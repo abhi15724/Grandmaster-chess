@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-canvas: #161512;
+    --bg-surface: #262421;
+    --bg-subsurface: #211f1c;
+    --bg-card: #2d2a26;
+    --border-warm: #3c3934;
+    --accent-green: #81b64c;
+    --accent-green-hover: #70a33e;
+  }
+
+  html {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  body {
+    background-color: #161512;
+    color: #e5e7eb;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  .font-mono-chess {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Custom scrollbars for move list and chat */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #161512;
+}
+::-webkit-scrollbar-thumb {
+  background: #3c3934;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #55514a;
+}
+
+/* Prevent accidental text drag on board */
+.chess-board-container {
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+/* Blog prose content */
+.prose-chess {
+  color: #d4d4d4;
+  line-height: 1.75;
+}
+.prose-chess h2 {
+  color: #f4f4f5;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.prose-chess h3 {
+  color: #e5e7eb;
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.prose-chess p {
+  margin-bottom: 1rem;
+}
+.prose-chess ul, .prose-chess ol {
+  margin: 1rem 0 1rem 1.25rem;
+}
+.prose-chess li {
+  margin-bottom: 0.4rem;
+}
+.prose-chess a {
+  color: #81b64c;
+  text-decoration: underline;
+}
+.prose-chess strong {
+  color: #f4f4f5;
+}
+.prose-chess blockquote {
+  border-left: 3px solid #81b64c;
+  padding-left: 1rem;
+  color: #a1a1aa;
+  font-style: italic;
+  margin: 1.5rem 0;
+}
+.prose-chess code {
+  background: #211f1c;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85em;
+}

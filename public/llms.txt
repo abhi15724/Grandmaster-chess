@@ -1,0 +1,42 @@
+# Grandmaster Chess Online - AI Documentation & System Overview
+
+> Website: Grandmaster Chess Online
+> Tagline: Play Free Online Chess vs AI or Yourself
+> Primary URL: https://www.grandmasterchess.in
+
+## What is Grandmaster Chess Online?
+Grandmaster Chess Online is a fast, responsive, web-based chess platform offering full standard FIDE chess rules, legal move validation, chess clocks, local pass & play, and an adaptive 3-tier chess AI engine (Basic, Intermediate, Advanced). It also publishes original chess guides and strategy articles.
+
+## Core Capabilities
+- **Play Against AI**: Three levels of intelligence:
+  - **Basic AI**: Beginner-friendly random/simple capture heuristic with low search depth.
+  - **Intermediate AI**: Minimax algorithm with alpha-beta pruning, piece-square table positional evaluation, center control, and king safety.
+  - **Advanced AI**: Deep evaluation engine with tactical calculations, piece activity, mobility, and positional awareness.
+- **Local Two-Player Chess**: Pass-and-play mode on the same desktop or mobile device with flipping board options.
+- **Chess Clock Controls**: Bullet (1+0), Blitz (3+0, 5+0), Rapid (10+0, 15+10), and Untimed casual matches.
+- **Move History & PGN**: Standard algebraic notation (SAN) tracking, move list scrolling, position evaluation bar, and PGN export/download.
+- **Board Customization**: Themes (Wood Classic, Modern Slate, Obsidian Dark, High Contrast) and customizable piece styles.
+- **Accounts & Synced Stats**: Free account (via Supabase) syncs rating, game history, and results across devices.
+- **Chess Learning Center**: Dedicated guides on standard chess rules, opening principles, and tactical strategies.
+- **Chess Blog**: Regularly published guides covering openings, tactics, AI strategy, time controls, and rules.
+
+## Important URLs
+- Homepage: `/`
+- Play vs AI: `/play/ai`
+  - Basic Difficulty: `/play/ai/basic`
+  - Intermediate Difficulty: `/play/ai/intermediate`
+  - Advanced Difficulty: `/play/ai/advanced`
+- Local Pass & Play: `/play/local`
+- Chess Rules Guide: `/learn/chess-rules`
+- Chess Openings: `/learn/chess-openings`
+- Chess Strategies: `/learn/chess-strategies`
+- FAQ: `/faq`
+- Dashboard & Stats: `/dashboard`
+- Blog Index: `/blog`
+- Blog Categories: `/blog/category/{category}`
+
+## Chess Engine Architecture
+The platform utilizes an abstracted `ChessEngine` layer (`BasicEngine`, `IntermediateEngine`, `AdvancedEngine`) interacting with FEN positions and returning SAN moves, enabling future neural network or Stockfish WASM integrations.
+
+## Content & Publishing
+Blog articles are authored editorially, published with full publish/update dates, and structured with Article and FAQPage schema for AI answer engines. Articles link contextually to the relevant play/learn pages they reference.
