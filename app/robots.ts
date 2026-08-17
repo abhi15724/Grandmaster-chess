@@ -11,6 +11,5 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: 'https://www.grandmasterchess.in/sitemap.xml',
-    host: SITE_URL,
   };
 }
