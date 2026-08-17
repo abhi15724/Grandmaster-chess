@@ -99,6 +99,22 @@ export const PlayAIPage: React.FC<PlayAIPageProps> = ({
     }
   };
 
+  // Return to setup screen for a fresh game (does not auto-start)
+  const handleNewGame = () => {
+    chess.reset();
+    setFen(chess.fen());
+    setMoves([]);
+    setLastMove(null);
+    setWhiteCaptured([]);
+    setBlackCaptured([]);
+    setIsGameOver(false);
+    setWinner(null);
+    setGameEndReason('');
+    setEvalScore(0);
+    if (timerRef.current) clearInterval(timerRef.current);
+    setIsPlaying(false);
+  };
+
   // Clock countdown loop
   useEffect(() => {
     if (!isPlaying || isGameOver || timePreset === 'none') {
@@ -550,7 +566,7 @@ export const PlayAIPage: React.FC<PlayAIPageProps> = ({
                 onResign={handleResign}
                 onOfferDraw={handleOfferDraw}
                 onFlipBoard={() => setBoardOrientation((o) => (o === 'w' ? 'b' : 'w'))}
-                onNewGame={() => setIsPlaying(false)}
+                onNewGame={handleNewGame}
                 onRematch={handleStartGame}
                 isGameOver={isGameOver}
               />
@@ -615,7 +631,7 @@ export const PlayAIPage: React.FC<PlayAIPageProps> = ({
           movesCount={moves.length}
           pgn={chess.pgn()}
           onRematch={handleStartGame}
-          onNewGame={() => setIsPlaying(false)}
+          onNewGame={handleNewGame}
           onClose={() => setIsGameOver(false)}
         />
       )}
