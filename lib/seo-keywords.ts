@@ -21,13 +21,17 @@ export const BRAND_KEYWORDS = [
   'play grandmaster chess online',
   'grandmaster chess game',
   'grandmasterchess.in',
+  'chess grandmaster games',
 ];
 
 export const SITE_KEYWORDS = [
   ...BRAND_KEYWORDS,
   'play chess online',
+  'play free chess online',
   'online chess',
   'chess online',
+  'Play chess online',
+  'Grandmasterchess online',
   'chess game online',
   'free online chess',
   'play chess against computer',
@@ -37,6 +41,8 @@ export const SITE_KEYWORDS = [
   'chess without registration',
   'chess no sign up',
   'Chess',
+  'best chess website in India',
+  'chess grandmaster games',
 ];
 
 export const HOME_KEYWORDS = [
@@ -48,6 +54,7 @@ export const HOME_KEYWORDS = [
   'pass and play chess',
   'chess without registration',
   'chess no sign up',
+  'best chess website in India',
 ];
 
 export const PLAY_AI_KEYWORDS = [
@@ -143,4 +150,5 @@ export const BLOG_KEYWORDS = [
   'chess tactics guide',
   'how to beat chess ai',
   'grandmaster chess blog',
+  'How Chess AI Engines Work: A Complete Guide to Difficulty Levels',
 ];
