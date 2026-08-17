@@ -15,6 +15,7 @@
 
 export const BRAND_KEYWORDS = [
   'grandmaster chess',
+  'grandmasterchess',
   'grandmaster chess online',
   'grandmaster chess online games',
   'play grandmaster chess online',
@@ -35,6 +36,7 @@ export const SITE_KEYWORDS = [
   'chess website',
   'chess without registration',
   'chess no sign up',
+  'Chess',
 ];
 
 export const HOME_KEYWORDS = [
