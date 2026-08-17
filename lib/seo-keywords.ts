@@ -15,6 +15,8 @@
 
 export const BRAND_KEYWORDS = [
   'grandmaster chess',
+  'Grandmaster chess',
+  'grandmasterchess.in',
   'grandmasterchess',
   'grandmaster chess online',
   'grandmaster chess online games',
