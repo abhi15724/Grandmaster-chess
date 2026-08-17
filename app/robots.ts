@@ -10,7 +10,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/dashboard'],
       },
     ],
-    sitemap: `${SITE_URL}/sitemap.xml`,
+    sitemap: 'https://www.grandmasterchess.in/sitemap.xml',
     host: SITE_URL,
   };
 }
