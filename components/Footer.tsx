@@ -123,12 +123,16 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
         {/* Copyright & Bottom bar */}
         <div className="pt-5 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-400 gap-3">
           <p>© {new Date().getFullYear()} Grandmaster Chess Online. Fast, accessible, and high density.</p>
-          <div className="flex items-center gap-4 text-xs">
-            <button onClick={() => navigate('/learn/chess-rules')} className="hover:text-[#81b64c] hover:underline">Chess Rules</button>
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs">
+            <button onClick={() => navigate('/about')} className="hover:text-[#81b64c] hover:underline">About</button>
+            <span>•</span>
+            <button onClick={() => navigate('/contact')} className="hover:text-[#81b64c] hover:underline">Contact</button>
+            <span>•</span>
+            <button onClick={() => navigate('/privacy')} className="hover:text-[#81b64c] hover:underline">Privacy Policy</button>
+            <span>•</span>
+            <button onClick={() => navigate('/terms')} className="hover:text-[#81b64c] hover:underline">Terms</button>
             <span>•</span>
             <button onClick={() => navigate('/faq')} className="hover:text-[#81b64c] hover:underline">FAQ</button>
-            <span>•</span>
-            <button onClick={() => navigate('/dashboard')} className="hover:text-[#81b64c] hover:underline">Player Stats</button>
           </div>
         </div>
       </div>
