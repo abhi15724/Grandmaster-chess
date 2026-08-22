@@ -86,3 +86,45 @@ export function getRelatedPosts(current: BlogPost, limit = 3): BlogPost[] {
     })
     .slice(0, limit);
 }
+
+/**
+ * Extract Q&A pairs from a post's "## Frequently asked questions" section
+ * so it can be turned into real FAQPage schema, instead of just being
+ * plain text search/AI engines have to parse out of prose themselves.
+ *
+ * Expected markdown shape (matches every post in content/blog today):
+ *
+ *   ## Frequently asked questions
+ *
+ *   **Question text?**
+ *   Answer text, one paragraph.
+ *
+ *   **Next question?**
+ *   Next answer.
+ *
+ * Returns [] if the post has no such section, or if it's not in this
+ * shape — callers should treat an empty array as "no FAQ schema to add"
+ * rather than an error.
+ */
+export function extractFaqFromContent(
+  markdown: string
+): { question: string; answer: string }[] {
+  const sectionMatch = markdown.match(
+    /^##\s+Frequently asked questions\s*$([\s\S]*?)(?=^##\s|\s*$(?![\s\S]))/im
+  );
+  if (!sectionMatch) return [];
+
+  const section = sectionMatch[1];
+  const qaPattern = /\*\*(.+?)\*\*\s*\n([^\n*][^\n]*(?:\n(?!\*\*|##)[^\n]+)*)/g;
+
+  const results: { question: string; answer: string }[] = [];
+  let match: RegExpExecArray | null;
+  while ((match = qaPattern.exec(section)) !== null) {
+    const question = match[1].trim();
+    const answer = match[2].trim().replace(/\s+/g, ' ');
+    if (question && answer) {
+      results.push({ question, answer });
+    }
+  }
+  return results;
+}

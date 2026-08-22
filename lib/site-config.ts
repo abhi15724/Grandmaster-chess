@@ -1,4 +1,12 @@
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.grandmasterchess.in';
+// Trailing slash stripped defensively: if NEXT_PUBLIC_SITE_URL is ever set
+// with a trailing slash (e.g. "https://www.grandmasterchess.in/"), every
+// `${SITE_URL}/path` concatenation below would silently produce a
+// double slash (".../path"), which breaks sitemap.xml URLs and wastes
+// crawl budget. Normalizing here means it's correct regardless of how
+// the env var happens to be set.
+const rawSiteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://www.grandmasterchess.in';
+export const SITE_URL = rawSiteUrl.replace(/\/+$/, '');
 
 export const SITE_NAME = 'Grandmaster Chess Online';
 
