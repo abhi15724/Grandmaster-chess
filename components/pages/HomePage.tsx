@@ -7,12 +7,15 @@ import { Bot, Monitor, ShieldCheck, Zap, Sparkles, BookOpen, ChevronRight, HelpC
 import { ChessBoard } from '@/components/ChessBoard';
 import { DEFAULT_BOARD_THEME } from '@/lib/chess/themes';
 import { FAMOUS_OPENINGS } from '@/lib/chess/openings';
+import { BlogPostCard } from '@/components/blog/BlogPostCard';
+import type { BlogPost } from '@/lib/blog';
 
 interface HomePageProps {
   navigate?: (path: string) => void;
+  latestPosts?: BlogPost[];
 }
 
-export const HomePage: React.FC<HomePageProps> = ({}) => {
+export const HomePage: React.FC<HomePageProps> = ({ latestPosts = [] }) => {
   const router = useRouter();
   const navigate = (path: string) => router.push(path);
 
@@ -208,6 +211,35 @@ export const HomePage: React.FC<HomePageProps> = ({}) => {
           ))}
         </div>
       </section>
+
+      {/* 3.5 LATEST FROM THE BLOG */}
+      {latestPosts.length > 0 && (
+        <section className="border-t border-[#3c3934] pt-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+            <div>
+              <h2 className="text-xl font-extrabold text-zinc-100 tracking-tight mb-0.5">
+                Latest from the Blog
+              </h2>
+              <p className="text-xs text-zinc-400">
+                Guides, strategy, and research on chess — new posts regularly.
+              </p>
+            </div>
+            <button
+              onClick={() => navigate('/blog')}
+              className="flex items-center gap-1 text-xs font-bold text-[#81b64c] hover:underline self-start sm:self-center"
+            >
+              <span>View All Posts</span>
+              <ChevronRight className="h-3.5 w-3.5" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {latestPosts.slice(0, 3).map((post) => (
+              <BlogPostCard key={post.slug} post={post} />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* 4. FREQUENTLY ASKED QUESTIONS SUMMARY */}
       <section className="border-t border-[#3c3934] pt-8 pb-4">
