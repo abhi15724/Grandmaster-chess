@@ -7,9 +7,15 @@ import {
   getPostBySlug,
   getRelatedPosts,
   renderMarkdown,
+  extractFaqFromContent,
 } from '@/lib/blog';
 import { BlogPostCard } from '@/components/blog/BlogPostCard';
-import { jsonLdGraph, articleSchema, breadcrumbSchema } from '@/lib/json-ld';
+import {
+  jsonLdGraph,
+  articleSchema,
+  breadcrumbSchema,
+  faqSchema,
+} from '@/lib/json-ld';
 import { absoluteUrl } from '@/lib/site-config';
 
 export function generateStaticParams() {
@@ -66,13 +72,16 @@ export default async function BlogPostPage({
     day: 'numeric',
   });
 
+  const faqs = extractFaqFromContent(post.content);
+
   const graph = jsonLdGraph(
     articleSchema(post),
     breadcrumbSchema([
       { name: 'Home', path: '/' },
       { name: 'Blog', path: '/blog' },
       { name: post.title, path: `/blog/${post.slug}` },
-    ])
+    ]),
+    ...(faqs.length > 0 ? [faqSchema(faqs)] : [])
   );
 
   return (
