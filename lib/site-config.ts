@@ -10,7 +10,7 @@ export const SITE_URL = rawSiteUrl.replace(/\/+$/, '');
 
 export const SITE_NAME = 'Grandmasterchess Online';
 
-export const SITE_TAGLINE = 'Play Free Chess vs AI or Yourself';
+export const SITE_TAGLINE = 'Play Free Chess vs AI or Yourself on Grandmasterchess';
 
 export const SITE_DESCRIPTION =
   'Play free online chess on grandmasterchess against yourself or challenge AI opponents across basic, intermediate and advanced difficulty levels . Chess clocks, move history, and strategy guides.';
