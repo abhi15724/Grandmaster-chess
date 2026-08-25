@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import './globals.css';
 import { AppShell } from '@/components/AppShell';
 import {
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: `${SITE_NAME} | ${SITE_TAGLINE}`,
     description:
-      'Challenge AI opponents or play locally against yourself, with clocks, move analysis, and custom themes.',
+      'Challenge AI opponents or play locally against yourself on grandmasterchess, with clocks, move analysis, and custom themes.',
     siteName: SITE_NAME,
   },
   twitter: {
