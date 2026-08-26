@@ -8,7 +8,7 @@ const rawSiteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || 'https://www.grandmasterchess.in';
 export const SITE_URL = rawSiteUrl.replace(/\/+$/, '');
 
-export const SITE_NAME = 'Grandmasterchess Online';
+export const SITE_NAME = 'Grandmasterchess - Play chess free online';
 
 export const SITE_TAGLINE = 'Play Free Chess vs AI or Yourself on Grandmasterchess';
 
