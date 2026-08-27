@@ -5,7 +5,7 @@ date: "2026-08-27"
 author: "Grandmaster Chess Editorial Team"
 Primary Keyword: best chess websites
 tags: [best chess websites 2026, best chess tools, chess websites for beginners, best chess apps 2026]
-Category: Comparisons
+category: Comparisons
 Read Time: ~10 min
 
 ---
