@@ -1,8 +1,8 @@
 ---
 title: "Castling Rules Explained: When You Can (and Can't) Castle"
 description: "The exact conditions required to castle in chess, the two most common mistakes players make with this rule, and why the rook's safety doesn't matter but the king's does."
-date: "2026-08-26"
-updated: "2026-08-26"
+date: "2026-08-28"
+updated: "2026-08-28"
 author: "Grandmaster Chess Editorial Team"
 category: "Rules"
 tags: ["castling rules chess", "how does castling work", "chess rules explained", "kingside castling", "queenside castling"]
