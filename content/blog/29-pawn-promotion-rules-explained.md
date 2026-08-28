@@ -1,8 +1,8 @@
 ---
 title: "Pawn Promotion Rules Explained: Underpromotion and When It Actually Matters"
 description: "How pawn promotion works, why you can have more than one queen, and the real tactical reason strong players sometimes choose a knight or rook instead."
-date: "2026-08-26"
-updated: "2026-08-26"
+date: "2026-08-28"
+updated: "2026-08-28"
 author: "Grandmaster Chess Editorial Team"
 category: "Rules"
 tags: ["pawn promotion rules", "underpromotion chess", "can you have two queens in chess", "chess rules explained"]
