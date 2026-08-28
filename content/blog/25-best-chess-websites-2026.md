@@ -1,8 +1,8 @@
 ---
 title: "Best Free Online Chess Platforms: An Honest Comparison"
 description: "A genuinely fair comparison of the best free chess platforms — Lichess, Chess.com, and where a simpler option like this site fits — based on what each actually offers for free."
-date: "2026-08-25"
-updated: "2026-08-25"
+date: "2026-08-28"
+updated: "2026-08-28"
 author: "Grandmaster Chess Editorial Team"
 category: "Reviews"
 tags: ["best free chess platform", "chess.com vs lichess", "best free chess app", "free online chess"]
