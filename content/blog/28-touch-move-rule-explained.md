@@ -1,8 +1,8 @@
 ---
 title: "The Touch-Move Rule: The Official Chess Rule Most Online Players Don't Know"
 description: "What the touch-move rule actually requires in official over-the-board chess, why online play doesn't enforce it, and what to say if you need to adjust a piece."
-date: "2026-08-26"
-updated: "2026-08-26"
+date: "2026-08-28"
+updated: "2026-08-28"
 author: "Grandmaster Chess Editorial Team"
 category: "Rules"
 tags: ["touch move rule chess", "jadoube", "over the board chess rules", "chess tournament rules"]
