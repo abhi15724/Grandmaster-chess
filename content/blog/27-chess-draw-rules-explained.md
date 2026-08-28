@@ -1,8 +1,8 @@
 ---
 title: "Chess Draw Rules Explained: Threefold Repetition, the 50-Move Rule, and More"
 description: "Every way a chess game can end in a draw — threefold repetition, the 50-move rule, insufficient material, stalemate, and agreement — explained with real examples."
-date: "2026-08-26"
-updated: "2026-08-26"
+date: "2026-08-28"
+updated: "2026-08-28"
 author: "Grandmaster Chess Editorial Team"
 category: "Rules"
 tags: ["chess draw rules", "threefold repetition", "50 move rule chess", "insufficient material chess", "chess rules explained"]
