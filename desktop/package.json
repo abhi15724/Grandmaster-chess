@@ -1,0 +1,1 @@
+{"name":"grandmaster-ai-hq","version":"0.1.0","private":true,"main":"main.js","scripts":{"start":"electron .","dev":"electron ."},"devDependencies":{"electron":"^39.2.0"}}
