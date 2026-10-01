@@ -1,0 +1,6 @@
+{
+  "site": {"name": "Grandmaster Chess", "url": "https://www.grandmasterchess.in", "repo": "abhi15724/Grandmaster-chess", "branch": "main", "content_dir": "content/blog"},
+  "policy": {"min_article_words": 1500, "max_article_words": 2200, "verifier_min_score": 90, "max_files_changed": 12, "auto_merge": false, "no_generated_spam": true},
+  "models": {"provider": "openrouter", "model": "openrouter/free"},
+  "cadence": {"mode": "one_growth_cycle_per_day", "max_articles_per_cycle": 1}
+}
