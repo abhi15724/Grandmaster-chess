@@ -1,0 +1,1 @@
+const{contextBridge,ipcRenderer}=require("electron");contextBridge.exposeInMainWorld("grandmaster",{startCycle:t=>ipcRenderer.invoke("start-cycle",t),stopCycle:()=>ipcRenderer.invoke("stop-cycle"),status:()=>ipcRenderer.invoke("status"),onEvent:cb=>ipcRenderer.on("agent-event",(_e,d)=>cb(d))});
