@@ -1,79 +1,62 @@
 # Connect Grandmaster Chess to ChatGPT
 
-## 1. Run the MCP server locally
+## Production MCP endpoint
 
-From the repository root:
+The Grandmaster Chess website is deployed on Vercel. The MCP server is now mounted inside the same Next.js application.
 
-    cd mcp-server
+- Website: https://www.grandmasterchess.in
+- MCP endpoint: https://www.grandmasterchess.in/api/mcp
+- Health check: https://www.grandmasterchess.in/api/mcp/health
+
+No separate Render service is required for the production MCP endpoint.
+
+## ChatGPT connection
+
+Use the production HTTPS MCP endpoint in a ChatGPT environment that supports remote MCP apps/connections:
+
+    https://www.grandmasterchess.in/api/mcp
+
+The server exposes:
+
+- Search Grandmaster Chess content
+- Get a Grandmaster Chess article
+- Find chess openings
+- Get chess rules
+- Get chess puzzles
+- Start and play chess games
+- Play against Grandmaster AI
+- Analyze positions
+- Coach individual moves
+- Analyze recorded games
+- Render an interactive MCP chessboard
+
+## Vercel configuration
+
+The route is:
+
+    app/api/mcp/route.ts
+
+It uses Vercel's Web-standard MCP handler and Node.js runtime. The route is stateless at the MCP transport layer.
+
+The chess game implementation currently keeps active games in process memory. On a serverless cold start or instance change, an in-progress game may no longer be available. Persistent authenticated games should be backed by Supabase in a later phase.
+
+## Local development
+
+Run the normal Next.js application from the repository root:
+
     npm install
-    npm start
+    npm run dev
 
-Check:
+Then the MCP endpoint is:
 
-    http://localhost:8787/
+    http://localhost:3000/api/mcp
 
-The MCP endpoint is:
+For a remote MCP client, expose the local Next.js server through an HTTPS development tunnel.
 
-    http://localhost:8787/mcp
+## Security
 
-## 2. Give ChatGPT an HTTPS endpoint
+Do not commit Supabase service-role keys, GitHub tokens, passwords, payment credentials, or other secrets. The MCP endpoint currently does not expose those credentials.
 
-ChatGPT cannot directly reach a localhost-only server. During development, expose port 8787 through an HTTPS tunnel such as ngrok.
+## Engine licensing
 
-The public endpoint should look like:
-
-    https://YOUR-TUNNEL-DOMAIN/mcp
-
-Do not commit tunnel credentials or API keys.
-
-## 3. Connect it in ChatGPT
-
-In a ChatGPT workspace/account where Developer Mode or MCP app connections are available, add a remote MCP server using the HTTPS /mcp endpoint.
-
-The available tools should appear as:
-
-- Search Grandmaster Chess
-- Get a Grandmaster Chess Article
-- Find a Chess Opening
-- Get Chess Rules
-- Get a Chess Puzzle
-
-## 4. Production deployment
-
-Deploy mcp-server as a separate Node service with Node 20+ and HTTPS. Set:
-
-    SITE_URL=https://www.grandmasterchess.in
-
-The service must expose:
-
-    /mcp
-
-Do not expose Supabase service-role keys, GitHub tokens, user passwords, or payment credentials to this read-only server.
-
-## 5. Next phase
-
-After this read-only version is tested, add an MCP App UI for an interactive chess board. Authenticated game/training actions should be introduced separately with authorization and confirmation.
-
-## Interactive chess board
-
-The server now includes an MCP-compatible board asset at `public/chess-board.html` and game tools:
-
-- `new_chess_game`
-- `get_chess_game`
-- `get_legal_chess_moves`
-- `make_chess_move`
-
-The board is intentionally session/in-memory based in this first version. Restarting the MCP server removes active games. There is no account persistence yet.
-
-The next production step is to register the board as an MCP App UI resource using the current OpenAI Apps SDK/MCP Apps resource pattern, then deploy the MCP server over HTTPS.
-
-
-## Coaching and analysis
-
-The MCP server now provides:
-
-- `analyze_chess_position` — engine evaluation and principal variation for a FEN.
-- `coach_chess_move` — compares a played move with the engine recommendation and classifies it as good, inaccuracy, mistake, or blunder when centipawn data is available.
-- `analyze_chess_game` — reviews recorded moves and returns a post-game issue summary.
-
-The board's **Analyze** button calls the full-game analyzer. Engine labels depend on search depth and should be treated as training guidance.
+Grandmaster AI uses Stockfish through `@se-oss/stockfish`. Review the dependency's GPL-3.0 licensing obligations before commercial redistribution.
