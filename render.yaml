@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: grandmaster-chess-mcp
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /
+    envVars:
+      - key: SITE_URL
+        value: https://www.grandmasterchess.in
+      - key: PORT
+        value: "8787"
