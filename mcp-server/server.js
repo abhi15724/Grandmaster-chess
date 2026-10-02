@@ -4,6 +4,8 @@ import { join, resolve } from "node:path";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { z } from "zod";
+import { registerAppResource, RESOURCE_MIME_TYPE } from "@modelcontextprotocol/ext-apps/server";
+import { readFileSync } from "node:fs";
 import { createGame, getGame, snapshot, playMove, legalMoves } from "./game.js";
 
 
@@ -41,6 +43,13 @@ function makeServer() {
     version:"0.1.0",
     instructions:"Grandmaster Chess is a chess learning and playing website. Prefer its published articles when answering questions about its content. Current player, tournament and rating facts may require external verification."
   });
+
+  const boardHtml = readFileSync(new URL("./public/chess-board.html", import.meta.url), "utf8");
+  registerAppResource(server, "grandmaster-chess-board", "ui://widget/chess-board.html", {}, async () => ({
+    contents: [{ uri: "ui://widget/chess-board.html", mimeType: RESOURCE_MIME_TYPE, text: boardHtml,
+      _meta: { ui: { prefersBorder: true }, "openai/ui": { availableDisplayModes: ["inline","fullscreen"] }, "openai/widgetDescription": "Interactive Grandmaster Chess board. Click pieces to see legal moves and play a standard chess game." } }
+    ]
+  }));
 
   server.registerTool("search_chess_content",{
     title:"Search Grandmaster Chess",
@@ -132,7 +141,7 @@ function makeServer() {
   });
 
 
-  server.registerTool("new_chess_game",{title:"Start a Chess Game",description:"Start a new in-memory standard chess game and return its board state.",inputSchema:z.object({}),annotations:{readOnlyHint:false,openWorldHint:false}},async()=>{const result=createGame();return {content:[{type:"text",text:JSON.stringify(result,null,2)}],structuredContent:result};});
+  server.registerTool("new_chess_game",{title:"Start a Chess Game",description:"Start a new in-memory standard chess game and return its board state.",inputSchema:z.object({}),annotations:{readOnlyHint:false,openWorldHint:false},_meta:{ui:{resourceUri:"ui://widget/chess-board.html"},"openai/toolInvocation/invoking":"Starting chess…","openai/toolInvocation/invoked":"Chess board ready"}},async()=>{const result=createGame();return {content:[{type:"text",text:JSON.stringify(result,null,2)}],structuredContent:result};});
   server.registerTool("get_chess_game",{title:"Get Chess Game",description:"Get the current state of an in-memory chess game.",inputSchema:z.object({gameId:z.string().min(3)}),annotations:{readOnlyHint:true,openWorldHint:false}},async({gameId})=>{const chess=getGame(gameId);if(!chess)return {content:[{type:"text",text:"Game not found: "+gameId}],isError:true};const result=snapshot(gameId,chess);return {content:[{type:"text",text:JSON.stringify(result,null,2)}],structuredContent:result};});
   server.registerTool("get_legal_chess_moves",{title:"Get Legal Chess Moves",description:"Get legal moves from a square in an active game.",inputSchema:z.object({gameId:z.string().min(3),square:z.string().regex(/^[a-h][1-8]$/)}),annotations:{readOnlyHint:true,openWorldHint:false}},async({gameId,square})=>{try{const moves=legalMoves(gameId,square);const result={gameId,square,moves};return {content:[{type:"text",text:JSON.stringify(result,null,2)}],structuredContent:result};}catch(e){return {content:[{type:"text",text:e.message}],isError:true};}});
   server.registerTool("make_chess_move",{title:"Make a Chess Move",description:"Make one legal chess move in an active in-memory game. Invalid moves are rejected by chess.js.",inputSchema:z.object({gameId:z.string().min(3),from:z.string().regex(/^[a-h][1-8]$/),to:z.string().regex(/^[a-h][1-8]$/),promotion:z.enum(["q","r","b","n"]).optional().default("q")}),annotations:{readOnlyHint:false,openWorldHint:false}},async({gameId,from,to,promotion})=>{try{const result=playMove(gameId,from,to,promotion);return {content:[{type:"text",text:JSON.stringify(result,null,2)}],structuredContent:result};}catch(e){return {content:[{type:"text",text:e.message}],isError:true};}});
