@@ -1,5 +1,5 @@
 import { createMcpHandler } from "mcp-handler";
-import { makeServer } from "../../../../mcp-server/server.js";
+import { makeServer } from "../../../mcp-server/server.js";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
