@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+const nextConfig: NextConfig = {\n  serverExternalPackages: ["@se-oss/stockfish", "@modelcontextprotocol/server", "@modelcontextprotocol/ext-apps", "mcp-handler"],
   async redirects() {
     return [
       { source: '/play', destination: '/play/ai', permanent: true },
