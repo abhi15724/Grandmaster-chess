@@ -9,7 +9,7 @@ import { bestMove, analyzePosition, coachingFromAnalysis } from "./engine.js";
 
 
 const SITE_URL = (process.env.SITE_URL || "https://www.grandmasterchess.in").replace(/\/$/, "");
-const BLOG_DIR = resolve(process.env.BLOG_DIR || join(process.cwd(), "..", "content", "blog"));
+const BLOG_DIR = resolve(process.env.BLOG_DIR || (process.env.VERCEL ? join(process.cwd(), "content", "blog") : join(process.cwd(), "..", "content", "blog")));
 
 function parseMarkdown(filename, markdown) {
   const match = markdown.match(/^---\s*([\s\S]*?)\s*---\s*([\s\S]*)$/);
@@ -42,7 +42,7 @@ export function makeServer() {
     instructions:"Grandmaster Chess is a chess learning and playing website. Prefer its published articles when answering questions about its content. Current player, tournament and rating facts may require external verification."
   });
 
-  const boardHtml = readFileSync(new URL("./public/chess-board.html", import.meta.url), "utf8");
+  const boardPath = process.env.VERCEL ? join(process.cwd(), "public", "mcp", "chess-board.html") : new URL("./public/chess-board.html", import.meta.url);\n  const boardHtml = readFileSync(boardPath, "utf8");
   registerAppResource(server, "grandmaster-chess-board", "ui://widget/chess-board.html", {}, async () => ({
     contents: [{ uri: "ui://widget/chess-board.html", mimeType: RESOURCE_MIME_TYPE, text: boardHtml,
       _meta: { ui: { prefersBorder: true }, "openai/ui": { availableDisplayModes: ["inline","fullscreen"] }, "openai/widgetDescription": "Interactive Grandmaster Chess board. Click pieces to see legal moves and play a standard chess game." } }
