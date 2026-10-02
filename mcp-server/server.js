@@ -17,8 +17,7 @@ function parseMarkdown(filename, markdown) {
   let body = markdown;
   if (match) {
     body = match[2];
-    for (const line of match[1].split("
-")) {
+    for (const line of match[1].split("\n")) {
       const m = line.match(/^([A-Za-z][A-Za-z0-9_-]*):\s*(.*)$/);
       if (m) frontmatter[m[1]] = m[2].replace(/^["']|["']$/g, "");
     }
@@ -63,8 +62,7 @@ export function makeServer(existingServer) {
       return {a,score:terms.reduce((n,t)=>n+(hay.includes(t)?1:0),0)};
     }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,limit).map(x=>({
       title:x.a.title,description:x.a.description,category:x.a.category,date:x.a.date,url:x.a.url,
-      snippet:x.a.body.replace(/[
-#*_>\[\]]/g," ").replace(/\s+/g," ").trim().slice(0,500)
+      snippet:x.a.body.replace(/[\n#*_>\[\]]/g," ").replace(/\s+/g," ").trim().slice(0,500)
     }));
     return {content:[{type:"text",text:JSON.stringify({query,results},null,2)}],structuredContent:{query,results}};
   });
