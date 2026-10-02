@@ -3,6 +3,7 @@ import { makeServer } from "../../../mcp-server/server.js";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 const handler = createMcpHandler((server) => {
   makeServer(server);
