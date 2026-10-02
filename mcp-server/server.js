@@ -1,8 +1,6 @@
-import { createServer } from "node:http";
 import { readFile, readdir } from "node:fs/promises";
 import { join, resolve } from "node:path";
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
+import { McpServer } from "@modelcontextprotocol/server";
 import { z } from "zod";
 import { registerAppResource, RESOURCE_MIME_TYPE } from "@modelcontextprotocol/ext-apps/server";
 import { readFileSync } from "node:fs";
@@ -10,7 +8,6 @@ import { createGame, getGame, getMode, snapshot, playMove, legalMoves, recordedM
 import { bestMove, analyzePosition, coachingFromAnalysis } from "./engine.js";
 
 
-const PORT = Number(process.env.PORT || 8787);
 const SITE_URL = (process.env.SITE_URL || "https://www.grandmasterchess.in").replace(/\/$/, "");
 const BLOG_DIR = resolve(process.env.BLOG_DIR || join(process.cwd(), "..", "content", "blog"));
 
@@ -38,7 +35,7 @@ async function loadArticles() {
   return result;
 }
 
-function makeServer() {
+export function makeServer() {
   const server = new McpServer({
     name:"grandmaster-chess",
     version:"0.1.0",
@@ -158,26 +155,4 @@ function makeServer() {
   return server;
 }
 
-const httpServer=createServer(async(req,res)=>{
-  const url=new URL(req.url||"/","http://"+(req.headers.host||"localhost"));
-  if(url.pathname==="/"&&req.method==="GET"){
-    res.writeHead(200,{"content-type":"application/json; charset=utf-8"});
-    res.end(JSON.stringify({name:"Grandmaster Chess MCP",status:"ok",endpoint:"/mcp",site:SITE_URL}));
-    return;
-  }
-  if(url.pathname==="/mcp"&&req.method==="OPTIONS"){
-    res.writeHead(204,{"Access-Control-Allow-Origin":"*","Access-Control-Allow-Methods":"POST, GET, DELETE, OPTIONS","Access-Control-Allow-Headers":"content-type, mcp-session-id","Access-Control-Expose-Headers":"Mcp-Session-Id"});
-    res.end(); return;
-  }
-  if(url.pathname==="/mcp"&&["POST","GET","DELETE"].includes(req.method||"")){
-    res.setHeader("Access-Control-Allow-Origin","*"); res.setHeader("Access-Control-Expose-Headers","Mcp-Session-Id");
-    const server=makeServer();
-    const transport=new StreamableHTTPServerTransport({sessionIdGenerator:undefined,enableJsonResponse:true});
-    res.on("close",()=>{transport.close();server.close();});
-    try{await server.connect(transport);await transport.handleRequest(req,res);}
-    catch(error){console.error("MCP request failed:",error);if(!res.headersSent)res.writeHead(500).end("Internal server error");}
-    return;
-  }
-  res.writeHead(404,{"content-type":"text/plain; charset=utf-8"});res.end("Not Found");
-});
-httpServer.listen(PORT,"0.0.0.0",()=>console.log("Grandmaster Chess MCP listening on port "+PORT));
+
