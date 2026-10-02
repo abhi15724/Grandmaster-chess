@@ -1,0 +1,17 @@
+{
+  "name": "grandmaster-chess-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.0.0",
+    "@modelcontextprotocol/ext-apps": "^1.0.0",
+    "chess.js": "^1.4.0",
+    "zod": "^4.2.0",
+    "@se-oss/stockfish": "^1.0.1"
+  },
+  "description": "Shared Grandmaster Chess MCP tool definitions used by the Vercel Next.js route at /api/mcp."
+}

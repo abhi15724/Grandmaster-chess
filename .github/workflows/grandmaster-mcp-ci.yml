@@ -1,0 +1,36 @@
+name: Grandmaster Chess MCP CI
+
+on:
+  pull_request:
+    paths:
+      - "app/api/mcp/**"
+      - "mcp-server/**"
+      - "content/blog/**"
+      - "public/mcp/**"
+      - "package.json"
+      - "package-lock.json"
+      - "next.config.ts"
+  push:
+    branches:
+      - main
+    paths:
+      - "app/api/mcp/**"
+      - "mcp-server/**"
+      - "content/blog/**"
+      - "public/mcp/**"
+      - "package.json"
+      - "package-lock.json"
+      - "next.config.ts"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npm run build
