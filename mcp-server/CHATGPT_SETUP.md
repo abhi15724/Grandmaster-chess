@@ -53,3 +53,16 @@ Do not expose Supabase service-role keys, GitHub tokens, user passwords, or paym
 ## 5. Next phase
 
 After this read-only version is tested, add an MCP App UI for an interactive chess board. Authenticated game/training actions should be introduced separately with authorization and confirmation.
+
+## Interactive chess board
+
+The server now includes an MCP-compatible board asset at `public/chess-board.html` and game tools:
+
+- `new_chess_game`
+- `get_chess_game`
+- `get_legal_chess_moves`
+- `make_chess_move`
+
+The board is intentionally session/in-memory based in this first version. Restarting the MCP server removes active games. There is no account persistence yet.
+
+The next production step is to register the board as an MCP App UI resource using the current OpenAI Apps SDK/MCP Apps resource pattern, then deploy the MCP server over HTTPS.
