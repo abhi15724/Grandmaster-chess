@@ -4,17 +4,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js"
+    "start": "node --experimental-strip-types api/mcp.ts",
+    "dev": "node --experimental-strip-types api/mcp.ts"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "latest",
-    "zod": "latest",
-    "chess.js": "^1.4.0",
+    "@modelcontextprotocol/server": "^2.1.0",
     "@modelcontextprotocol/ext-apps": "^1.0.1",
+    "chess.js": "^1.4.0",
+    "zod": "^4.2.0",
     "@se-oss/stockfish": "^1.0.1"
   }
 }
