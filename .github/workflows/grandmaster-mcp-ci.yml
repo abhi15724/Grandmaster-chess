@@ -1,0 +1,46 @@
+name: Grandmaster Chess MCP CI
+
+on:
+  pull_request:
+    paths:
+      - "mcp-server/**"
+  push:
+    branches:
+      - main
+    paths:
+      - "mcp-server/**"
+  workflow_dispatch:
+
+jobs:
+  test-mcp:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: mcp-server
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: mcp-server/package-lock.json
+      - run: npm install
+      - name: Smoke test server
+        run: |
+          node server.js > /tmp/gm-mcp.log 2>&1 &
+          PID=$!
+          trap 'kill $PID' EXIT
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:8787/ | grep -q '"status":"ok"'; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/gm-mcp.log
+          exit 1
+      - name: Syntax check
+        run: |
+          node --check server.js
+          node --check game.js
+          node --check engine.js
