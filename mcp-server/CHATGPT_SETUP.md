@@ -66,3 +66,14 @@ The server now includes an MCP-compatible board asset at `public/chess-board.htm
 The board is intentionally session/in-memory based in this first version. Restarting the MCP server removes active games. There is no account persistence yet.
 
 The next production step is to register the board as an MCP App UI resource using the current OpenAI Apps SDK/MCP Apps resource pattern, then deploy the MCP server over HTTPS.
+
+
+## Coaching and analysis
+
+The MCP server now provides:
+
+- `analyze_chess_position` — engine evaluation and principal variation for a FEN.
+- `coach_chess_move` — compares a played move with the engine recommendation and classifies it as good, inaccuracy, mistake, or blunder when centipawn data is available.
+- `analyze_chess_game` — reviews recorded moves and returns a post-game issue summary.
+
+The board's **Analyze** button calls the full-game analyzer. Engine labels depend on search depth and should be treated as training guidance.
