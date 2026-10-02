@@ -1,44 +1,53 @@
-# Grandmaster Chess MCP Server
+# Grandmaster Chess MCP
 
-Read-only MCP server for GrandmasterChess.in.
+MCP integration for GrandmasterChess.in, deployed with the website's Next.js/Vercel application.
 
-Tools:
-- search_chess_content
-- get_chess_article
-- find_opening
-- get_chess_rules
-- get_chess_puzzle
+## Production
 
-## Local setup
+- Website: https://www.grandmasterchess.in
+- MCP: https://www.grandmasterchess.in/api/mcp
+- Health: https://www.grandmasterchess.in/api/mcp/health
 
-cd mcp-server
-npm install
-npm start
+## Tools
 
-Health: http://localhost:8787/
-MCP: http://localhost:8787/mcp
-
-For ChatGPT development, expose the local server through an HTTPS tunnel and connect the public /mcp URL in ChatGPT Developer Mode.
-
-This first version exposes no account, payment, write, or GitHub credentials.
-
-
-## Play against Grandmaster AI
-
-The MCP App includes a chessboard for human-vs-engine play.
-
-- Human plays White.
-- Grandmaster AI plays Black.
-- Difficulty: Beginner, Intermediate, Advanced, Master.
-- Legal moves are validated with chess.js.
-- Engine analysis uses Stockfish WASM through `@se-oss/stockfish`.
-- Game state is currently in memory and is not tied to a user account.
-
-### AI tools
-
-- `start_ai_chess_game`
-- `play_chess_vs_ai`
+- `search_chess_content`
+- `get_chess_article`
+- `find_opening`
+- `get_chess_rules`
+- `get_chess_puzzle`
+- `new_chess_game`
 - `get_chess_game`
 - `get_legal_chess_moves`
+- `make_chess_move`
+- `start_ai_chess_game`
+- `play_chess_vs_ai`
+- `analyze_chess_position`
+- `coach_chess_move`
+- `analyze_chess_game`
 
-The Stockfish wrapper is GPL-3.0 licensed; review its license obligations before commercial distribution or redistribution of the software.
+## MCP App UI
+
+The interactive board is registered as:
+
+    ui://widget/chess-board.html
+
+The UI supports human-vs-AI play, legal move highlighting, difficulty selection, and post-game analysis.
+
+## Local development
+
+From the repository root:
+
+    npm install
+    npm run dev
+
+MCP endpoint:
+
+    http://localhost:3000/api/mcp
+
+## State
+
+MCP transport is stateless. Active chess games currently use process memory, so persistent games are not guaranteed across Vercel instance changes. Supabase-backed game persistence is the next production-hardening step.
+
+## Licensing
+
+The Stockfish wrapper `@se-oss/stockfish` is GPL-3.0 licensed. Review its license obligations before commercial distribution or redistribution.
