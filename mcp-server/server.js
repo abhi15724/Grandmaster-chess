@@ -3,9 +3,9 @@ import { join, resolve } from "node:path";
 import { McpServer } from "@modelcontextprotocol/server";
 import { z } from "zod";
 import { registerAppResource, registerAppTool, RESOURCE_MIME_TYPE } from "@modelcontextprotocol/ext-apps/server";
-import { readFileSync } from "node:fs";
 import { createGame, getGame, getMode, snapshot, playMove, legalMoves, recordedMoves } from "./game.js";
 import { bestMove, analyzePosition, coachingFromAnalysis } from "./engine.js";
+import { boardHtml } from "./board-html.js";
 
 
 const SITE_URL = (process.env.SITE_URL || "https://www.grandmasterchess.in").replace(/\/$/, "");
@@ -42,8 +42,6 @@ export function makeServer(existingServer) {
     instructions:"Grandmaster Chess is a chess learning and playing website. Prefer its published articles when answering questions about its content. Current player, tournament and rating facts may require external verification."
   });
 
-  const boardPath = process.env.VERCEL ? join(process.cwd(), "public", "mcp", "chess-board.html") : new URL("./public/chess-board.html", import.meta.url);
-  const boardHtml = readFileSync(boardPath, "utf8");
   registerAppResource(server, "grandmaster-chess-board", "ui://widget/chess-board.html", {}, async () => ({
     contents: [{ uri: "ui://widget/chess-board.html", mimeType: RESOURCE_MIME_TYPE, text: boardHtml,
       _meta: { ui: { prefersBorder: true }, "openai/ui": { availableDisplayModes: ["inline","fullscreen"] }, "openai/widgetDescription": "Interactive Grandmaster Chess board. Click pieces to see legal moves and play a standard chess game." } }
