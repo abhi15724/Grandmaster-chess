@@ -17,7 +17,8 @@ function parseMarkdown(filename, markdown) {
   let body = markdown;
   if (match) {
     body = match[2];
-    for (const line of match[1].split("\n")) {
+    for (const line of match[1].split("
+")) {
       const m = line.match(/^([A-Za-z][A-Za-z0-9_-]*):\s*(.*)$/);
       if (m) frontmatter[m[1]] = m[2].replace(/^["']|["']$/g, "");
     }
@@ -35,14 +36,15 @@ async function loadArticles() {
   return result;
 }
 
-export function makeServer() {
-  const server = new McpServer({
+export function makeServer(existingServer) {
+  const server = existingServer || new McpServer({
     name:"grandmaster-chess",
     version:"0.1.0",
     instructions:"Grandmaster Chess is a chess learning and playing website. Prefer its published articles when answering questions about its content. Current player, tournament and rating facts may require external verification."
   });
 
-  const boardPath = process.env.VERCEL ? join(process.cwd(), "public", "mcp", "chess-board.html") : new URL("./public/chess-board.html", import.meta.url);\n  const boardHtml = readFileSync(boardPath, "utf8");
+  const boardPath = process.env.VERCEL ? join(process.cwd(), "public", "mcp", "chess-board.html") : new URL("./public/chess-board.html", import.meta.url);
+  const boardHtml = readFileSync(boardPath, "utf8");
   registerAppResource(server, "grandmaster-chess-board", "ui://widget/chess-board.html", {}, async () => ({
     contents: [{ uri: "ui://widget/chess-board.html", mimeType: RESOURCE_MIME_TYPE, text: boardHtml,
       _meta: { ui: { prefersBorder: true }, "openai/ui": { availableDisplayModes: ["inline","fullscreen"] }, "openai/widgetDescription": "Interactive Grandmaster Chess board. Click pieces to see legal moves and play a standard chess game." } }
@@ -61,7 +63,8 @@ export function makeServer() {
       return {a,score:terms.reduce((n,t)=>n+(hay.includes(t)?1:0),0)};
     }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,limit).map(x=>({
       title:x.a.title,description:x.a.description,category:x.a.category,date:x.a.date,url:x.a.url,
-      snippet:x.a.body.replace(/[\n#*_>\[\]]/g," ").replace(/\s+/g," ").trim().slice(0,500)
+      snippet:x.a.body.replace(/[
+#*_>\[\]]/g," ").replace(/\s+/g," ").trim().slice(0,500)
     }));
     return {content:[{type:"text",text:JSON.stringify({query,results},null,2)}],structuredContent:{query,results}};
   });
