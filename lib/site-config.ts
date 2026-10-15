@@ -1,19 +1,29 @@
-// Trailing slash stripped defensively: if NEXT_PUBLIC_SITE_URL is ever set
-// with a trailing slash (e.g. "https://www.grandmasterchess.in/"), every
-// `${SITE_URL}/path` concatenation below would silently produce a
-// double slash (".../path"), which breaks sitemap.xml URLs and wastes
-// crawl budget. Normalizing here means it's correct regardless of how
-// the env var happens to be set.
+// Trailing slash stripped defensively so `${SITE_URL}/path` never yields "//".
 const rawSiteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || 'https://www.grandmasterchess.in';
 export const SITE_URL = rawSiteUrl.replace(/\/+$/, '');
 
-export const SITE_NAME = 'Grandmasterchess - Play chess free online';
+/** Entity name used in schema.org + og:site_name. Keep it short and brand-only:
+ *  Google builds the site name from WebSite.name, not from long marketing strings. */
+export const SITE_NAME = 'Grandmaster Chess';
 
-export const SITE_TAGLINE = 'Play Free Chess vs AI or Yourself on Grandmasterchess';
+/** One-word brand used as the title suffix ("... | Grandmasterchess") so the
+ *  brand query "grandmasterchess" is reinforced on every page. */
+export const SITE_BRAND = 'Grandmasterchess';
 
+/** Alternate spellings people type; fed to WebSite/Organization.alternateName. */
+export const SITE_ALT_NAMES = [
+  'Grandmasterchess',
+  'GrandmasterChess',
+  'Grandmaster Chess Online',
+  'grandmasterchess.in',
+];
+
+export const SITE_TAGLINE = 'Play Chess Online Free';
+
+// <=160 chars so Google doesn't truncate it.
 export const SITE_DESCRIPTION =
-  'Play free online chess on grandmasterchess against yourself or challenge AI opponents across basic, intermediate and advanced difficulty levels . Chess clocks, move history, and strategy guides.';
+  'Play chess online free on Grandmasterchess: challenge a chess AI at 3 levels or play 2-player locally. Chess clocks, PGN export, no sign-up needed.';
 
 export const TWITTER_HANDLE = '@grandmasterchess';
 

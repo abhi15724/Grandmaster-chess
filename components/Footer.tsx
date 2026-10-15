@@ -1,13 +1,15 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { Swords, Bot, BookOpen, HelpCircle, Shield, Globe, Award } from 'lucide-react';
 
 interface FooterProps {
-  navigate: (path: string) => void;
+  /** @deprecated links are now real <a href> elements; kept for API compatibility */
+  navigate?: (path: string) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ navigate }) => {
+export const Footer: React.FC<FooterProps> = () => {
   return (
     <footer className="border-t border-[#3c3934] bg-[#161512] text-zinc-400 py-10 px-4 sm:px-6 lg:px-8 mt-auto">
       <div className="mx-auto max-w-7xl">
@@ -37,24 +39,24 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
             </h4>
             <ul className="space-y-1.5 text-xs">
               <li>
-                <button onClick={() => navigate('/play/ai/basic')} className="hover:text-[#81b64c] transition-colors">
+                <Link href="/play/ai/basic" className="hover:text-[#81b64c] transition-colors">
                   Play vs Basic AI (Beginner)
-                </button>
+                </Link>
               </li>
               <li>
-                <button onClick={() => navigate('/play/ai/intermediate')} className="hover:text-[#81b64c] transition-colors">
+                <Link href="/play/ai/intermediate" className="hover:text-[#81b64c] transition-colors">
                   Play vs Intermediate AI (Casual)
-                </button>
+                </Link>
               </li>
               <li>
-                <button onClick={() => navigate('/play/ai/advanced')} className="hover:text-[#81b64c] transition-colors">
+                <Link href="/play/ai/advanced" className="hover:text-[#81b64c] transition-colors">
                   Play vs Advanced AI (Master)
-                </button>
+                </Link>
               </li>
               <li>
-                <button onClick={() => navigate('/play/local')} className="hover:text-[#81b64c] transition-colors">
+                <Link href="/play/local" className="hover:text-[#81b64c] transition-colors">
                   Play with Yourself (Local Pass & Play)
-                </button>
+                </Link>
               </li>
             </ul>
           </div>
@@ -66,34 +68,34 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
             </h4>
             <ul className="space-y-1.5 text-xs">
               <li>
-                <button onClick={() => navigate('/learn/chess-rules')} className="hover:text-[#81b64c] transition-colors">
+                <Link href="/learn/chess-rules" className="hover:text-[#81b64c] transition-colors">
                   Complete FIDE Chess Rules
-                </button>
+                </Link>
               </li>
               <li>
-                <button onClick={() => navigate('/learn/how-to-play-chess')} className="hover:text-[#81b64c] transition-colors">
+                <Link href="/blog/chess-rules-complete-beginners-guide" className="hover:text-[#81b64c] transition-colors">
                   How to Play Chess Step-by-Step
-                </button>
+                </Link>
               </li>
               <li>
-                <button onClick={() => navigate('/learn/chess-openings')} className="hover:text-[#81b64c] transition-colors">
+                <Link href="/learn/chess-openings" className="hover:text-[#81b64c] transition-colors">
                   Popular Chess Openings Guide
-                </button>
+                </Link>
               </li>
               <li>
-                <button onClick={() => navigate('/learn/chess-strategies')} className="hover:text-[#81b64c] transition-colors">
+                <Link href="/learn/chess-strategies" className="hover:text-[#81b64c] transition-colors">
                   Tactics & Middlegame Strategy
-                </button>
+                </Link>
               </li>
               <li>
-                <button onClick={() => navigate('/faq')} className="hover:text-[#81b64c] transition-colors">
+                <Link href="/faq" className="hover:text-[#81b64c] transition-colors">
                   Frequently Asked Questions
-                </button>
+                </Link>
               </li>
               <li>
-                <button onClick={() => navigate('/blog')} className="hover:text-[#81b64c] transition-colors">
+                <Link href="/blog" className="hover:text-[#81b64c] transition-colors">
                   Chess Blog & Guides
-                </button>
+                </Link>
               </li>
             </ul>
           </div>
@@ -124,15 +126,15 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
         <div className="pt-5 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-400 gap-3">
           <p>© {new Date().getFullYear()} Grandmaster Chess Online. Fast, accessible, and high density.</p>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs">
-            <button onClick={() => navigate('/about')} className="hover:text-[#81b64c] hover:underline">About</button>
+            <Link href="/about" className="hover:text-[#81b64c] hover:underline">About</Link>
             <span>•</span>
-            <button onClick={() => navigate('/contact')} className="hover:text-[#81b64c] hover:underline">Contact</button>
+            <Link href="/contact" className="hover:text-[#81b64c] hover:underline">Contact</Link>
             <span>•</span>
-            <button onClick={() => navigate('/privacy')} className="hover:text-[#81b64c] hover:underline">Privacy Policy</button>
+            <Link href="/privacy" className="hover:text-[#81b64c] hover:underline">Privacy Policy</Link>
             <span>•</span>
-            <button onClick={() => navigate('/terms')} className="hover:text-[#81b64c] hover:underline">Terms</button>
+            <Link href="/terms" className="hover:text-[#81b64c] hover:underline">Terms</Link>
             <span>•</span>
-            <button onClick={() => navigate('/faq')} className="hover:text-[#81b64c] hover:underline">FAQ</button>
+            <Link href="/faq" className="hover:text-[#81b64c] hover:underline">FAQ</Link>
           </div>
         </div>
       </div>

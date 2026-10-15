@@ -17,6 +17,7 @@ import {
   faqSchema,
 } from '@/lib/json-ld';
 import { absoluteUrl } from '@/lib/site-config';
+import { pageMetadata } from '@/lib/seo';
 
 export function generateStaticParams() {
   return getAllPostSlugs().map((slug) => ({ slug }));
@@ -31,25 +32,25 @@ export async function generateMetadata({
   const post = getPostBySlug(slug);
   if (!post) return {};
 
-  return {
+  const base = pageMetadata({
     title: post.title,
     description: post.description,
-    alternates: { canonical: `/blog/${post.slug}` },
-    authors: [{ name: post.author }],
+    path: `/blog/${post.slug}`,
     keywords: post.tags,
+    // Long post titles would be truncated once " | Grandmasterchess" is appended.
+    absoluteTitle: post.title.length > 40,
+    ogLabel: post.category,
+  });
+
+  return {
+    ...base,
+    authors: [{ name: post.author }],
     openGraph: {
+      ...base.openGraph,
       type: 'article',
-      title: post.title,
-      description: post.description,
-      url: absoluteUrl(`/blog/${post.slug}`),
       publishedTime: post.date,
       modifiedTime: post.updated || post.date,
       tags: post.tags,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.title,
-      description: post.description,
     },
   };
 }

@@ -5,6 +5,7 @@ import { ChevronLeft } from 'lucide-react';
 import { getAllCategories, getPostsByCategory } from '@/lib/blog';
 import { BlogPostCard } from '@/components/blog/BlogPostCard';
 import { jsonLdGraph, breadcrumbSchema } from '@/lib/json-ld';
+import { pageMetadata } from '@/lib/seo';
 
 export function generateStaticParams() {
   return getAllCategories().map((cat) => ({ category: cat.toLowerCase() }));
@@ -19,11 +20,11 @@ export async function generateMetadata({
   const posts = getPostsByCategory(category);
   if (posts.length === 0) return {};
   const label = posts[0].category;
-  return {
-    title: `${label} Articles — Chess Blog`,
-    description: `Chess ${label.toLowerCase()} guides and articles from Grandmaster Chess Online.`,
-    alternates: { canonical: `/blog/category/${category.toLowerCase()}` },
-  };
+  return pageMetadata({
+    title: `${label} Chess Articles`,
+    description: `Chess ${label.toLowerCase()} guides and articles from Grandmasterchess.`,
+    path: `/blog/category/${encodeURIComponent(category.toLowerCase())}`,
+  });
 }
 
 export default async function CategoryPage({

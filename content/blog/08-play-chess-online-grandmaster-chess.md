@@ -1,6 +1,6 @@
 ---
-title: "Play Chess Online: The Complete Guide (and Why Grandmaster Chess Online Is Worth Trying)"
-description: "Everything you need to know about playing chess online in 2026 — how it works, what to look for in a chess site, and how Grandmaster Chess Online's AI engine and local play compare."
+title: "Play Chess Online: The Complete Guide (2026)"
+description: "How to play chess online in 2026: what to look for in a chess site, how AI opponents work, and how to start a free game on Grandmasterchess."
 date: "2026-08-17"
 updated: "2026-08-17"
 author: "Grandmaster Chess Editorial Team"

@@ -1,16 +1,17 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import { LearnStrategiesPage } from '@/components/pages/LearnStrategiesPage';
 import { jsonLdGraph, breadcrumbSchema } from '@/lib/json-ld';
 
 import { LEARN_STRATEGY_KEYWORDS } from '@/lib/seo-keywords';
 
-export const metadata: Metadata = {
-  title: 'Chess Tactics & Middlegame Strategy Guide',
+export const metadata: Metadata = pageMetadata({
+  title: 'Chess Tactics & Strategy Guide',
   description:
-    'Learn the core tactical patterns and middlegame strategies that decide most chess games: forks, pins, skewers, discovered attacks, and positional planning.',
+    'Learn the chess tactics and strategy that win games: forks, pins, skewers, discovered attacks, endgame basics and positional planning.',
   keywords: LEARN_STRATEGY_KEYWORDS,
-  alternates: { canonical: '/learn/chess-strategies' },
-};
+  path: '/learn/chess-strategies',
+});
 
 export default function Page() {
   const graph = jsonLdGraph(

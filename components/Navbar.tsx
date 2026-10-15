@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Swords, Bot, Monitor, BookOpen, HelpCircle, Trophy, Volume2, VolumeX, Menu, X, Shield, Settings2, Newspaper, LogIn, LogOut } from 'lucide-react';
 import { sound } from '@/lib/audio';
 import { SoundSettingsModal } from '@/components/SoundSettingsModal';
@@ -52,12 +53,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         
         {/* Brand Logo */}
-        <button
-          id="nav-logo-btn"
-          onClick={() => {
-            navigate('/');
-            setMobileMenuOpen(false);
-          }}
+        <Link href="/" id="nav-logo-btn" aria-label="Grandmaster Chess home" onClick={() => setMobileMenuOpen(false)}
           className="flex items-center gap-2.5 text-left focus:outline-none group"
         >
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#81b64c] text-zinc-950 font-extrabold shadow-sm group-hover:bg-[#70a33e] transition-colors">
@@ -70,7 +66,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
             </div>
             <span className="text-[10px] text-zinc-400 font-medium tracking-wide uppercase">Play vs AI or Yourself</span>
           </div>
-        </button>
+        </Link>
 
         {/* Desktop Nav Links */}
         <nav className="hidden xl:flex items-center gap-1">
@@ -78,19 +74,15 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
             const Icon = item.icon;
             const isActive = currentPath.startsWith(item.path);
             return (
-              <button
-                key={item.path}
-                id={`nav-link-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
-                onClick={() => navigate(item.path)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${
+              <Link href={item.path} key={item.path}
+                id={`nav-link-${item.label.toLowerCase().replace(/\s+/g, '-')}`} className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${
                   isActive
                     ? 'bg-[#3c3934] text-[#81b64c] shadow-sm'
                     : 'text-zinc-300 hover:text-zinc-100 hover:bg-[#3c3934]/60'
-                }`}
-              >
+                }`}>
                 <Icon className="h-3.5 w-3.5 opacity-90" />
                 <span>{item.label}</span>
-              </button>
+              </Link>
             );
           })}
         </nav>
@@ -121,18 +113,14 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
           </div>
 
           {/* User Rating Badge */}
-          <button
-            id="nav-user-profile-badge"
-            onClick={() => navigate('/dashboard')}
-            className="hidden xl:flex items-center gap-1.5 rounded-md border border-[#3c3934] bg-[#211f1c] px-2.5 py-1 text-xs font-semibold text-zinc-200 hover:border-[#81b64c]/60 transition-colors"
-            title="View Player Rating & Stats"
-          >
+          <Link href="/dashboard" id="nav-user-profile-badge" className="hidden xl:flex items-center gap-1.5 rounded-md border border-[#3c3934] bg-[#211f1c] px-2.5 py-1 text-xs font-semibold text-zinc-200 hover:border-[#81b64c]/60 transition-colors"
+            title="View Player Rating & Stats">
             <Shield className="h-3.5 w-3.5 text-[#81b64c]" />
             <span>{userStats.name}</span>
             <span className="font-mono-chess rounded bg-[#81b64c]/20 px-1.5 py-0.5 text-[#81b64c] text-[11px] font-bold">
               {userStats.rating}
             </span>
-          </button>
+          </Link>
 
           {/* Account: Login/Signup or Logout */}
           {!authLoading && (
@@ -178,12 +166,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
               const Icon = item.icon;
               const isActive = currentPath.startsWith(item.path);
               return (
-                <button
+                <Link
                   key={item.path}
-                  onClick={() => {
-                    navigate(item.path);
-                    setMobileMenuOpen(false);
-                  }}
+                  href={item.path}
+                  onClick={() => setMobileMenuOpen(false)}
                   className={`flex items-center gap-2.5 rounded-md px-3 py-2 text-left text-xs font-semibold transition-colors ${
                     isActive
                       ? 'bg-[#3c3934] text-[#81b64c]'
@@ -192,7 +178,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
                 >
                   <Icon className="h-4 w-4 opacity-90" />
                   <span>{item.label}</span>
-                </button>
+                </Link>
               );
             })}
             

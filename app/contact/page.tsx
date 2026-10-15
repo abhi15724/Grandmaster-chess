@@ -1,12 +1,15 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import { ContactPage } from '@/components/pages/ContactPage';
-import { SITE_NAME } from '@/lib/site-config';
 
-export const metadata: Metadata = {
-  title: `Contact Us | ${SITE_NAME}`,
-  description: 'Get in touch with the Grandmaster Chess Online team for support, feedback, or bug reports.',
-  alternates: { canonical: '/contact' },
-};
+export const metadata: Metadata = pageMetadata({
+  title: 'Contact Grandmasterchess',
+  description:
+    'Contact the Grandmasterchess team for support, feedback or bug reports about our free online chess site.',
+
+  path: '/contact',
+  absoluteTitle: true,
+});
 
 export default function Page() {
   return <ContactPage />;

@@ -1,8 +1,10 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import './globals.css';
 import { AppShell } from '@/components/AppShell';
+import { JsonLd } from '@/components/JsonLd';
 import {
+  SITE_BRAND,
   SITE_NAME,
   SITE_TAGLINE,
   SITE_DESCRIPTION,
@@ -16,34 +18,59 @@ import {
   webApplicationSchema,
 } from '@/lib/json-ld';
 import { SITE_KEYWORDS } from '@/lib/seo-keywords';
+import { ogImageUrl } from '@/lib/seo';
+
+const DEFAULT_TITLE = `${SITE_TAGLINE} | ${SITE_BRAND}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} | ${SITE_TAGLINE}`,
-    template: `%s | ${SITE_NAME}`,
+    default: DEFAULT_TITLE,
+    template: `%s | ${SITE_BRAND}`,
   },
   description: SITE_DESCRIPTION,
   keywords: SITE_KEYWORDS,
-  authors: [{ name: SITE_NAME }],
-  robots: { index: true, follow: true },
-  alternates: { canonical: '/' },
+  applicationName: SITE_BRAND,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  category: 'games',
+  // NOTE: no root-level `alternates.canonical`. A canonical here is inherited by
+  // any page that forgets its own and would point it at the homepage.
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
   manifest: '/site.webmanifest',
   openGraph: {
     type: 'website',
     url: SITE_URL,
-    title: `${SITE_NAME} | ${SITE_TAGLINE}`,
-    description:
-      'Challenge AI opponents or play locally against yourself on grandmasterchess, with clocks, move analysis, and custom themes.',
+    title: DEFAULT_TITLE,
+    description: SITE_DESCRIPTION,
     siteName: SITE_NAME,
+    locale: 'en_US',
+    images: [{ url: ogImageUrl('Play Chess Online Free'), width: 1200, height: 630, alt: DEFAULT_TITLE }],
   },
   twitter: {
     card: 'summary_large_image',
     site: TWITTER_HANDLE,
-    title: `${SITE_NAME} | Play Free Chess`,
-    description:
-      'Play free online chess against AI or against yourself locally. Features move analysis and chess clocks.',
+    title: DEFAULT_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [ogImageUrl('Play Chess Online Free')],
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#161512',
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -68,11 +95,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
-        <script
-          type="application/ld+json"
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
-        />
+        <JsonLd data={graph} />
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3716104050682143"
