@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { Chess } from 'chess.js';
 import { Bot, Monitor, ShieldCheck, Zap, Sparkles, BookOpen, ChevronRight, HelpCircle, Trophy } from 'lucide-react';
 import { ChessBoard } from '@/components/ChessBoard';
@@ -16,9 +16,6 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ latestPosts = [] }) => {
-  const router = useRouter();
-  const navigate = (path: string) => router.push(path);
-
   // Static demo board in Ruy Lopez opening position for hero visual
   const demoChess = new Chess('r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3');
 
@@ -39,9 +36,9 @@ export const HomePage: React.FC<HomePageProps> = ({ latestPosts = [] }) => {
 
           {/* Main Title */}
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-zinc-100 tracking-tight leading-[1.15] mb-4">
-            Play Chess Online — <br className="hidden sm:inline" />
+            Play Chess Online Free — <br className="hidden sm:inline" />
             <span className="text-[#81b64c]">
-              Yourself or the AI
+              vs the AI or Yourself
             </span>
           </h1>
 
@@ -54,24 +51,16 @@ export const HomePage: React.FC<HomePageProps> = ({ latestPosts = [] }) => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full max-w-md mb-5">
             
             {/* Play AI */}
-            <button
-              id="hero-play-ai-btn"
-              onClick={() => navigate('/play/ai')}
-              className="flex items-center justify-center gap-2 rounded-lg bg-[#81b64c] px-4 py-3 text-xs font-bold text-zinc-950 hover:bg-[#70a33e] shadow-md hover:scale-101 active:scale-98 transition-all"
-            >
+            <Link href="/play/ai" id="hero-play-ai-btn" className="flex items-center justify-center gap-2 rounded-lg bg-[#81b64c] px-4 py-3 text-xs font-bold text-zinc-950 hover:bg-[#70a33e] shadow-md hover:scale-101 active:scale-98 transition-all">
               <Bot className="h-4 w-4 text-zinc-950" />
               <span>Play vs AI</span>
-            </button>
+            </Link>
 
             {/* Play Local Chess */}
-            <button
-              id="hero-play-local-btn"
-              onClick={() => navigate('/play/local')}
-              className="flex items-center justify-center gap-2 rounded-lg bg-[#161512] px-4 py-3 text-xs font-bold text-zinc-200 hover:bg-[#262421] border border-[#3c3934] hover:scale-101 active:scale-98 transition-all"
-            >
+            <Link href="/play/local" id="hero-play-local-btn" className="flex items-center justify-center gap-2 rounded-lg bg-[#161512] px-4 py-3 text-xs font-bold text-zinc-200 hover:bg-[#262421] border border-[#3c3934] hover:scale-101 active:scale-98 transition-all">
               <Monitor className="h-4 w-4 text-zinc-400" />
               <span>Local Game</span>
-            </button>
+            </Link>
           </div>
 
           {/* Feature Micro-Badges */}
@@ -109,12 +98,9 @@ export const HomePage: React.FC<HomePageProps> = ({ latestPosts = [] }) => {
 
             <div className="mt-2.5 flex items-center justify-between px-2 pt-1 text-xs text-zinc-400">
               <span className="text-[11px]">Click or drag pieces to test board</span>
-              <button
-                onClick={() => navigate('/play/ai')}
-                className="text-[#81b64c] font-bold hover:underline flex items-center gap-1 text-xs"
-              >
+              <Link href="/play/ai" className="text-[#81b64c] font-bold hover:underline flex items-center gap-1 text-xs">
                 Start Game <ChevronRight className="h-3.5 w-3.5" />
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -178,13 +164,10 @@ export const HomePage: React.FC<HomePageProps> = ({ latestPosts = [] }) => {
               Study the first moves played by world champions and grandmasters.
             </p>
           </div>
-          <button
-            onClick={() => navigate('/learn/chess-openings')}
-            className="flex items-center gap-1 text-xs font-bold text-[#81b64c] hover:underline self-start sm:self-center"
-          >
+          <Link href="/learn/chess-openings" className="flex items-center gap-1 text-xs font-bold text-[#81b64c] hover:underline self-start sm:self-center">
             <span>Explore All Openings</span>
             <ChevronRight className="h-3.5 w-3.5" />
-          </button>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -224,13 +207,10 @@ export const HomePage: React.FC<HomePageProps> = ({ latestPosts = [] }) => {
                 Guides, strategy, and research on chess — new posts regularly.
               </p>
             </div>
-            <button
-              onClick={() => navigate('/blog')}
-              className="flex items-center gap-1 text-xs font-bold text-[#81b64c] hover:underline self-start sm:self-center"
-            >
+            <Link href="/blog" className="flex items-center gap-1 text-xs font-bold text-[#81b64c] hover:underline self-start sm:self-center">
               <span>View All Posts</span>
               <ChevronRight className="h-3.5 w-3.5" />
-            </button>
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -283,15 +263,25 @@ export const HomePage: React.FC<HomePageProps> = ({ latestPosts = [] }) => {
           </div>
 
           <div className="mt-6 text-center">
-            <button
-              onClick={() => navigate('/faq')}
-              className="inline-flex items-center gap-1 text-xs font-bold text-[#81b64c] hover:underline"
-            >
+            <Link href="/faq" className="inline-flex items-center gap-1 text-xs font-bold text-[#81b64c] hover:underline">
               <HelpCircle className="h-3.5 w-3.5" />
               <span>Read Full FAQ & Guides</span>
-            </button>
+            </Link>
           </div>
         </div>
+      </section>
+
+      {/* 5. ABOUT / SEO COPY */}
+      <section className="mx-auto max-w-3xl text-sm leading-relaxed text-zinc-400">
+        <h2 className="mb-3 text-xl font-extrabold tracking-tight text-zinc-100">
+          Play chess online free on Grandmasterchess
+        </h2>
+        <p className="mb-3">
+          Grandmasterchess is a free place to play chess online with no download and no sign-up. Play chess against the computer at three levels, from a beginner-friendly AI to a master-strength engine, or play 2 player chess on one device with a friend. Every game uses full FIDE rules, chess clocks from bullet to rapid, and a move list you can export as PGN.
+        </p>
+        <p className="mb-3">
+          New to the game? Start with our <Link href="/learn/chess-rules" className="text-[#81b64c] hover:underline">chess rules guide</Link>, learn the <Link href="/learn/chess-openings" className="text-[#81b64c] hover:underline">best chess openings</Link>, then sharpen your <Link href="/learn/chess-strategies" className="text-[#81b64c] hover:underline">tactics and strategy</Link>. Ready to play? Try the <Link href="/play/ai/basic" className="text-[#81b64c] hover:underline">easy AI</Link>, the <Link href="/play/ai/intermediate" className="text-[#81b64c] hover:underline">medium AI</Link> or the <Link href="/play/ai/advanced" className="text-[#81b64c] hover:underline">hardest AI</Link>.
+        </p>
       </section>
 
     </div>

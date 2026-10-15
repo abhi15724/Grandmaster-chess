@@ -1,15 +1,16 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import { FAQPage } from '@/components/pages/FAQPage';
 import { jsonLdGraph, faqSchema, breadcrumbSchema } from '@/lib/json-ld';
 import { FAQ_KEYWORDS } from '@/lib/seo-keywords';
 
-export const metadata: Metadata = {
-  title: 'FAQ — Online Chess & AI Engine Questions Answered',
+export const metadata: Metadata = pageMetadata({
+  title: 'Chess FAQ: Free Online Chess Questions',
   description:
-    'Answers to common questions about playing free online chess: AI difficulty, FIDE rule enforcement, PGN export, and mobile support.',
+    'Answers about playing free online chess: AI difficulty levels, FIDE rules, PGN export, accounts, ratings and mobile support.',
   keywords: FAQ_KEYWORDS,
-  alternates: { canonical: '/faq' },
-};
+  path: '/faq',
+});
 
 const faqs = [
   {

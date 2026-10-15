@@ -396,9 +396,9 @@ export const PlayAIPage: React.FC<PlayAIPageProps> = ({
             <div className="mx-auto mb-2.5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#81b64c] text-zinc-950 shadow-md">
               <Bot className="h-6 w-6 text-zinc-950" />
             </div>
-            <h2 className="text-xl font-extrabold text-zinc-100 tracking-tight mb-1">
-              Play Against AI
-            </h2>
+            <h1 className="text-xl font-extrabold text-zinc-100 tracking-tight mb-1">
+              {{ basic: 'Play Chess vs Easy AI', intermediate: 'Play Chess vs Computer Online', advanced: 'Play Chess vs the Hardest AI' }[initialDifficulty]}
+            </h1>
             <p className="text-xs text-zinc-400">
               Select difficulty level, color, and time control to start.
             </p>

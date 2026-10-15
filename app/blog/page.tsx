@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 import { BookOpen } from 'lucide-react';
 import { getAllPosts, getAllCategories } from '@/lib/blog';
@@ -7,13 +8,13 @@ import { jsonLdGraph, breadcrumbSchema } from '@/lib/json-ld';
 
 import { BLOG_KEYWORDS } from '@/lib/seo-keywords';
 
-export const metadata: Metadata = {
-  title: 'Chess Blog — Openings, Strategy & Guides',
+export const metadata: Metadata = pageMetadata({
+  title: 'Chess Blog: Openings, Tactics & Guides',
   description:
-    'Practical chess guides: openings for beginners, tactics like forks and pins, how to beat AI at every level, time control comparisons, and rules explained clearly.',
+    'Practical chess guides: best openings for beginners, tactics like forks and pins, how to beat chess AI, time controls and rules explained.',
   keywords: BLOG_KEYWORDS,
-  alternates: { canonical: '/blog' },
-};
+  path: '/blog',
+});
 
 export default function BlogIndexPage() {
   const posts = getAllPosts();

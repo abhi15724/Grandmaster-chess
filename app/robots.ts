@@ -7,9 +7,11 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/dashboard'],
+        // Private/duplicate-value URLs only. Never block /_next/ (Google needs the JS/CSS to render).
+        disallow: ['/dashboard', '/api/'],
       },
     ],
-    sitemap: 'https://www.grandmasterchess.in/sitemap.xml',
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   };
 }

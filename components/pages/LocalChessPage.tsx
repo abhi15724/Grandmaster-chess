@@ -140,6 +140,7 @@ export const LocalChessPage: React.FC<LocalChessPageProps> = ({}) => {
 
   return (
     <div className="mx-auto max-w-7xl px-3 py-4 sm:px-5 lg:px-6">
+      <h1 className="sr-only">2 Player Chess Online: Free Pass &amp; Play on One Device</h1>
       
       {/* Top Bar */}
       <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[#3c3934] mb-4">
