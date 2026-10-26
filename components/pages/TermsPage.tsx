@@ -3,8 +3,8 @@
 import React from 'react';
 import { FileText } from 'lucide-react';
 
-const CONTACT_EMAIL = 'abhi15724@gmail.com';
-const LAST_UPDATED = 'August 17, 2026';
+import { CONTACT_EMAIL } from '@/lib/site-config';
+const LAST_UPDATED = 'October 23, 2026';
 
 export const TermsPage: React.FC = () => {
   return (

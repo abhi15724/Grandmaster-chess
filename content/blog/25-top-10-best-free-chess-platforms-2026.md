@@ -7,6 +7,7 @@ author: "Grandmaster Chess Editorial Team"
 category: "Reviews"
 tags: ["best free chess platform", "top 10 chess websites", "chess.com vs lichess", "free online chess"]
 readingMinutes: 8
+noindex: true
 ---
 
 There are dozens of places to play chess online, but only a handful are actually worth your time. We ranked the 10 best based on what matters most for a free player: how much you get without paying, how easy it is to just start playing, and how good the tools are once you're there.

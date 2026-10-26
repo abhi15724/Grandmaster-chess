@@ -10,7 +10,7 @@ import { PLAY_AI_INTERMEDIATE_KEYWORDS } from '@/lib/seo-keywords';
 export const metadata: Metadata = pageMetadata({
   title: 'Play Chess vs Medium AI (Casual)',
   description:
-    'Play chess vs a medium-strength AI (~1400 rating): a fair fight for club-level players. Free, in your browser, no sign-up needed.',
+    'Play chess vs a medium-strength AI: a fair fight for improving players. Free, in your browser, no sign-up needed.',
   keywords: PLAY_AI_INTERMEDIATE_KEYWORDS,
   path: '/play/ai/intermediate',
 });

@@ -35,6 +35,7 @@ export const metadata: Metadata = {
   creator: SITE_NAME,
   publisher: SITE_NAME,
   category: 'games',
+  alternates: { types: { 'application/rss+xml': '/feed.xml' } },
   // NOTE: no root-level `alternates.canonical`. A canonical here is inherited by
   // any page that forgets its own and would point it at the homepage.
   robots: {

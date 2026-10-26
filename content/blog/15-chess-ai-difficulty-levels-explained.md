@@ -1,29 +1,38 @@
 ---
 title: "Chess AI Difficulty Levels Explained: Basic vs. Intermediate vs. Advanced"
-description: "What actually changes between Basic, Intermediate, and Advanced chess AI — search depth, evaluation complexity, and how to pick the right level for where you're at."
+description: "What changes between Basic, Intermediate and Advanced chess AI: search depth, evaluation and how to pick a level to practise against."
 date: "2026-08-22"
-updated: "2026-08-22"
+updated: "2026-10-23"
 author: "Grandmaster Chess Editorial Team"
 category: "Guides"
 tags: ["chess ai difficulty levels", "play chess vs ai", "chess engine difficulty explained", "chess ai opponent"]
 readingMinutes: 6
+factChecked: "2026-10-23"
+sources:
+  - title: "Grandmasterchess engine source code (lib/chess/engine.ts)"
+    url: "https://github.com/abhi15724/Grandmaster-chess/blob/main/lib/chess/engine.ts"
+  - title: "Lichess blog: How do chess engines really work?"
+    url: "https://lichess.org/@/everdell/blog/how-do-chess-engines-really-work/JsMnuk3l"
+  - title: "Wikipedia: Alpha-beta pruning"
+    url: "https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning"
+seoTitle: "Chess AI Difficulty Levels: Basic, Intermediate, Advanced"
 ---
 
 The three AI tiers here — [Basic](/play/ai/basic), [Intermediate](/play/ai/intermediate), and [Advanced](/play/ai/advanced) — don't just get "more random" or "less random." Each one is a genuinely different engine underneath, and knowing what actually changes helps you pick the level that will teach you something instead of just frustrating or boring you.
 
 ## Basic: fast evaluation, intentionally imperfect
 
-Basic AI evaluates the board directly — material balance and basic positional factors — without searching multiple moves ahead. On top of that, it deliberately adds a bit of randomness to its move choice rather than always playing the objectively best option. That's not a limitation of a "worse" engine; it's an intentional design decision. An engine that always plays the mathematically optimal move at every turn is a brutal, discouraging opponent for someone still learning how pieces interact — Basic is tuned to punish clear mistakes (like hanging a piece) while still leaving room for a beginner to win real games and build confidence.
+Basic AI plays a random legal move 45% of the time, and otherwise evaluates the position after each of its candidate moves — material balance and basic positional factors — without searching multiple moves ahead. On top of that, it deliberately adds a bit of randomness to its move choice rather than always playing the objectively best option. That's not a limitation of a "worse" engine; it's an intentional design decision. An engine that always plays the mathematically optimal move at every turn is a brutal, discouraging opponent for someone still learning how pieces interact — Basic is tuned to punish clear mistakes (like hanging a piece) while still leaving room for a beginner to win real games and build confidence.
 
 ## Intermediate: real search, real trade-offs
 
-Intermediate is a different class of opponent: it uses **minimax search with alpha-beta pruning**, looking about three moves ahead for both sides before deciding on a move. In plain terms, it doesn't just evaluate the current position — it simulates plausible sequences of moves and counter-moves, and picks the move that leads to the best position it can find a few moves out, assuming you respond reasonably well too.
+Intermediate is a different class of opponent: it uses **minimax search with alpha-beta pruning**, searching three plies (half-moves) ahead before deciding on a move. In plain terms, it doesn't just evaluate the current position — it simulates plausible sequences of moves and counter-moves, and picks the move that leads to the best position it can find a few moves out, assuming you respond reasonably well too.
 
 Its evaluation function also gets more sophisticated at this tier, factoring in **piece-square tables** (bonus or penalty values for where each piece type sits on the board — a knight in the center is worth more than one stuck on the rim), **center control**, and basic **king safety**. This is the level where tactics that are two or three moves deep — a fork, a discovered attack, a simple combination — start getting punished consistently if you miss them.
 
 ## Advanced: deeper search plus tactical lookahead
 
-Advanced extends the same minimax approach one move deeper (roughly four moves ahead instead of three) — which sounds small, but search trees grow explosively with depth, so that extra ply represents meaningfully more calculation. More importantly, Advanced adds **quiescence search**: at the end of its normal search, instead of stopping and evaluating whatever position it lands on, it keeps calculating through any immediate captures or forcing sequences until the position "settles down." This directly fixes what's called the horizon effect — a shallower engine that stops mid-exchange can badly misjudge a position it would have evaluated correctly one or two moves later, and Advanced is specifically built to avoid that trap.
+Advanced extends the same minimax approach one ply deeper (four plies instead of three) — which sounds small, but search trees grow explosively with depth, so that extra ply represents meaningfully more calculation. More importantly, Advanced adds **quiescence search**: at the end of its normal search, instead of stopping and evaluating whatever position it lands on, it keeps calculating through any immediate captures or forcing sequences until the position "settles down." This directly fixes what's called the horizon effect — a shallower engine that stops mid-exchange can badly misjudge a position it would have evaluated correctly one or two moves later, and Advanced is specifically built to avoid that trap.
 
 The evaluation itself also weighs more: piece activity, mobility, and broader positional factors on top of everything Intermediate already considers. The result plays noticeably more like a careful human — patient, hard to trick with superficial tactics, and quick to punish a genuinely weak structural decision, not just an outright blunder.
 

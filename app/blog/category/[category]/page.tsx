@@ -24,6 +24,8 @@ export async function generateMetadata({
     title: `${label} Chess Articles`,
     description: `Chess ${label.toLowerCase()} guides and articles from Grandmasterchess.`,
     path: `/blog/category/${encodeURIComponent(category.toLowerCase())}`,
+    // Thin archive pages: let people browse, keep them out of the index.
+    noindex: true,
   });
 }
 

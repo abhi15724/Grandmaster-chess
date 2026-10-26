@@ -5,7 +5,7 @@ import { TermsPage } from '@/components/pages/TermsPage';
 export const metadata: Metadata = pageMetadata({
   title: 'Terms of Service',
   description:
-    'The terms and conditions for using Grandmasterchess.',
+    'The terms for using Grandmasterchess: acceptable use, accounts, advertising, disclaimers and governing law.',
 
   path: '/terms',
 });

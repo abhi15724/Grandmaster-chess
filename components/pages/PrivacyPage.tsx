@@ -1,10 +1,11 @@
-'use client';
-
 import React from 'react';
 import { Shield } from 'lucide-react';
+import { CONTACT_EMAIL } from '@/lib/site-config';
 
-const CONTACT_EMAIL = 'abhi15724@gmail.com';
-const LAST_UPDATED = 'August 17, 2026';
+const LAST_UPDATED = 'October 23, 2026';
+
+const H2 = 'text-base font-bold text-zinc-100 mb-2';
+const STRONG = 'text-zinc-100';
 
 export const PrivacyPage: React.FC = () => {
   return (
@@ -20,107 +21,134 @@ export const PrivacyPage: React.FC = () => {
       <div className="space-y-6 text-sm leading-relaxed text-zinc-300">
         <section>
           <p>
-            This Privacy Policy explains what information Grandmaster Chess Online
-            (&quot;we&quot;, &quot;us&quot;, &quot;the Site&quot;) collects, how it is used, and the choices you have.
-            By using grandmasterchess.in, you agree to the practices described here.
+            This policy explains what information Grandmasterchess (grandmasterchess.in, &quot;we&quot;, &quot;the Site&quot;) collects, why, who else
+            receives it, and the choices you have. The Site is run by an individual publisher in India; see the{' '}
+            <a href="/about#author" className="text-[#81b64c] hover:underline">About page</a>.
           </p>
         </section>
 
         <section>
-          <h2 className="text-base font-bold text-zinc-100 mb-2">1. Information we collect</h2>
-          <p className="mb-2"><strong className="text-zinc-100">Playing without an account.</strong> You can play every game mode on this Site without creating an account. In this case, we do not collect any personal information about you — gameplay data stays only in your browser session.</p>
-          <p className="mb-2"><strong className="text-zinc-100">Creating an account.</strong> If you choose to sign up, we collect your email address and authentication details via our backend provider, Supabase. We also store gameplay-related data tied to your account: rating, win/loss/draw record, and game history, so this information can sync across your devices.</p>
-          <p><strong className="text-zinc-100">Automatically collected data.</strong> Like most websites, our hosting provider (Vercel) may automatically log standard technical information such as IP address, browser type, device type, and pages visited, for security and performance purposes.</p>
-        </section>
-
-        <section>
-          <h2 className="text-base font-bold text-zinc-100 mb-2">2. Cookies and similar technologies</h2>
+          <h2 className={H2}>1. What we collect</h2>
           <p className="mb-2">
-            We use essential cookies/local storage to keep you signed in and to remember basic
-            preferences (such as board theme).
+            <strong className={STRONG}>Playing as a guest.</strong> You can play every mode without an account. We do not ask for your name or email.
+            A temporary guest name, rating and recent results are kept in your browser&apos;s session storage and disappear when you close the tab.
+          </p>
+          <p className="mb-2">
+            <strong className={STRONG}>Creating an account.</strong> If you sign up, our authentication and database provider, Supabase, stores your
+            email address and sign-in details, plus the rating, results and game history linked to your account so they sync across devices.
+          </p>
+          <p className="mb-2">
+            <strong className={STRONG}>Preferences.</strong> Settings such as board theme and sound are stored in your browser.
           </p>
           <p>
-            If this Site displays advertising, third-party vendors, including Google, may use cookies
-            to serve ads based on your prior visits to this or other websites. Google&apos;s use of
-            advertising cookies enables it and its partners to serve ads based on your visit to this
-            site and/or other sites on the Internet. You may opt out of personalized advertising by
-            visiting{' '}
-            <a
-              href="https://adssettings.google.com"
-              target="_blank"
-              rel="noreferrer"
-              className="text-[#81b64c] hover:underline"
-            >
-              Google Ads Settings
-            </a>
-            .
+            <strong className={STRONG}>Server logs.</strong> Our hosting provider (currently Vercel) processes technical data such as your IP address,
+            browser type and the pages requested, in order to deliver the Site and keep it secure.
           </p>
         </section>
 
         <section>
-          <h2 className="text-base font-bold text-zinc-100 mb-2">3. How we use your information</h2>
-          <ul className="list-disc list-inside space-y-1 marker:text-[#81b64c]">
-            <li>To provide and maintain core gameplay functionality</li>
-            <li>To sync your rating, stats, and game history across devices if you have an account</li>
-            <li>To respond to support requests sent to us directly</li>
-            <li>To monitor and improve Site performance and security</li>
-            <li>To display advertising, where applicable, in accordance with this policy</li>
+          <h2 className={H2}>1a. Free tools</h2>
+          <p className="mb-2">
+            The chess tools, EMI calculator, Image to PDF and PDF to Word run in your browser. What you type or the files you choose are not sent to us.
+          </p>
+          <p className="mb-2">
+            <strong className={STRONG}>Currency converter.</strong> Our server fetches euro reference exchange rates from the Frankfurter service (which publishes
+            European Central Bank rates) and shares them with all visitors. Your amounts and choices are not sent to that service.
+          </p>
+          <p>
+            <strong className={STRONG}>Word to PDF and PowerPoint to PDF</strong> (where offered). The file you choose is uploaded over an encrypted connection to our
+            conversion service, converted in a temporary folder and deleted immediately afterwards. We do not keep, read or share the file or its contents.
+          </p>
+        </section>
+
+        <section>
+          <h2 className={H2}>2. Analytics</h2>
+          <p>
+            We do not currently run a third-party analytics tool on the Site. If we add one, we will name it here and, where the law requires, ask for
+            your consent first.
+          </p>
+        </section>
+
+        <section>
+          <h2 className={H2}>3. Advertising and cookies</h2>
+          <p className="mb-2">
+            We use Google AdSense to show advertising. Google and its partners may use cookies or similar technologies on the Site to serve and
+            measure ads, and to personalise them based on your visits to this and other websites, subject to your choices.
+          </p>
+          <p className="mb-2">
+            In the European Economic Area, the United Kingdom and Switzerland, personalised advertising requires your consent. Where it applies,
+            consent is requested through a consent message provided by Google&apos;s Privacy &amp; messaging tools, and you can change your choice at
+            any time through the privacy controls shown by that message.
+          </p>
+          <p>
+            You can opt out of personalised advertising in{' '}
+            <a href="https://adssettings.google.com" className="text-[#81b64c] hover:underline" rel="noopener noreferrer" target="_blank">Google Ad Settings</a>
+            , or learn how Google uses information from sites that use its services at{' '}
+            <a href="https://policies.google.com/technologies/partner-sites" className="text-[#81b64c] hover:underline" rel="noopener noreferrer" target="_blank">policies.google.com/technologies/partner-sites</a>.
+            We never encourage anyone to click advertisements.
+          </p>
+        </section>
+
+        <section>
+          <h2 className={H2}>4. Third-party services we use</h2>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong className={STRONG}>Supabase</strong>: authentication and database for account holders.</li>
+            <li><strong className={STRONG}>Vercel</strong>: website hosting and delivery.</li>
+            <li><strong className={STRONG}>Google Fonts</strong>: the Site loads fonts from Google&apos;s servers, which means your IP address is sent to Google when a page loads.</li>
+            <li><strong className={STRONG}>Google Translate</strong>: only if you choose a language in the language picker. We then load Google&apos;s website translator, which sends the text of the page you are viewing and your IP address to Google to translate it, and Google may set its own cookies. We store your choice in a cookie named googtrans so the page stays translated; choosing English removes it. Nothing is sent to Google for translation unless you pick a language.</li>
+            <li><strong className={STRONG}>Google AdSense</strong>: advertising, as described above.</li>
           </ul>
+          <p className="mt-2">Each provider handles data under its own privacy policy.</p>
         </section>
 
         <section>
-          <h2 className="text-base font-bold text-zinc-100 mb-2">4. Third-party services</h2>
-          <p className="mb-2">We rely on the following third-party services to operate this Site:</p>
-          <ul className="list-disc list-inside space-y-1 marker:text-[#81b64c]">
-            <li><strong className="text-zinc-100">Supabase</strong> — authentication and database storage for account holders</li>
-            <li><strong className="text-zinc-100">Vercel</strong> — website hosting and infrastructure</li>
-            <li><strong className="text-zinc-100">Google AdSense</strong> (where enabled) — advertising, subject to Google&apos;s own privacy policy</li>
+          <h2 className={H2}>5. How we use information</h2>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>To run the games and, for account holders, save ratings and history.</li>
+            <li>To keep the Site secure, reliable and fast.</li>
+            <li>To answer messages you send us.</li>
+            <li>To show advertising, as described above.</li>
           </ul>
-          <p className="mt-2">Each of these providers has its own privacy practices governing the data they process on our behalf.</p>
+          <p className="mt-2">We do not sell your personal information.</p>
         </section>
 
         <section>
-          <h2 className="text-base font-bold text-zinc-100 mb-2">5. Data retention</h2>
+          <h2 className={H2}>6. Retention and deletion</h2>
           <p>
-            If you have an account, we retain your account data for as long as your account remains
-            active. You may request deletion of your account and associated data at any time by
-            contacting us at the email below.
+            Account data is kept while your account is active. You can ask us to delete your account and its data at any time by emailing the address
+            below. Server logs are kept by our hosting provider for the period set in its own policy.
           </p>
         </section>
 
         <section>
-          <h2 className="text-base font-bold text-zinc-100 mb-2">6. Your rights</h2>
+          <h2 className={H2}>7. Your rights</h2>
           <p>
-            Depending on your location, you may have rights to access, correct, or delete your
-            personal data, and to object to or restrict certain processing. To exercise any of these
-            rights, contact us using the details below.
+            Depending on where you live (for example under the GDPR or UK GDPR, or India&apos;s Digital Personal Data Protection Act), you may have the
+            right to access, correct or delete your personal data, to withdraw consent, and to object to or restrict some processing. Email us to
+            exercise these rights.
           </p>
         </section>
 
         <section>
-          <h2 className="text-base font-bold text-zinc-100 mb-2">7. Children&apos;s privacy</h2>
+          <h2 className={H2}>8. Children</h2>
           <p>
-            This Site is not directed at children under 13, and we do not knowingly collect personal
-            information from children under 13.
+            The Site is not directed at children under 13, and we do not knowingly collect personal information from them. If you believe a child has
+            created an account, contact us and we will delete it.
           </p>
         </section>
 
         <section>
-          <h2 className="text-base font-bold text-zinc-100 mb-2">8. Changes to this policy</h2>
-          <p>
-            We may update this Privacy Policy from time to time. Material changes will be reflected
-            by updating the &quot;Last updated&quot; date at the top of this page.
-          </p>
+          <h2 className={H2}>9. Changes</h2>
+          <p>We will update this page and its date when our practices change.</p>
         </section>
 
         <section>
-          <h2 className="text-base font-bold text-zinc-100 mb-2">9. Contact us</h2>
+          <h2 className={H2}>10. Contact</h2>
           <p>
-            Questions about this Privacy Policy can be sent to{' '}
+            Privacy questions or requests:{' '}
             <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#81b64c] hover:underline">
               {CONTACT_EMAIL}
             </a>
-            .
           </p>
         </section>
       </div>

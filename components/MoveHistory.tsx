@@ -53,7 +53,7 @@ export const MoveHistory: React.FC<MoveHistoryProps> = ({
   };
 
   return (
-    <div className="flex flex-col h-full rounded-lg border border-[#3c3934] bg-[#262421] overflow-hidden shadow-sm">
+    <div translate="no" className="flex flex-col h-full rounded-lg border border-[#3c3934] bg-[#262421] overflow-hidden shadow-sm">
       {/* Header */}
       <div className="flex items-center justify-between px-3 py-2 border-b border-[#3c3934] bg-[#211f1c]">
         <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-200 uppercase tracking-wider">

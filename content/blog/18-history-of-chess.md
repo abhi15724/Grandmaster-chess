@@ -2,11 +2,17 @@
 title: "The History of Chess: Where Did Chess Come From?"
 description: "Chess's real history — from 6th-century India through Persia, the Islamic world, and Europe, to FIDE, Deep Blue, and the online chess boom."
 date: "2026-08-23"
-updated: "2026-08-23"
+updated: "2026-10-23"
 author: "Grandmaster Chess Editorial Team"
 category: "History"
 tags: ["history of chess", "where did chess come from", "origin of chess", "chaturanga", "chess timeline"]
 readingMinutes: 8
+factChecked: "2026-10-23"
+sources:
+  - title: "Encyclopaedia Britannica: Chess, history"
+    url: "https://www.britannica.com/topic/chess/History"
+  - title: "Wikipedia: History of chess"
+    url: "https://en.wikipedia.org/wiki/History_of_chess"
 ---
 
 Chess didn't start as chess. It started as a 6th-century Indian war game called chaturanga, and it took roughly 1,400 years, three continents, and a complete rewrite of its most powerful piece before it became the game played today.
@@ -17,7 +23,7 @@ Chaturanga emerged in India around the 6th century CE — the name is Sanskrit f
 
 ## Persia gave it its name and its philosophy
 
-By around 600 CE, chaturanga had reached Sassanid Persia and become "chatrang," later "shatranj." This is where a lot of chess's vocabulary actually comes from: the Persian word for king, *shah*, is where "check" comes from, and the phrase *shah mat* — "the king is helpless" — is the direct ancestor of "checkmate." The Persians treated the game as more than entertainment; it became associated with wisdom and nobility, referenced by poets and philosophers, and played at royal courts.
+By around the 7th century, chaturanga had reached Sassanid Persia and become "chatrang," later "shatranj." This is where a lot of chess's vocabulary actually comes from: the Persian word for king, *shah*, is where "check" comes from, and the phrase *shah mat* — "the king is helpless" — is the direct ancestor of "checkmate." The Persians treated the game as more than entertainment; it became associated with wisdom and nobility, referenced by poets and philosophers, and played at royal courts.
 
 ## The Islamic world turned it into a serious intellectual pursuit
 

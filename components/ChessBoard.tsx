@@ -165,7 +165,7 @@ export const ChessBoard: React.FC<ChessBoardProps> = ({
   };
 
   return (
-    <div
+    <div translate="no"
       ref={boardRef}
       className={`relative w-full aspect-square max-w-[560px] mx-auto rounded-xl border-4 overflow-hidden shadow-2xl chess-board-container ${boardTheme.borderClass}`}
       style={{ touchAction: 'none' }}

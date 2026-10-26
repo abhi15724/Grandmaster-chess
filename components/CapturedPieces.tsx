@@ -22,7 +22,7 @@ export const CapturedPieces: React.FC<CapturedPiecesProps> = ({
   const blackAdvantage = Math.floor((blackScore - whiteScore) / 100);
 
   return (
-    <div className="flex flex-col gap-1.5 py-1">
+    <div translate="no" className="flex flex-col gap-1.5 py-1">
       {/* Black's captured pieces (pieces taken by white) */}
       <div className="flex items-center gap-1 min-h-[22px]">
         <div className="flex flex-wrap items-center gap-0.5">

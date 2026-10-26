@@ -43,7 +43,6 @@ export const SITE_KEYWORDS = [
   'chess without registration',
   'chess no sign up',
   'Chess',
-  'best chess website in India',
   'chess grandmaster games',
 ];
 
@@ -56,7 +55,6 @@ export const HOME_KEYWORDS = [
   'pass and play chess',
   'chess without registration',
   'chess no sign up',
-  'best chess website in India',
 ];
 
 export const PLAY_AI_KEYWORDS = [

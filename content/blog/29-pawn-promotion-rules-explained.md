@@ -2,11 +2,16 @@
 title: "Pawn Promotion Rules Explained: Underpromotion and When It Actually Matters"
 description: "How pawn promotion works, why you can have more than one queen, and the real tactical reason strong players sometimes choose a knight or rook instead."
 date: "2026-08-28"
-updated: "2026-08-28"
+updated: "2026-10-23"
 author: "Grandmaster Chess Editorial Team"
 category: "Rules"
 tags: ["pawn promotion rules", "underpromotion chess", "can you have two queens in chess", "chess rules explained"]
 readingMinutes: 5
+factChecked: "2026-10-23"
+sources:
+  - title: "FIDE Laws of Chess (in force from 1 January 2023)"
+    url: "https://rcc.fide.com/fide-laws-of-chess_fulltexthtml/"
+seoTitle: "Pawn Promotion in Chess: Rules and Underpromotion"
 ---
 
 A pawn that survives the trip to the far side of the board doesn't just sit there proudly — it has to transform, immediately, as part of the same move that got it there. Here's exactly how that works, and the one situation where the "obvious" choice isn't actually the best one.
@@ -14,6 +19,10 @@ A pawn that survives the trip to the far side of the board doesn't just sit ther
 ## The basic rule
 
 The moment a pawn reaches the **final rank** — the 8th rank for White, the 1st rank for Black — it **must** promote, right then, as part of that same move. It cannot simply stay a pawn and sit on that square. The player chooses which piece it becomes: **queen, rook, bishop, or knight**. It cannot become a king, and it cannot remain a pawn.
+
+```fen
+8/4P1k1/8/8/8/8/8/4K3 w - - 0 1 | The White pawn on e7 is one step from promotion. On e8 it must become a queen, rook, bishop or knight. | hl=e7,e8
+```
 
 ## Yes, you can have more than one queen
 
@@ -28,6 +37,8 @@ Choosing a rook, bishop, or knight instead of a queen is called **underpromotion
 - **Avoiding a check that hands the opponent a tempo.** In rare cases, promoting to a queen would allow the opponent an immediate favorable response (like a check of their own) that promoting to a quieter piece avoids.
 
 None of these come up in the overwhelming majority of games — most promotions really are just "promote to queen, obviously" — but underpromotion puzzles are a genuine, recurring category in chess tactics training precisely because the "obvious" choice is occasionally a real mistake.
+
+**Related:** [en passant](/blog/en-passant-explained) is the other special pawn move, and underpromotion is often used to avoid [stalemate](/blog/stalemate-vs-checkmate).
 
 ## Frequently asked questions
 

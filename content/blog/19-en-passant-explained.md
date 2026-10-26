@@ -2,11 +2,15 @@
 title: "En Passant Explained: The Most Misunderstood Rule in Chess"
 description: "What en passant actually is, exactly when it applies, why it exists, and why so many players — even experienced ones — think it's not a real rule."
 date: "2026-08-24"
-updated: "2026-08-24"
+updated: "2026-10-23"
 author: "Grandmaster Chess Editorial Team"
 category: "Rules"
 tags: ["en passant", "en passant rule explained", "chess rules explained", "confusing chess rules"]
 readingMinutes: 6
+factChecked: "2026-10-23"
+sources:
+  - title: "FIDE Laws of Chess (in force from 1 January 2023)"
+    url: "https://rcc.fide.com/fide-laws-of-chess_fulltexthtml/"
 ---
 
 If you've ever had someone accuse you of cheating after you captured a pawn that "wasn't even in the way," you've met en passant — a completely legal, official chess rule that somehow remains the single most disputed move in the game, even among players who've played for years.
@@ -23,13 +27,17 @@ Here's the exact sequence:
 
 If you don't take the capture on that immediate next move, the option disappears permanently for that pawn — you can't come back to it three moves later.
 
+```fen
+rnbqkbnr/1pp1pppp/p7/3pP3/8/8/PPPP1PPP/RNBQKBNR w KQkq d6 0 3 | Black has just played d7-d5, passing the White pawn on e5. White may capture en passant with exd6, but only on this move. | hl=e5,d5,d6
+```
+
 ## Why it feels like it shouldn't be legal
 
 Visually, it looks wrong: your pawn ends up on an empty square, and a completely different square's piece disappears. Every other capture in chess involves moving onto the exact square the captured piece occupies — en passant is the only move in the entire game that doesn't work that way, which is exactly why it trips people up so consistently, including plenty of players well past the beginner stage.
 
 ## Why the rule exists at all
 
-This isn't an arbitrary exception — it's a patch for a different rule change. Originally, pawns could only ever move one square at a time, even on their first move. The two-square first move was added later specifically to speed the opening phase of the game up. But that change created a loophole: a pawn could now "sprint past" an enemy pawn that was poised to capture it one square at a time, completely avoiding a capture it would otherwise have been exposed to. En passant closes that loophole — it preserves the capturing chances a pawn would have had under the old one-square-only rule, even after the two-square move was introduced.
+This isn't an arbitrary exception. It is usually explained as a patch for a different rule change. Originally, pawns could only ever move one square at a time, even on their first move. The two-square first move was added later specifically to speed the opening phase of the game up. But that change created a loophole: a pawn could now "sprint past" an enemy pawn that was poised to capture it one square at a time, completely avoiding a capture it would otherwise have been exposed to. En passant closes that loophole — it preserves the capturing chances a pawn would have had under the old one-square-only rule, even after the two-square move was introduced.
 
 ## A concrete example
 

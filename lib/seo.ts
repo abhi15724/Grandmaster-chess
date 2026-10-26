@@ -33,7 +33,8 @@ export function pageMetadata(o: PageMetaOptions): Metadata {
     title: o.absoluteTitle ? { absolute: o.title } : o.title,
     description: o.description,
     keywords: o.keywords,
-    alternates: { canonical: o.path },
+    // Page-level `alternates` replaces the layout's, so the RSS feed link is repeated here.
+    alternates: { canonical: o.path, types: { 'application/rss+xml': '/feed.xml' } },
     ...(o.noindex ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       type: 'website',

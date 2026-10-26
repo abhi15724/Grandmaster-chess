@@ -2,11 +2,16 @@
 title: "Chess Notation Explained: How to Read and Write Algebraic Chess Moves"
 description: "A clear, practical guide to algebraic chess notation — the coordinate system, piece letters, captures, check, castling, and promotion, with a worked example."
 date: "2026-08-20"
-updated: "2026-08-20"
+updated: "2026-10-23"
 author: "Grandmaster Chess Editorial Team"
 category: "Rules"
 tags: ["chess notation explained", "algebraic notation chess", "how to read chess moves", "chess notation for beginners"]
 readingMinutes: 6
+factChecked: "2026-10-23"
+sources:
+  - title: "FIDE Laws of Chess (in force from 1 January 2023)"
+    url: "https://rcc.fide.com/fide-laws-of-chess_fulltexthtml/"
+seoTitle: "Chess Notation Explained: Read and Write Moves"
 ---
 
 Algebraic notation is the standard way chess moves are written down — it's what you see in books, on broadcasts, and in every game's move history here. Once you know the pattern, reading it takes about ten minutes to learn and a few games to feel natural.
@@ -34,19 +39,19 @@ Pawns get no letter at all. A move like `e4` on its own means "a pawn moved to e
 
 ## Captures, check, and checkmate
 
-A few symbols added after the piece and square carry extra meaning:
+FIDE recognises algebraic notation as the only system for its own events. A few symbols added after the piece and square carry extra meaning; in FIDE's text the capture, check, checkmate and en passant symbols are optional:
 
 - **x** — a capture happened. `Nxe4` means "knight captures on e4."
 - **+** — the move puts the opposing king in check. `Qh5+` means "queen moves to h5, giving check."
 - **#** — the move is checkmate. `Qh7#` means "queen moves to h7, checkmate."
-- **=** — pawn promotion. `e8=Q` means "pawn moves to e8 and promotes to a queen."
+- **=Q** — pawn promotion. `e8=Q` means "pawn moves to e8 and promotes to a queen." (FIDE's own text writes this as `e8Q`; the `=` form is the common convention in books and PGN files. On a FIDE scoresheet a bare `(=)` marks a draw offer.)
 
 ## Castling
 
 Castling has its own special notation, since it moves two pieces (king and rook) in one move:
 
-- **O-O** — kingside castling (the king's side of the board, toward `g1`/`g8`)
-- **O-O-O** — queenside castling (toward `c1`/`c8`)
+- **O-O** (FIDE's text writes 0-0 with zeros) — kingside castling (the king's side of the board, toward `g1`/`g8`)
+- **O-O-O** (0-0-0 in FIDE's text) — queenside castling (toward `c1`/`c8`)
 
 ## When two pieces could make the same move
 
@@ -70,6 +75,8 @@ Here's the opening sequence of a real game, in standard notation, with what each
 - `3... a6` — Black's pawn moves to a6, challenging the bishop.
 
 That's the entire skill: piece letter (if any) + destination square, plus the handful of symbols above for captures, check, castling, and promotion.
+
+**Practise it:** learn the square names with the [coordinates trainer](/tools/chess-coordinates-trainer), replay any game from its moves in the [PGN viewer](/tools/pgn-viewer), and see the special rules behind some symbols in [en passant explained](/blog/en-passant-explained).
 
 ## Frequently asked questions
 

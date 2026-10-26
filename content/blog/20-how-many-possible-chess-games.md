@@ -2,11 +2,19 @@
 title: "How Many Possible Chess Games Are There? The Actual Math"
 description: "The real numbers behind chess's complexity — the Shannon number, legal position counts, and how fast the possibilities explode move by move."
 date: "2026-08-25"
-updated: "2026-08-25"
+updated: "2026-10-23"
 author: "Grandmaster Chess Editorial Team"
 category: "Trivia"
 tags: ["how many chess games possible", "shannon number", "chess math", "chess trivia", "legal chess positions"]
 readingMinutes: 6
+factChecked: "2026-10-23"
+sources:
+  - title: "John Tromp: The number of legal chess positions is ~4.8 x 10^44 (TalkChess)"
+    url: "https://www.talkchess.com/viewtopic.php?p=975229"
+  - title: "Tromp and Österlund: ChessPositionRanking (sampling method and code)"
+    url: "https://github.com/tromp/ChessPositionRanking"
+  - title: "Chessprogramming wiki: Perft Results"
+    url: "https://www.chessprogramming.org/Perft_Results"
 ---
 
 The commonly quoted answer is **10^120** — a 1 followed by 120 zeros, known as the Shannon number. For comparison, there are an estimated 10^80 atoms in the entire observable universe. Chess, played on a 64-square board with 32 pieces, has more possible games than there are atoms in existence. That number needs some unpacking, because it's actually the answer to a slightly different question than most people think they're asking.
@@ -22,9 +30,9 @@ Many different move sequences can arrive at the exact same position — so the n
 
 ## The exact numbers, move by move
 
-Here's where it stops being an estimate and starts being exact — mathematicians have precisely counted the early game tree:
+Here's where it stops being an estimate and starts being exact. These are counts of every legal move sequence of a given length (known as "perft" numbers in chess programming), and the number of distinct positions they reach:
 
-| Half-moves (plies) | Possible games | Possible positions |
+| Half-moves (plies) | Possible move sequences | Possible positions |
 |---|---|---|
 | 1 | 20 | 20 |
 | 2 | 400 | 400 |
@@ -34,17 +42,17 @@ Here's where it stops being an estimate and starts being exact — mathematician
 | 6 | 119,060,324 | 9,417,681 |
 | 10 | 69,352,859,712,417 | 85,375,278,064 |
 
-Read that last row again: after just **five full moves by each player**, there are already more than **69 trillion** possible games. Chess doesn't feel explosive at move 5 — it looks like an ordinary opening — but the combinatorics underneath are already staggering.
+Read that last row again: after just **five full moves by each player**, there are already more than **69 trillion** possible move sequences. Chess doesn't feel explosive at move 5 — it looks like an ordinary opening — but the combinatorics underneath are already staggering.
 
 ## Where 10^120 actually comes from
 
-Claude Shannon — the founder of information theory, writing a landmark 1950 paper on computer chess — needed a rough estimate of how big chess's "game tree" was, to argue that no computer could ever brute-force it by checking every possibility. His method: assume roughly 30 legal moves are available at a typical position, and a typical serious game runs about 80 half-moves. That gives 30^80, which works out to roughly **10^118** — Shannon rounded it up to **10^120** to account for games running longer than 80 moves.
+Claude Shannon, the founder of information theory, needed a rough size for chess's "game tree" in his 1950 paper "Programming a Computer for Playing Chess" (*Philosophical Magazine*). He argued that no computer could check every possibility. His estimate: about 10^3 (roughly a thousand) possibilities for a pair of moves, one by White and one by Black, and a typical game lasting about 40 such pairs. That gives (10^3)^40 = **10^120**.
 
-It's important to be honest about what this number is: a **deliberately rough, lower-bound estimate** for typical, sensible-length games — not an exact count, and not the absolute mathematical ceiling. Some later estimates, factoring in the full range of legal (if bizarre) games chess actually allows, put the true figure even higher, around 10^123.
+It's important to be honest about what this number is: Shannon's own back-of-envelope figure for typical games, which he described as a lower bound. It is not an exact count. Some popular write-ups reconstruct it as roughly 30 moves per position over 80 half-moves (30^80, about 10^118), which gives the same order of magnitude but is not Shannon's own arithmetic.
 
 ## How many legal positions actually exist
 
-This is a genuinely different — and more precisely answered — question. In 2014, computer scientists John Tromp and Peter Österlund calculated the number of legal chess positions with high confidence at approximately **4.82 × 10^44**. That's the number that actually matters for the dream of one day fully "solving" chess the way tic-tac-toe or checkers has been solved — and even at "only" 10^44, it's still far beyond what any computer can hope to brute-force through directly, which is exactly why modern chess engines rely on smart evaluation and selective search rather than checking every possibility.
+This is a genuinely different question, and it has a better-supported answer. In 2021, John Tromp estimated the number of legal chess positions at about **4.8 × 10^44** (4.82 with an uncertainty of about ±0.03 × 10^44 at 95% confidence). He did not count them one by one. He sampled random positions and, with Peter Österlund's Texel engine code and help from others, determined for each sample whether it was legal by finding either a game that reaches it or a proof that none exists. The sampling results were then scaled up. Even at "only" 10^44, the number is far beyond brute force, which is why modern engines rely on evaluation and selective search instead of checking everything.
 
 ## Why this actually matters, beyond trivia
 

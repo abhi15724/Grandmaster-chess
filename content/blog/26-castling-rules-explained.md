@@ -1,12 +1,16 @@
 ---
 title: "Castling Rules Explained: When You Can (and Can't) Castle"
-description: "The exact conditions required to castle in chess, the two most common mistakes players make with this rule, and why the rook's safety doesn't matter but the king's does."
+description: "The exact conditions for castling in chess, the two most common mistakes, and why the rule exists. Includes a board diagram."
 date: "2026-08-28"
-updated: "2026-08-28"
+updated: "2026-10-23"
 author: "Grandmaster Chess Editorial Team"
 category: "Rules"
 tags: ["castling rules chess", "how does castling work", "chess rules explained", "kingside castling", "queenside castling"]
 readingMinutes: 5
+factChecked: "2026-10-23"
+sources:
+  - title: "FIDE Laws of Chess (in force from 1 January 2023)"
+    url: "https://rcc.fide.com/fide-laws-of-chess_fulltexthtml/"
 ---
 
 Castling is the only move in chess where two pieces move at once — and it comes with five separate conditions that all have to be true simultaneously. Miss one, and it's not a legal move, even if the board looks fine at a glance.
@@ -17,6 +21,10 @@ Castling moves your king two squares toward one of your rooks, and that rook jum
 
 - **Kingside castling (O-O)** — the king moves toward the rook on the h-file (the "short" side), ending up on g1 (or g8 for Black), with the rook landing on f1 (or f8).
 - **Queenside castling (O-O-O)** — the king moves toward the rook on the a-file (the "long" side), ending up on c1 (or c8), with the rook landing on d1 (or d8).
+
+```fen
+r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/2N2N2/PPPP1PPP/R1BQK2R w KQkq - 6 5 | White can castle kingside (O-O): f1 and g1 are empty. Queenside castling is not possible yet because the bishop on c1 blocks it. | hl=e1,h1,f1,g1
+```
 
 ## The five conditions, all required
 
@@ -37,6 +45,8 @@ Every one of these has to be true, or castling isn't legal:
 ## Why castling exists
 
 Castling does two useful things in one move: it tucks the king away from the center of the board (where most of the early tactical fighting happens) and it activates a rook that would otherwise sit passively in the corner for many moves. That's exactly why "castle early" is one of the [core opening principles](/blog/best-chess-openings-for-beginners) taught to every beginner — a king still in the center on move 10 is usually a sign something's gone wrong with development, not a deliberate strategy.
+
+**Related rules:** [en passant](/blog/en-passant-explained) is the other special move, and [chess notation](/blog/chess-notation-explained) shows how castling is written.
 
 ## Frequently asked questions
 

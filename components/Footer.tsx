@@ -24,7 +24,7 @@ export const Footer: React.FC<FooterProps> = () => {
               <span className="text-zinc-100 font-bold tracking-tight text-base">Grandmaster Chess</span>
             </div>
             <p className="text-xs leading-relaxed text-zinc-400">
-              The high-density, ultra-responsive online chess platform. Challenge intelligent AI bots or play locally against yourself.
+              Free online chess against a computer opponent at three levels, or two players on one device. Guides and tools that cite their sources.
             </p>
             <div className="mt-3 flex items-center gap-2 text-xs text-[#81b64c] font-medium">
               <Award className="h-4 w-4 text-[#81b64c]" />
@@ -50,7 +50,7 @@ export const Footer: React.FC<FooterProps> = () => {
               </li>
               <li>
                 <Link href="/play/ai/advanced" className="hover:text-[#81b64c] transition-colors">
-                  Play vs Advanced AI (Master)
+                  Play vs Advanced AI (Hardest)
                 </Link>
               </li>
               <li>
@@ -100,20 +100,43 @@ export const Footer: React.FC<FooterProps> = () => {
             </ul>
           </div>
 
-          {/* AI & Discovery */}
+          {/* Tools & Trust */}
           <div>
             <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-200 mb-3 flex items-center gap-1.5">
-              <Globe className="h-3.5 w-3.5 text-[#81b64c]" /> Platform & Specs
+              <Globe className="h-3.5 w-3.5 text-[#81b64c]" /> Tools & Trust
             </h4>
-            <p className="text-xs text-zinc-400 leading-relaxed mb-3">
-              Server-authoritative AI move validation, responsive board rendering, Web Audio sound synthesis, and Supabase-backed player profiles.
-            </p>
+            <ul className="space-y-1.5 text-xs mb-3">
+              <li>
+                <Link href="/tools/elo-calculator" className="hover:text-[#81b64c] transition-colors">Elo Rating Calculator</Link>
+              </li>
+              <li>
+                <Link href="/tools/pgn-viewer" className="hover:text-[#81b64c] transition-colors">PGN Viewer</Link>
+              </li>
+              <li>
+                <Link href="/tools/chess-coordinates-trainer" className="hover:text-[#81b64c] transition-colors">Coordinates Trainer</Link>
+              </li>
+              <li>
+                <Link href="/tools/currency-converter" className="hover:text-[#81b64c] transition-colors">Currency Converter</Link>
+              </li>
+              <li>
+                <Link href="/tools/emi-calculator" className="hover:text-[#81b64c] transition-colors">EMI Calculator</Link>
+              </li>
+              <li>
+                <Link href="/tools/pdf-converter" className="hover:text-[#81b64c] transition-colors">PDF Converters</Link>
+              </li>
+              <li>
+                <Link href="/tools" className="hover:text-[#81b64c] transition-colors">All free tools</Link>
+              </li>
+              <li>
+                <Link href="/editorial-policy" className="hover:text-[#81b64c] transition-colors">Editorial Policy</Link>
+              </li>
+              <li>
+                <Link href="/about#author" className="hover:text-[#81b64c] transition-colors">Who runs this site</Link>
+              </li>
+            </ul>
             <div className="flex flex-wrap gap-2 text-[11px]">
               <a href="/sitemap.xml" target="_blank" rel="noreferrer" className="rounded bg-[#211f1c] px-2 py-1 text-zinc-400 hover:text-zinc-200 border border-[#3c3934]">
                 Sitemap
-              </a>
-              <a href="/robots.txt" target="_blank" rel="noreferrer" className="rounded bg-[#211f1c] px-2 py-1 text-zinc-400 hover:text-zinc-200 border border-[#3c3934]">
-                Robots.txt
               </a>
               <a href="/llms.txt" target="_blank" rel="noreferrer" className="rounded bg-[#211f1c] px-2 py-1 text-zinc-400 hover:text-zinc-200 border border-[#3c3934]">
                 llms.txt
@@ -124,7 +147,7 @@ export const Footer: React.FC<FooterProps> = () => {
 
         {/* Copyright & Bottom bar */}
         <div className="pt-5 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-400 gap-3">
-          <p>© {new Date().getFullYear()} Grandmaster Chess Online. Fast, accessible, and high density.</p>
+          <p>© {new Date().getFullYear()} Grandmasterchess</p>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs">
             <Link href="/about" className="hover:text-[#81b64c] hover:underline">About</Link>
             <span>•</span>
@@ -133,6 +156,8 @@ export const Footer: React.FC<FooterProps> = () => {
             <Link href="/privacy" className="hover:text-[#81b64c] hover:underline">Privacy Policy</Link>
             <span>•</span>
             <Link href="/terms" className="hover:text-[#81b64c] hover:underline">Terms</Link>
+            <span>•</span>
+            <Link href="/editorial-policy" className="hover:text-[#81b64c] hover:underline">Editorial Policy</Link>
             <span>•</span>
             <Link href="/faq" className="hover:text-[#81b64c] hover:underline">FAQ</Link>
           </div>

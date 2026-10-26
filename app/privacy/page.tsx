@@ -5,7 +5,7 @@ import { PrivacyPage } from '@/components/pages/PrivacyPage';
 export const metadata: Metadata = pageMetadata({
   title: 'Privacy Policy',
   description:
-    'How Grandmasterchess collects, uses and protects your information.',
+    'How Grandmasterchess collects, uses and protects your information, including cookies, advertising and the optional translation feature.',
 
   path: '/privacy',
 });

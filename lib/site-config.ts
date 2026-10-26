@@ -31,3 +31,17 @@ export function absoluteUrl(path: string): string {
   if (path.startsWith('http')) return path;
   return `${SITE_URL}${path.startsWith('/') ? path : `/${path}`}`;
 }
+
+/**
+ * ---- Publisher identity (edit these two blocks; they feed About, bylines, schema) ----
+ * Only put facts here that are true. Do not add chess titles, credentials or
+ * "years of experience" unless they are real and verifiable.
+ */
+export const AUTHOR_NAME = 'Abhishek Kumar';
+export const AUTHOR_ROLE = 'Writer and site owner, Grandmasterchess';
+export const AUTHOR_BIO =
+  'Abhishek Kumar writes the guides on Grandmasterchess and runs the site from India. He is not a titled chess player. Articles that state facts cite their sources, and time-sensitive figures such as ratings and match dates show the date they were checked.';
+export const AUTHOR_URL_PATH = '/about#author';
+
+/** Public contact address. Switch to a domain mailbox (e.g. contact@grandmasterchess.in) once it exists. */
+export const CONTACT_EMAIL = 'abhi15724@gmail.com';

@@ -3,9 +3,10 @@ import { pageMetadata } from '@/lib/seo';
 import { AboutPage } from '@/components/pages/AboutPage';
 
 export const metadata: Metadata = pageMetadata({
-  title: 'About Grandmasterchess',
+  title: 'About Us and Who Runs This Chess Site',
+
   description:
-    'About Grandmasterchess: a free online chess site with three AI levels, local pass-and-play, chess clocks and no forced sign-up.',
+    'Who runs Grandmasterchess, how its chess engine and articles work, and how we keep facts accurate. Free chess vs AI or on one device, no sign-up.',
 
   path: '/about',
   absoluteTitle: true,

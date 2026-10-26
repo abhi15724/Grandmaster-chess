@@ -1,12 +1,13 @@
 ---
 title: "5 Chess Tactics Every Player Should Know: Forks, Pins, Skewers & More"
-description: "The five tactical patterns that decide most amateur chess games — forks, pins, skewers, discovered attacks, and double attacks — with clear examples of how to spot them."
+description: "The five tactical patterns that decide most amateur games: forks, pins, skewers, discovered attacks and double attacks, with board diagrams."
 date: "2026-07-01"
 updated: "2026-07-28"
 author: "Grandmaster Chess Editorial Team"
 category: "Strategy"
 tags: ["chess tactics", "fork", "pin", "skewer", "discovered attack", "chess strategy", "chess tactics guide"]
 readingMinutes: 6
+seoTitle: "5 Chess Tactics: Forks, Pins, Skewers and More"
 ---
 
 Below roughly 1600 rating, most games aren't decided by deep strategic understanding — they're decided by who spots (or misses) a tactic first. Learning to recognize these five patterns will win and save you more games than any opening theory.
@@ -17,17 +18,29 @@ A fork is a single piece attacking two or more enemy pieces at once, forcing you
 
 **How to spot it:** Before every move, ask whether the piece you're about to move — or any piece already on the board — attacks two valuable enemy pieces simultaneously.
 
+```fen
+r3k3/2N5/8/8/8/8/8/4K3 b - - 0 1 | A knight fork: the knight on c7 attacks the king on e8 and the rook on a8 at once. Black must answer the check, and White wins the rook. | hl=c7,e8,a8
+```
+
 ## 2. The pin
 
 A pin happens when a piece can't move (or shouldn't move) because doing so would expose a more valuable piece behind it to attack. An **absolute pin** involves the king — the pinned piece legally cannot move at all. A **relative pin** involves any other piece — it technically can move, but doing so loses material.
 
 **How to spot it:** Look for enemy pieces lined up on the same rank, file, or diagonal, with your bishop, rook, or queen able to attack along that same line.
 
+```fen
+4k3/3n4/8/1B6/8/8/8/4K3 b - - 0 1 | An absolute pin: the bishop on b5 pins the knight on d7 to the king on e8. The knight cannot legally move. | hl=b5,d7,e8
+```
+
 ## 3. The skewer
 
 A skewer is the reverse of a pin: you attack a valuable piece that must move, exposing a less valuable piece behind it to capture. The classic example is attacking a king with a rook or bishop along a line, forcing the king to move and revealing a piece — often a rook or queen — that can then be captured.
 
 **How to spot it:** Same setup as a pin (pieces lined up on a rank, file, or diagonal), but check which piece is *more* valuable — if the front piece is worth more, it's a skewer, not a pin.
+
+```fen
+4r3/8/8/4k3/8/8/8/K3R3 b - - 0 1 | A skewer: the rook on e1 checks the king on e5. When the king moves away, the rook on e8 behind it is captured. | hl=e1,e5,e8
+```
 
 ## 4. The discovered attack
 

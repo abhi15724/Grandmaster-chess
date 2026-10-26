@@ -1,12 +1,21 @@
 ---
 title: "How Chess AI Engines Work: A Complete Guide to Difficulty Levels"
-description: "How chess AI actually decides its moves — minimax, alpha-beta pruning, and evaluation functions explained simply, plus how to pick the right AI difficulty for your skill level."
+description: "How chess AI picks its moves: minimax, alpha-beta pruning and evaluation functions explained simply, plus what changes at each difficulty level."
 date: "2026-08-17"
-updated: "2026-08-17"
+updated: "2026-10-23"
 author: "Grandmaster Chess Editorial Team"
 category: "Strategy"
 tags: ["chess ai", "chess engine", "minimax algorithm", "alpha-beta pruning", "chess ai difficulty", "how chess engines work", "play chess vs ai", "chess evaluation function"]
 readingMinutes: 7
+factChecked: "2026-10-23"
+sources:
+  - title: "Lichess blog: How do chess engines really work?"
+    url: "https://lichess.org/@/everdell/blog/how-do-chess-engines-really-work/JsMnuk3l"
+  - title: "Wikipedia: Alpha-beta pruning"
+    url: "https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning"
+  - title: "Grandmasterchess engine source code (lib/chess/engine.ts)"
+    url: "https://github.com/abhi15724/Grandmaster-chess/blob/main/lib/chess/engine.ts"
+seoTitle: "How Chess AI Engines Work: Minimax and Levels"
 ---
 
 A chess AI doesn't "think" the way a human does. It doesn't recognize patterns from memory or feel that a position looks dangerous. Instead, it calculates — searching through millions of possible move sequences and scoring each resulting position with a formula. Understanding how that process works makes you a better player, because it tells you exactly what your AI opponent is (and isn't) capable of seeing.
@@ -43,7 +52,7 @@ The final evaluation is a single number, usually expressed in "centipawns" (hund
 
 When you pick "Basic," "Intermediate," or "Advanced" against an AI opponent, you're not choosing a different piece of software — you're choosing a different configuration of the same search-and-evaluate process. Engines typically tune difficulty using a combination of these levers:
 
-1. **Search depth.** A basic AI might search only 1–2 ply ahead, meaning it can miss threats more than a couple of moves away. An advanced AI searching 5–6+ ply ahead will spot tactics and forced sequences far earlier.
+1. **Search depth.** In our own engine, the Basic level does no look-ahead search at all (it scores the position after each candidate move and sometimes plays a random move), Intermediate searches three plies, and Advanced searches four plies plus a short capture-only extension. Stronger engines such as Stockfish search many more plies.
 2. **Evaluation complexity.** Lower difficulties often use a simplified evaluation function — material count and little else — which makes them blind to positional factors like weak squares or long-term pawn weaknesses. Higher difficulties layer in king safety, mobility, and structural scoring.
 3. **Randomness and deliberate suboptimality.** Many "beginner" AI settings intentionally pick a slightly-worse-than-best move some percentage of the time, or skip deep tactical calculation, to keep games approachable rather than immediately crushing. Without this, even a shallow-search engine can still play solid enough chess to overwhelm a true beginner.
 4. **Move ordering and pruning aggressiveness.** More advanced engines use smarter move-ordering heuristics (checking captures and checks first) to search deeper in the same time budget, which is part of why "Advanced" doesn't just feel harder — it plays more accurately in complex, non-tactical positions too.
@@ -52,9 +61,9 @@ When you pick "Basic," "Intermediate," or "Advanced" against an AI opponent, you
 
 Matching your opponent's strength to your own is more useful for actually improving than always playing the hardest setting available. As a rough guide:
 
-- **Basic (roughly 800 rating strength):** Best if you're learning the rules, still working out basic tactics like forks and pins, or want a low-pressure game to practice openings without being punished for every small mistake.
-- **Intermediate (roughly 1400 rating strength):** A good target once you're comfortable with opening principles and basic tactics. This level will punish hanging pieces and obvious blunders but won't yet play with full positional precision.
-- **Advanced (roughly 2100 rating strength):** Searches deep enough to calculate multi-move tactical sequences and evaluates positions with a fuller picture of king safety, structure, and piece activity. This is a genuine test even for club-level players.
+- **Basic:** Best if you're learning the rules, still working out basic tactics like forks and pins, or want a low-pressure game to practice openings without being punished for every small mistake.
+- **Intermediate:** A good target once you're comfortable with opening principles and basic tactics. This level will punish hanging pieces and obvious blunders but won't yet play with full positional precision.
+- **Advanced:** Searches deep enough to calculate multi-move tactical sequences and evaluates positions with a fuller picture of king safety, structure, and piece activity. It is a real test for newer and improving players, but it is a home-built engine and much weaker than Stockfish.
 
 If you consistently win without much effort, move up a level. If you're losing every game within the first 15 moves without understanding why, drop down — the goal is a level that occasionally beats you in ways you can learn from, not one that either bores you or overwhelms you.
 

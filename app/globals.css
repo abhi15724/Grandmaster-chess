@@ -105,3 +105,9 @@
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.85em;
 }
+
+
+/* Google website translator: hide its own toolbar and tooltip; our language picker is the only UI. */
+.goog-te-banner-frame, .skiptranslate > iframe, #goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
+body { top: 0 !important; }
+.goog-text-highlight { background: none !important; box-shadow: none !important; }
