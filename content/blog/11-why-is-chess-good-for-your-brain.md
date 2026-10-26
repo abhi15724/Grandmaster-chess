@@ -7,6 +7,8 @@ author: "Grandmaster Chess Editorial Team"
 category: "Guides"
 tags: ["chess and brain", "is chess good for your brain", "chess cognitive benefits", "does chess make you smarter", "chess brain research"]
 readingMinutes: 7
+noindex: true
+healthNotice: true
 ---
 
 Short answer: chess is genuinely linked to sharper pattern recognition, working memory, and planning ability — but the claim you'll see everywhere, that playing chess makes you smarter in some general sense, is much shakier than the headlines suggest. The honest picture is more interesting than the hype, so here's what the actual research says, caveats included.

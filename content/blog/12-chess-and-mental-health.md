@@ -7,6 +7,8 @@ author: "Grandmaster Chess Editorial Team"
 category: "Guides"
 tags: ["chess and mental health", "chess for anxiety", "chess and stress relief", "chess for adhd", "chess and loneliness", "benefits of playing chess"]
 readingMinutes: 7
+noindex: true
+healthNotice: true
 ---
 
 Chess and brain research (covered in our [previous piece](/blog/why-is-chess-good-for-your-brain)) is mostly about cognition — memory, pattern recognition, IQ-style measures. This one is about something different: what chess actually does for stress, focus, mood, and connection to other people. That territory has real research behind it too, though a lot of it is earlier-stage and smaller in scale than the cognition studies, so the goal here is to be specific about what's solid and what's still preliminary.

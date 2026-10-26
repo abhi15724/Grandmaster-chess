@@ -411,9 +411,9 @@ export const PlayAIPage: React.FC<PlayAIPageProps> = ({
             </label>
             <div className="grid grid-cols-3 gap-2">
               {[
-                { id: 'basic', label: 'Basic', sub: 'Beginner (~800)', icon: Sparkles },
-                { id: 'intermediate', label: 'Intermediate', sub: 'Casual (~1400)', icon: Zap },
-                { id: 'advanced', label: 'Advanced', sub: 'Master (~2100)', icon: Swords },
+                { id: 'basic', label: 'Basic', sub: 'Beginner', icon: Sparkles },
+                { id: 'intermediate', label: 'Intermediate', sub: 'Casual', icon: Zap },
+                { id: 'advanced', label: 'Advanced', sub: 'Hardest', icon: Swords },
               ].map((tier) => {
                 const Icon = tier.icon;
                 const isSelected = difficulty === tier.id;

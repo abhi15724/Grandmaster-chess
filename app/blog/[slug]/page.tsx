@@ -13,10 +13,11 @@ import { BlogPostCard } from '@/components/blog/BlogPostCard';
 import {
   jsonLdGraph,
   articleSchema,
+  personSchema,
   breadcrumbSchema,
   faqSchema,
 } from '@/lib/json-ld';
-import { absoluteUrl } from '@/lib/site-config';
+import { absoluteUrl, AUTHOR_URL_PATH } from '@/lib/site-config';
 import { pageMetadata } from '@/lib/seo';
 
 export function generateStaticParams() {
@@ -33,12 +34,13 @@ export async function generateMetadata({
   if (!post) return {};
 
   const base = pageMetadata({
-    title: post.title,
+    noindex: post.noindex,
+    title: post.seoTitle ?? post.title,
     description: post.description,
     path: `/blog/${post.slug}`,
     keywords: post.tags,
     // Long post titles would be truncated once " | Grandmasterchess" is appended.
-    absoluteTitle: post.title.length > 40,
+    absoluteTitle: (post.seoTitle ?? post.title).length > 40,
     ogLabel: post.category,
   });
 
@@ -77,6 +79,7 @@ export default async function BlogPostPage({
 
   const graph = jsonLdGraph(
     articleSchema(post),
+    personSchema(),
     breadcrumbSchema([
       { name: 'Home', path: '/' },
       { name: 'Blog', path: '/blog' },
@@ -117,10 +120,41 @@ export default async function BlogPostPage({
         {post.title}
       </h1>
 
-      <div className="mb-8 flex items-center gap-2 text-xs text-zinc-500">
-        <span>{post.author}</span>
-        <span>•</span>
-        <time dateTime={post.date}>{date}</time>
+      <div className="mb-8 space-y-1 text-xs text-zinc-500">
+        <div className="flex flex-wrap items-center gap-x-2">
+          <span>
+            By{' '}
+            <Link href={AUTHOR_URL_PATH} className="text-zinc-300 hover:text-[#81b64c] hover:underline">
+              {post.author}
+            </Link>
+          </span>
+          <span>•</span>
+          <span>Published </span>
+          <time dateTime={post.date}>{date}</time>
+          {post.updated && post.updated !== post.date && (
+            <>
+              <span>•</span>
+              <span>Updated </span>
+              <time dateTime={post.updated}>
+                {new Date(post.updated).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+            </>
+          )}
+        </div>
+        {post.factChecked && (
+          <p>
+            Facts and figures checked against the sources below on{' '}
+            <time dateTime={post.factChecked}>
+              {new Date(post.factChecked).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </time>
+            . See our <Link href="/editorial-policy" className="underline hover:text-[#81b64c]">editorial policy</Link>.
+          </p>
+        )}
+        {post.healthNotice && (
+          <p className="rounded-md border border-[#3c3934] bg-[#1e1c19] p-2 text-zinc-400">
+            This article is general information, not medical advice. If you are struggling with your mental health, please talk to a qualified professional.
+          </p>
+        )}
       </div>
 
       <article
@@ -128,6 +162,23 @@ export default async function BlogPostPage({
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: html }}
       />
+
+      {post.sources && post.sources.length > 0 && (
+        <section className="mt-10 border-t border-[#3c3934] pt-6" aria-labelledby="sources-heading">
+          <h2 id="sources-heading" className="mb-3 text-lg font-bold text-zinc-100">
+            Sources and further reading
+          </h2>
+          <ul className="list-disc space-y-1 pl-5 text-sm text-zinc-300">
+            {post.sources.map((src) => (
+              <li key={src.url}>
+                <a href={src.url} target="_blank" rel="noopener noreferrer" className="text-[#81b64c] hover:underline">
+                  {src.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {related.length > 0 && (
         <div className="mt-12 border-t border-[#3c3934] pt-8">

@@ -1,4 +1,13 @@
-import { SITE_NAME, SITE_ALT_NAMES, SITE_URL, absoluteUrl } from './site-config';
+import {
+  SITE_NAME,
+  SITE_ALT_NAMES,
+  SITE_URL,
+  absoluteUrl,
+  AUTHOR_NAME,
+  AUTHOR_ROLE,
+  AUTHOR_BIO,
+  AUTHOR_URL_PATH,
+} from './site-config';
 import type { BlogPost } from './blog';
 
 export function organizationSchema() {
@@ -19,6 +28,18 @@ export function organizationSchema() {
       contactType: 'customer support',
       url: absoluteUrl('/contact'),
     },
+  };
+}
+
+export function personSchema() {
+  return {
+    '@type': 'Person',
+    '@id': `${SITE_URL}/#author`,
+    name: AUTHOR_NAME,
+    jobTitle: AUTHOR_ROLE,
+    description: AUTHOR_BIO,
+    url: absoluteUrl(AUTHOR_URL_PATH),
+    worksFor: { '@id': `${SITE_URL}/#organization` },
   };
 }
 
@@ -105,11 +126,10 @@ export function articleSchema(post: BlogPost) {
     image: [absoluteUrl(`/og?title=${encodeURIComponent(post.title)}&label=${encodeURIComponent(post.category)}`)],
     datePublished: post.date,
     dateModified: post.updated || post.date,
-    author: {
-      '@type': 'Organization',
-      name: post.author,
-      url: SITE_URL,
-    },
+    author: { '@id': `${SITE_URL}/#author` },
+    ...(post.sources && post.sources.length > 0
+      ? { citation: post.sources.map((src) => ({ '@type': 'CreativeWork', name: src.title, url: src.url })) }
+      : {}),
     publisher: { '@id': `${SITE_URL}/#organization` },
     isPartOf: { '@id': `${SITE_URL}/#website` },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },

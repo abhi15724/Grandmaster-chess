@@ -2,11 +2,16 @@
 title: "The Touch-Move Rule: The Official Chess Rule Most Online Players Don't Know"
 description: "What the touch-move rule actually requires in official over-the-board chess, why online play doesn't enforce it, and what to say if you need to adjust a piece."
 date: "2026-08-28"
-updated: "2026-08-28"
+updated: "2026-10-23"
 author: "Grandmaster Chess Editorial Team"
 category: "Rules"
 tags: ["touch move rule chess", "jadoube", "over the board chess rules", "chess tournament rules"]
 readingMinutes: 5
+factChecked: "2026-10-23"
+sources:
+  - title: "FIDE Laws of Chess (in force from 1 January 2023)"
+    url: "https://rcc.fide.com/fide-laws-of-chess_fulltexthtml/"
+seoTitle: "Touch-Move Rule in Chess: What the Official Rule Says"
 ---
 
 If you've only ever played chess online, there's an official rule you've likely never encountered: touch it, move it. In sanctioned over-the-board chess, picking up a piece isn't a casual "let me consider this" gesture — it's a binding commitment, enforced by an arbiter if needed.
@@ -27,7 +32,7 @@ If a player touches a piece that genuinely has no legal move available (for exam
 
 ## Why online chess doesn't enforce this
 
-This is the part that surprises players moving between formats: essentially no online platform enforces touch-move, including here. Digital interfaces let you pick up, drag, hover, and reconsider a piece before releasing it — there's no equivalent to physically lifting a wooden piece off a board in front of an arbiter. That's a genuinely different experience from tournament play, not a lesser one — it's just built around a different interaction model (clicking and dragging) that doesn't map onto a rule designed for physical pieces and human judgment calls.
+This is the part that surprises players moving between formats: most online platforms do not enforce touch-move, including here. Digital interfaces let you pick up, drag, hover, and reconsider a piece before releasing it — there's no equivalent to physically lifting a wooden piece off a board in front of an arbiter. That's a genuinely different experience from tournament play, not a lesser one — it's just built around a different interaction model (clicking and dragging) that doesn't map onto a rule designed for physical pieces and human judgment calls.
 
 ## Why it matters if you're moving from online to over-the-board play
 
@@ -36,7 +41,7 @@ Players who learn primarily online sometimes get a real surprise at their first 
 ## Frequently asked questions
 
 **Is the touch-move rule enforced in online chess?**
-No, essentially no online platform enforces it, including here — you can pick up, drag, and reconsider a piece before committing to a move, unlike in official over-the-board play.
+No, most online platforms do not enforce it, including here — you can pick up, drag, and reconsider a piece before committing to a move, unlike in official over-the-board play.
 
 **What do I say if I need to fix a crooked piece without moving it?**
 Say "I adjust" (or the traditional French "j'adoube") before you touch the piece, not after — announcing it first is what exempts the adjustment from the touch-move rule.

@@ -2,11 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Swords, Bot, Monitor, BookOpen, HelpCircle, Trophy, Volume2, VolumeX, Menu, X, Shield, Settings2, Newspaper, LogIn, LogOut } from 'lucide-react';
+import { Swords, Bot, Monitor, BookOpen, HelpCircle, Trophy, Volume2, VolumeX, Menu, X, Shield, Settings2, Newspaper, LogIn, LogOut, Wrench } from 'lucide-react';
 import { sound } from '@/lib/audio';
 import { SoundSettingsModal } from '@/components/SoundSettingsModal';
 import { getStoredUserStats, STATS_UPDATED_EVENT } from '@/lib/storage';
 import { useAuth } from '@/contexts/AuthContext';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 
 interface NavbarProps {
   currentPath: string;
@@ -43,6 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
     { label: 'Play AI', path: '/play/ai', icon: Bot },
     { label: 'Local Chess', path: '/play/local', icon: Monitor },
     { label: 'Rules & Openings', path: '/learn/chess-rules', icon: BookOpen },
+    { label: 'Tools', path: '/tools', icon: Wrench },
     { label: 'Blog', path: '/blog', icon: Newspaper },
     { label: 'FAQ', path: '/faq', icon: HelpCircle },
     { label: 'Dashboard', path: '/dashboard', icon: Trophy },
@@ -90,6 +92,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
         {/* Right Tools: Sound, Rating Pill, Mobile Menu */}
         <div className="flex items-center gap-2">
           
+          <LanguageSwitcher />
+
           {/* Sound Controls */}
           <div className="flex items-center rounded-md border border-[#3c3934] bg-[#211f1c] p-0.5">
             <button

@@ -2,11 +2,18 @@
 title: "Chess Ratings & Elo Explained: How It Works and How to Raise Yours"
 description: "What a chess rating actually measures, how the Elo formula calculates it, typical rating bands from beginner to master, and concrete ways to raise yours."
 date: "2026-08-16"
-updated: "2026-08-16"
+updated: "2026-10-23"
 author: "Grandmaster Chess Editorial Team"
 category: "Guides"
 tags: ["chess rating system explained", "elo rating chess", "how to increase chess rating", "chess rank titles", "fide rating", "chess leaderboard"]
 readingMinutes: 6
+factChecked: "2026-10-23"
+sources:
+  - title: "FIDE Handbook, B.02 Rating Regulations (effective 1 March 2024)"
+    url: "https://handbook.fide.com/chapter/B022024"
+  - title: "FIDE rating change calculator"
+    url: "https://ratings.fide.com/calc.phtml?page=change"
+seoTitle: "Chess Ratings and Elo Explained: How They Work"
 ---
 
 A chess rating is a single number that estimates how strong a player is relative to everyone else in the same pool — not a measure of "skill" in any absolute sense, but a prediction tool. If a 1400-rated player and a 1800-rated player sit down to play, the rating gap tells you roughly how often each side should expect to win, long before the first pawn moves.
@@ -17,7 +24,9 @@ Ratings are calculated with the **Elo system**, named after physicist Arpad Elo,
 
 Beat someone rated 200 points above you, and you gain a solid chunk of points, because the system didn't expect that result. Beat someone rated 200 points below you, and you gain only a sliver, because that outcome was already expected. Lose to a much weaker opponent, and you'll drop more points than a loss to a peer would cost — the system is punishing a genuinely surprising result, not being unfair.
 
-Most platforms also use a **K-factor**, which controls how volatile ratings are. New accounts typically get a higher K-factor so their rating can find its "true" level quickly; established accounts get a lower one so a single unlucky loss doesn't swing them by 50 points.
+The size of each change is set by a **K-factor**. FIDE uses K = 40 for new players (their first 30 games) and for under-18s rated below 2300, K = 20 for other players rated below 2400, and K = 10 once a rating has reached 2400. A higher K lets a new rating find its level quickly; a lower K stops a single unlucky loss from swinging an established player's rating.
+
+**A worked example.** You are rated 1500 and beat a 1700-rated opponent with K = 20. Your expected score was about 0.24, so you gain 20 × (1 − 0.24) ≈ **15 points**. A draw would have gained about 5, and a loss would have cost about 5. You can try your own numbers in the [Elo rating calculator](/tools/elo-calculator).
 
 ## Typical rating bands (roughly)
 
@@ -28,7 +37,7 @@ These bracket boundaries vary a bit by platform and federation, but as a rough m
 - **1400–1800** — Solid club player, understands common patterns and basic strategy
 - **1800–2000** — Strong club player / advanced, few outright blunders
 - **2000–2200** — Expert-level, deep opening knowledge and calculation
-- **2200+** — Candidate Master and above; the FIDE titles above this (FIDE Master, International Master, Grandmaster) require both a qualifying rating *and* specific tournament performances called norms — the rating alone isn't sufficient for the title
+- **2200+** — Candidate Master and above; the titles International Master and Grandmaster require both a qualifying rating *and* specific tournament performances called norms, so the rating alone isn't enough
 
 ## Is your online rating the same as your FIDE rating?
 

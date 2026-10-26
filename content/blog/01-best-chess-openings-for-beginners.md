@@ -1,6 +1,6 @@
 ---
 title: "15 Best Chess Openings for Beginners in 2026"
-description: "A practical guide to the chess openings beginners should actually learn first — Italian Game, Ruy Lopez, Caro-Kann, Slav Defense, and more — with the ideas behind each."
+description: "A practical guide to the chess openings beginners should learn first: Italian Game, Ruy Lopez, Caro-Kann, Slav and more, with diagrams."
 date: "2026-06-02"
 updated: "2026-08-24"
 author: "Grandmaster Chess Editorial Team"
@@ -28,8 +28,16 @@ If you only apply those three rules and nothing else on this page, your results 
 ### 1. Italian Game (1.e4 e5 2.Nf3 Nc6 3.Bc4)
 The most natural developing opening for new players. The bishop eyes f7 immediately, development is fast, and plans are intuitive: castle, put a rook on the e-file, look for tactics against f7.
 
+```fen
+r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3 | Italian Game after 1.e4 e5 2.Nf3 Nc6 3.Bc4: the bishop eyes the f7 square. | hl=c4,f7
+```
+
 ### 2. Ruy Lopez / Spanish Game (1.e4 e5 2.Nf3 Nc6 3.Bb5)
 One of the oldest openings in chess — still played at every level from beginner to World Championship. The bishop pins Black's knight to the king's defender indirectly, applying long-term pressure rather than a quick trick. It teaches patient, strategic pressure instead of immediate tactics, which makes it a genuinely different lesson from the Italian Game even though the first two moves are identical.
+
+```fen
+r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3 | Ruy Lopez after 1.e4 e5 2.Nf3 Nc6 3.Bb5: the bishop pressures the knight that defends e5. | hl=b5,c6
+```
 
 ### 3. Scotch Game (1.e4 e5 2.Nf3 Nc6 3.d4)
 A direct, no-nonsense way to open the center immediately and avoid the deeper theory that builds up in the Ruy Lopez. Good for players who want open, tactical positions without having to learn as much specific theory up front.
@@ -45,6 +53,10 @@ Flexible, avoids heavily analyzed main lines, and can transpose into sharp attac
 ### 6. Caro-Kann Defense (1.e4 c6)
 Extremely solid. Black avoids early structural weaknesses and gets a safe, well-understood pawn structure. It's a favorite of positional players because losing quickly is rare.
 
+```fen
+rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3 | Caro-Kann after 1.e4 c6 2.d4 d5: Black supports d5 with the c-pawn and keeps a solid structure. | hl=c6,d5
+```
+
 ### 7. Slav Defense (1.d4 d5 2.c4 c6)
 Arguably the most popular solid response to 1.d4 at every level above beginner, and a natural companion to the Caro-Kann's philosophy — Black keeps a solid pawn structure while still contesting the center directly. It avoids some of the cramped positions that can come up in the Queen's Gambit Declined.
 
@@ -59,6 +71,10 @@ More ambitious and tactical than the Caro-Kann or French. Black fights for the c
 
 ### 11. Queen's Gambit Declined (1.d4 d5 2.c4 e6)
 The classical response to 1.d4. Solid structure, clear plans, and it teaches you how to handle central pawn tension — a skill that transfers to almost every other opening.
+
+```fen
+rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq - 0 3 | Queen's Gambit Declined after 1.d4 d5 2.c4 e6: Black holds d5 with a pawn and builds a compact centre. | hl=d5,e6
+```
 
 ## Openings that work for both colors
 
@@ -81,6 +97,8 @@ Reading a list of openings won't improve your rating by itself. Three steps make
 1. Play the same one or two openings for at least 20–30 games before switching.
 2. After each loss, check where your position first went wrong — usually it's a development or center-control mistake, not a "theory" mistake.
 3. Play against the [AI opponent](/play/ai) at increasing difficulty to pressure-test your opening against different response styles, or use [local pass-and-play](/play/local) to test both sides of the position yourself.
+
+**Try it:** replay an opening line move by move in the [PGN viewer](/tools/pgn-viewer), and see how the game began in the [history of chess](/blog/history-of-chess).
 
 ## Frequently asked questions
 

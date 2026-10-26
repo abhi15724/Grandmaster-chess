@@ -10,7 +10,7 @@ import { PLAY_AI_BASIC_KEYWORDS } from '@/lib/seo-keywords';
 export const metadata: Metadata = pageMetadata({
   title: 'Play Chess vs Easy AI (Beginner)',
   description:
-    'Play chess vs an easy AI built for beginners (~800 rating). Learn the rules and basic tactics in a free online game, no sign-up needed.',
+    'Play chess vs an easy AI built for beginners. Learn the rules and basic tactics in a free online game, no sign-up needed.',
   keywords: PLAY_AI_BASIC_KEYWORDS,
   path: '/play/ai/basic',
 });

@@ -277,7 +277,7 @@ export const HomePage: React.FC<HomePageProps> = ({ latestPosts = [] }) => {
           Play chess online free on Grandmasterchess
         </h2>
         <p className="mb-3">
-          Grandmasterchess is a free place to play chess online with no download and no sign-up. Play chess against the computer at three levels, from a beginner-friendly AI to a master-strength engine, or play 2 player chess on one device with a friend. Every game uses full FIDE rules, chess clocks from bullet to rapid, and a move list you can export as PGN.
+          Grandmasterchess is a free place to play chess online with no download and no sign-up. Play chess against the computer at three levels, from a beginner-friendly AI to our hardest engine, or play 2 player chess on one device with a friend. Every game uses full FIDE rules, chess clocks from bullet to rapid, and a move list you can export as PGN.
         </p>
         <p className="mb-3">
           New to the game? Start with our <Link href="/learn/chess-rules" className="text-[#81b64c] hover:underline">chess rules guide</Link>, learn the <Link href="/learn/chess-openings" className="text-[#81b64c] hover:underline">best chess openings</Link>, then sharpen your <Link href="/learn/chess-strategies" className="text-[#81b64c] hover:underline">tactics and strategy</Link>. Ready to play? Try the <Link href="/play/ai/basic" className="text-[#81b64c] hover:underline">easy AI</Link>, the <Link href="/play/ai/intermediate" className="text-[#81b64c] hover:underline">medium AI</Link> or the <Link href="/play/ai/advanced" className="text-[#81b64c] hover:underline">hardest AI</Link>.

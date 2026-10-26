@@ -8,17 +8,17 @@ import { jsonLdGraph, breadcrumbSchema } from '@/lib/json-ld';
 import { PLAY_AI_ADVANCED_KEYWORDS } from '@/lib/seo-keywords';
 
 export const metadata: Metadata = pageMetadata({
-  title: 'Play Chess vs Hardest AI (Master)',
+  title: 'Play Chess vs Hardest AI',
   description:
-    'Play chess vs the hardest AI on Grandmasterchess (~2100 rating). A serious tactical test for experienced players. Free, no sign-up.',
+    'Play chess vs the hardest AI on Grandmasterchess. A tough tactical test for experienced players. Free, no sign-up.',
   keywords: PLAY_AI_ADVANCED_KEYWORDS,
   path: '/play/ai/advanced',
 });
 
 const content = {
-  heading: 'Play chess vs the hardest AI (master level)',
+  heading: 'Play chess vs the hardest AI',
   paragraphs: [
-    'The advanced AI is the strongest opponent on Grandmasterchess (roughly a 2100 rating). It calculates tactics deeply, converts small advantages and rarely gives away material, so every inaccuracy matters.',
+    'The advanced AI is the strongest opponent on Grandmasterchess (a home-built minimax engine, much weaker than Stockfish). It searches deeper than the other two levels, so tactical inaccuracies are punished.',
     'To beat it, steer toward closed, strategic positions, avoid early tactical complications you have not calculated, and take your time on the clock. Review your PGN after each game to find the moment the evaluation turned.',
   ],
   links: [

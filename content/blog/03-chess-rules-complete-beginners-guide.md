@@ -1,12 +1,16 @@
 ---
 title: "Chess Rules Explained: The Complete Beginner's Guide"
-description: "Every core chess rule explained clearly — how each piece moves, check and checkmate, castling, en passant, promotion, and the draw rules — for players learning from zero."
+description: "Every core chess rule explained clearly: how each piece moves, check and checkmate, castling, en passant, promotion and draws."
 date: "2026-06-16"
-updated: "2026-07-22"
+updated: "2026-10-23"
 author: "Grandmaster Chess Editorial Team"
 category: "Rules"
 tags: ["chess rules", "how to play chess", "chess for beginners", "castling", "en passant", "chess piece values", "algebraic notation chess"]
 readingMinutes: 8
+factChecked: "2026-10-23"
+sources:
+  - title: "FIDE Laws of Chess (in force from 1 January 2023)"
+    url: "https://rcc.fide.com/fide-laws-of-chess_fulltexthtml/"
 ---
 
 Chess has a reputation for being complicated, but the rules themselves take about fifteen minutes to learn properly. The complexity comes later, from strategy — not from the rules. This guide covers everything you need to play a legal, confident game.
@@ -33,7 +37,7 @@ Chess is played on an 8×8 board of alternating light and dark squares. Each pla
 ## The three special-case rules everyone forgets
 
 ### Castling
-A king and rook can move together once per game, provided neither piece has moved yet, there are no pieces between them, and the king doesn't pass through or land on a square that's under attack. The king moves two squares toward the rook, and the rook jumps to the square next to the king. This is the fastest way to get the king to safety.
+A king and rook can move together once per game, provided neither piece has moved yet, there are no pieces between them, the king is not in check, and the king doesn't pass through or land on a square that's under attack. The king moves two squares toward the rook, and the rook jumps to the square next to the king. This is the fastest way to get the king to safety.
 
 ### En passant
 If a pawn moves two squares forward from its starting position and lands beside an opponent's pawn, that opponent's pawn can capture it *as if* it had only moved one square — but only immediately, on the very next move. Miss the window and the right disappears for that pawn.
@@ -43,10 +47,10 @@ When a pawn reaches the opposite end of the board, it must promote to a queen, r
 
 ## Draw rules beyond stalemate
 
-- **Threefold repetition** — if the exact same position occurs three times (same player to move, same pieces, same rights), either player can claim a draw.
-- **Fifty-move rule** — if 50 consecutive moves pass with no pawn move and no capture, the game is drawn.
+- **Threefold repetition** — if the exact same position occurs three times (same player to move, same pieces, same rights), the player whose turn it is can claim a draw. The positions must match in who is to move, the pieces, and the available castling and en passant rights.
+- **Fifty-move rule** — if each player has made 50 moves with no pawn move and no capture, the player to move can claim a draw. The game is drawn automatically at 75 moves each.
 - **Insufficient material** — if neither side has enough pieces left to deliver checkmate (e.g. king vs. king, or king and bishop vs. king), the game is automatically drawn.
-- **Mutual agreement** — players can agree to a draw at any point.
+- **Mutual agreement** — players can agree to a draw once each has made at least one move (a tournament can restrict this).
 
 ## Common beginner rule mistakes
 
@@ -54,6 +58,8 @@ When a pawn reaches the opposite end of the board, it must promote to a queen, r
 - Trying to castle after the king or rook has already moved (not allowed, even if they later returned to their original squares).
 - Missing en passant's one-move-only window.
 - Assuming the game ends the moment a king is "trapped," rather than checking whether it's actually checkmate or just check.
+
+**Go deeper:** [en passant](/blog/en-passant-explained), [stalemate versus checkmate](/blog/stalemate-vs-checkmate), [chess notation](/blog/chess-notation-explained) and the [history of chess](/blog/history-of-chess). To learn the square names, try the [coordinates trainer](/tools/chess-coordinates-trainer).
 
 ## Frequently asked questions
 

@@ -29,7 +29,7 @@ export const ChessClock: React.FC<ChessClockProps> = ({
   };
 
   return (
-    <div
+    <div translate="no"
       className={`flex items-center justify-between px-3 py-2 rounded-lg border transition-all duration-200 ${
         isActive
           ? isCriticalTime

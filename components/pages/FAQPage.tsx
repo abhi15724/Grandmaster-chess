@@ -25,7 +25,7 @@ export const FAQPage: React.FC<FAQPageProps> = ({}) => {
     },
     {
       q: 'How does the AI chess engine work?',
-      a: 'Our AI engine uses the Minimax algorithm with Alpha-Beta pruning and Quiescence search. Basic AI plays intuitive beginner moves (~800 Elo), Intermediate AI uses minimax depth 2 with positional piece-square evaluations (~1400 Elo), and Advanced AI calculates deep multi-ply variations with quiescence search to avoid the horizon effect (~2100 Elo).',
+      a: 'Our AI engine uses the Minimax algorithm with Alpha-Beta pruning and Quiescence search. Basic AI plays simple beginner-level moves, Intermediate AI uses shallow minimax search with positional piece-square evaluations, and Advanced AI searches deeper with quiescence search to avoid the horizon effect. For rating updates the Site treats the three levels as nominal opponents rated 800, 1400 and 2100; these are fixed values chosen for the calculation, not measured or official ratings, and the engine is not as strong as Stockfish or a titled player.',
     },
     {
       q: 'Are all standard FIDE chess rules enforced?',

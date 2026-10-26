@@ -7,6 +7,7 @@ author: "Grandmaster Chess Editorial Team"
 category: "News"
 tags: ["javokhir sindarov", "who is sindarov", "uzbekistan chess", "world championship challenger 2026"]
 readingMinutes: 6
+noindex: true
 ---
 
 If you don't follow elite chess closely, Javokhir Sindarov's name may be new to you — which is exactly the point of this piece. He's the challenger facing reigning World Champion D Gukesh in the [2026 World Chess Championship](/blog/world-chess-championship-2026-preview), and eighteen months ago most casual chess fans hadn't heard of him either. Here's how he got here.

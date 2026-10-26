@@ -1,48 +1,67 @@
 ---
-title: "Who Is India's Highest-Rated Chess Player? (Updated August 2026)"
-description: "Arjun Erigaisi holds India's top classical FIDE rating as of the most recent 2026 rating lists — how his numbers compare to Gukesh and Anand, and why this ranking shifts constantly."
+title: "Who Is India's Highest-Rated Chess Player? (October 2026)"
+description: "Praggnanandhaa became India's top-rated player on the September 2026 FIDE list, ahead of Arjun Erigaisi. Current numbers and where to check."
 date: "2026-08-22"
-updated: "2026-08-22"
+updated: "2026-10-23"
 author: "Grandmaster Chess Editorial Team"
 category: "Guides"
-tags: ["india highest rated chess player", "arjun erigaisi rating", "indian chess players fide ranking", "top indian chess players 2026"]
+tags: ["india highest rated chess player", "praggnanandhaa rating", "arjun erigaisi rating", "indian chess players fide ranking"]
 readingMinutes: 6
+factChecked: "2026-10-23"
+sources:
+  - title: "FIDE: official top players lists"
+    url: "https://ratings.fide.com/top_lists.phtml"
+  - title: "Chess.com: Praggnanandhaa Indian No. 1 on the September 2026 FIDE rating list"
+    url: "https://chess.com/news/view/september-2026-fide-rating-list"
+  - title: "ChessBase India: FIDE rating list, September 2026"
+    url: "https://chessbase.in/news/fide-rating-list-september-2026"
+  - title: "Wikipedia: R Praggnanandhaa (cites FIDE)"
+    url: "https://en.wikipedia.org/wiki/R_Praggnanandhaa"
+  - title: "Wikipedia: Arjun Erigaisi (cites FIDE)"
+    url: "https://en.wikipedia.org/wiki/Arjun_Erigaisi"
+  - title: "Wikipedia: FIDE rankings"
+    url: "https://en.wikipedia.org/wiki/FIDE_rankings"
 ---
 
-As of the most recent FIDE rating lists in 2026, **Arjun Erigaisi** holds India's highest classical chess rating — around 2760, and the only Indian currently inside the world's Open top 10. That's worth double-checking against FIDE's official list before you quote it anywhere, though: this exact answer has changed hands within India more than once in 2026 alone, and it will keep moving with every major tournament.
+**R Praggnanandhaa is India's highest-rated player in classical chess.** He moved ahead of Arjun Erigaisi on the September 2026 FIDE list and held the position in October. Ratings are republished on the first of every month, so check FIDE for today's order.
 
-## Arjun Erigaisi's numbers
+## The current order (classical ratings)
 
-Erigaisi became India's top-rated player in September 2024, and by December 2024 he'd reached a peak rating of 2801 — making him only the second Indian ever to cross the 2800 mark, after Viswanathan Anand. His rating has moved around some since (ratings always do), but through the June and August 2026 lists he's remained India's highest-rated player and the country's sole representative in the world's Open top 10, sitting around World No. 8 with a rating in the low 2760s as of the June 2026 list.
+| Player | September 2026 list | October 2026 list |
+|---|---|---|
+| R Praggnanandhaa | 2761, world No. 8 | 2763, world No. 7 |
+| Arjun Erigaisi | 2759, world No. 9 | 2746, world No. 12 |
+| D Gukesh | 2703, around world No. 31 | not checked |
 
-## Rating isn't the same as being World Champion
+The September figures come from Chess.com's and ChessBase India's reports of the FIDE list. The October figures are taken from the players' Wikipedia pages, which cite FIDE; confirm them on [FIDE's top players page](https://ratings.fide.com/top_lists.phtml), because we have not read the October list itself.
 
-Here's the part most casual coverage glosses over: **D Gukesh is the reigning World Chess Champion**, having won the title in December 2024 by defeating China's Ding Liren — but that doesn't mean he holds India's highest rating. In fact, the August 2026 rating list showed Gukesh dropping sharply after a rough Chennai Grand Masters result, losing 14 rating points to fall to 2703 and world No. 31. A rating and a world title measure genuinely different things: the title is decided by a specific match, held until it's defended or lost, while the rating is a constantly-updating number based on every rated game a player has played recently. It's entirely possible — and, in India's case in 2026, currently true — for a country's reigning World Champion to not hold that same country's highest FIDE rating. (If that distinction is confusing, [our explainer on how chess ratings actually work](/blog/chess-rating-elo-explained) covers exactly why a single result can swing a rating so much.)
+## What changed
 
-## Before Arjun: Viswanathan Anand's era
+On the August 2026 list, Erigaisi was the highest-ranked Indian, in 9th place on 2759, with Praggnanandhaa 12th on 2750 and Viswanathan Anand 14th on 2739. A month later Praggnanandhaa's rating had risen to 2761 and he passed Erigaisi by two points. Gaps this small flip easily, which is why a headline that was right last month can be wrong now.
 
-For years before Erigaisi's rise, Viswanathan Anand was both India's highest-rated player and, for long stretches, one of the very best in the world — a five-time World Champion and the first Indian to cross the 2800 rating mark. Anand remains active and highly rated even now, still appearing among India's Top 30 players in the world classical rankings as of mid-2026, a remarkable longevity given how young the current wave of Indian grandmasters (Erigaisi, Gukesh, Praggnanandhaa, and others) actually is.
+## Highest-rated is not the same as World Champion
 
-## India's highest-rated woman: Koneru Humpy
+D Gukesh became World Champion in December 2024 by beating Ding Liren, and he defends the title against Javokhir Sindarov in Geneva this November (see our [championship match guide](/blog/world-chess-championship-2026-preview)). His classical rating of 2703 is well below Praggnanandhaa's and Erigaisi's, which shows that a title and a rating measure different things. Viswanathan Anand, India's first grandmaster and a former World Champion, is still among India's top three on the August list.
 
-Separately from the Open category above, **Koneru Humpy** holds India's highest rating among women, ranked among the world's top 10 women players through 2026's rating lists — India has consistently placed multiple women inside the global top 100 across recent lists, including Divya Deshmukh and R. Vaishali.
+## Classical, rapid and blitz are separate ratings
 
-## Why this answer keeps changing
+FIDE keeps three ratings for each player, one for each time control. This article uses the **classical** rating, which is the one in the headline "world No. 7". A player's rapid or blitz rating can be much higher or lower. See [blitz vs rapid vs classical](/blog/blitz-vs-rapid-vs-classical) for how the formats differ.
 
-FIDE publishes a new rating list every month, and any single strong or weak tournament result can shift a player's rating by 10-20 points or more — enough to change national and world rankings entirely. Three different Indians (Gukesh, Erigaisi, and briefly others) have each held the "highest-rated Indian" position at different points across just the first eight months of 2026. If you're reading this well after August 2026, it's worth checking FIDE's official live rating list directly rather than assuming this answer is still current.
+## How to check for yourself
+
+1. Open FIDE's [top players list](https://ratings.fide.com/top_lists.phtml) and choose Open.
+2. Read the month shown at the top of the list.
+3. Filter or scan for the federation "IND".
+
+Want to see how a rating gap converts into winning chances? Try our [Elo rating calculator](/tools/elo-calculator).
 
 ## Frequently asked questions
 
-**Who is India's highest-rated chess player right now?**
-As of the most recent 2026 FIDE rating lists, Arjun Erigaisi holds India's highest classical rating, at roughly 2760 and ranked around World No. 8 — check FIDE's official list for the current figure, since it updates monthly.
+**Who is India's number one chess player?**
+By classical FIDE rating, Praggnanandhaa, as of the September and October 2026 lists.
 
 **Is Gukesh India's highest-rated player?**
-No — while D Gukesh is the reigning World Chess Champion (won in December 2024), his FIDE rating dropped significantly after a difficult Chennai Grand Masters result in mid-2026, putting him behind Arjun Erigaisi in India's national rating rankings.
+No. He is World Champion, but his classical rating on the September list was 2703, below both Praggnanandhaa and Erigaisi.
 
-**Has an Indian player ever been ranked world No. 1?**
-Not yet in the modern FIDE rating era — Magnus Carlsen has held the world No. 1 classical rating continuously since 2011. Arjun Erigaisi's peak ranking of World No. 3 (October 2024) is the closest an Indian has come recently.
-
-**What's the difference between FIDE rating and world ranking?**
-Rating is a numerical score (like 2761) calculated from recent game results; ranking is just that player's position (like "world No. 8") relative to everyone else's current rating. Two players can be very close in rating but several ranking spots apart if the field is tightly bunched.
-
-Curious how rating math actually works move by move? Play a few games against the [AI](/play/ai) and watch your own rating shift on your [dashboard](/dashboard) — the mechanics are the same ones deciding Arjun's and Gukesh's rankings, just at club level instead of world-elite.
+**How often does the ranking change?**
+FIDE publishes a new list monthly, and the order of the top Indians can change from one list to the next.

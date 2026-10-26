@@ -22,7 +22,7 @@ export const EvaluationBar: React.FC<EvaluationBarProps> = ({
   const isWhiteFavored = evalScoreInCentipawns >= 0;
 
   return (
-    <div className="flex flex-col items-center gap-1">
+    <div translate="no" className="flex flex-col items-center gap-1">
       {/* Visual vertical bar */}
       <div
         className="relative w-3.5 h-[280px] sm:h-[420px] rounded-full overflow-hidden border border-zinc-700 bg-zinc-900 shadow-inner flex flex-col justify-end"

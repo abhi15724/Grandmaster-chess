@@ -3,6 +3,8 @@ import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import remarkHtml from 'remark-html';
+import { renderFenBlocks } from './fen-diagram';
+import { AUTHOR_NAME } from './site-config';
 
 const BLOG_DIR = path.join(process.cwd(), 'content', 'blog');
 
@@ -15,6 +17,16 @@ export interface BlogFrontmatter {
   category: string;
   tags: string[];
   readingMinutes: number;
+  /** Primary sources the facts in the article come from. Rendered as "Sources" and emitted as schema citations. */
+  sources?: { title: string; url: string }[];
+  /** ISO date on which the sources were last actually checked against the article. Only set after a real check. */
+  factChecked?: string;
+  /** Keep out of the sitemap, blog index and related lists; page gets a robots noindex. Use while a page awaits verification. */
+  noindex?: boolean;
+  /** Shorter title for search results and social cards (aim for 60 characters or fewer). The page heading keeps the full title. */
+  seoTitle?: string;
+  /** Show a health-information notice under the byline. */
+  healthNotice?: boolean;
 }
 
 export interface BlogPost extends BlogFrontmatter {
@@ -42,16 +54,22 @@ function readAllRawPosts(): BlogPost[] {
   return files.map((filename) => {
     const raw = fs.readFileSync(path.join(BLOG_DIR, filename), 'utf8');
     const { data, content } = matter(raw);
+    const fm = data as BlogFrontmatter;
     return {
       slug: slugFromFilename(filename),
       content,
-      ...(data as BlogFrontmatter),
+      ...fm,
+      // One accountable, named author for every article (see /editorial-policy).
+      author: AUTHOR_NAME,
     };
   });
 }
 
+/** Published, indexable posts (excludes posts flagged `noindex`). */
 export function getAllPosts(): BlogPost[] {
-  return readAllRawPosts().sort(
+  return readAllRawPosts()
+    .filter((p) => !p.noindex)
+    .sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 }
@@ -73,7 +91,8 @@ export function getAllCategories(): string[] {
 
 export async function renderMarkdown(markdown: string): Promise<string> {
   const result = await remark().use(remarkHtml).process(markdown);
-  return result.toString();
+  // ```fen blocks -> accessible inline SVG diagrams (see lib/fen-diagram.ts)
+  return renderFenBlocks(result.toString());
 }
 
 export function getRelatedPosts(current: BlogPost, limit = 3): BlogPost[] {

@@ -1,17 +1,24 @@
 ---
 title: "Blitz vs Rapid vs Classical: Choosing the Right Chess Time Control"
-description: "How blitz, rapid, and classical chess time controls change the way you should think, play openings, and manage risk — and how to pick the right one for your goals."
+description: "How blitz, rapid and classical time controls change how you should think, play openings and manage risk, with FIDE's definitions."
 date: "2026-06-24"
-updated: "2026-07-25"
+updated: "2026-10-23"
 author: "Grandmaster Chess Editorial Team"
 category: "Guides"
 tags: ["chess time control", "blitz chess", "rapid chess", "chess clock", "classical chess", "bullet chess"]
 readingMinutes: 5
+factChecked: "2026-10-23"
+sources:
+  - title: "FIDE Laws of Chess (in force from 1 January 2023)"
+    url: "https://rcc.fide.com/fide-laws-of-chess_fulltexthtml/"
+seoTitle: "Blitz vs Rapid vs Classical Chess Time Controls"
 ---
 
 The time control you choose changes chess more than almost any other single decision. The same position can be a clean win in classical and a coin flip in bullet, simply because of how much thinking time is available.
 
-## Bullet (under 3 minutes)
+FIDE's Laws define the boundaries per player as the starting time plus 60 times any increment: **blitz** is 10 minutes or less, **rapid** is more than 10 and under 60 minutes, and standard (classical) chess is 60 minutes or more. FIDE does not define bullet, and online sites draw their own lines, so the same game can carry a different label on different sites.
+
+## Bullet (about 3 minutes or less)
 
 Bullet is closer to reflexes than to strategy. Games are decided as much by mouse speed and pattern recognition as by "correct" chess. It's excellent for:
 
@@ -21,7 +28,7 @@ Bullet is closer to reflexes than to strategy. Games are decided as much by mous
 
 It's a poor way to learn strategy, because there's rarely time to calculate — you're pattern-matching, not thinking.
 
-## Blitz (3–10 minutes)
+## Blitz (up to 10 minutes)
 
 Blitz is the most popular online time control, and for good reason: fast enough to play many games in a session, slow enough that real decisions still matter. In blitz:
 
@@ -29,7 +36,7 @@ Blitz is the most popular online time control, and for good reason: fast enough 
 - Simple, forcing tactics matter more than deep long-term planning — you often won't have time to calculate 6 moves deep.
 - Time management becomes part of the skill: spending 30 seconds on an unimportant move can cost you the game later.
 
-## Rapid (10–30 minutes)
+## Rapid (more than 10 and under 60 minutes)
 
 Rapid strikes the balance most improving players actually want. There's enough time to:
 
@@ -39,7 +46,7 @@ Rapid strikes the balance most improving players actually want. There's enough t
 
 If you're trying to *improve*, rapid is generally the best time control to play the bulk of your games in — fast enough to play often, slow enough that your decisions reflect your actual chess understanding rather than your reflexes.
 
-## Classical (30+ minutes)
+## Classical (60 minutes or more)
 
 Classical chess is what's played in most over-the-board tournaments and world championship matches. It rewards:
 
