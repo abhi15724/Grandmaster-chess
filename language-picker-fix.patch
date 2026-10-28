@@ -1,0 +1,90 @@
+diff -ruN a/components/LanguageSwitcher.tsx b/components/LanguageSwitcher.tsx
+--- a/components/LanguageSwitcher.tsx	2026-10-27 00:25:55.370975535 +0000
++++ b/components/LanguageSwitcher.tsx	2026-10-27 00:25:55.374751042 +0000
+@@ -1,6 +1,7 @@
+ 'use client';
+ 
+ import React, { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
++import { createPortal } from 'react-dom';
+ import { Globe, X, Search } from 'lucide-react';
+ import {
+   GROUP_LABELS,
+@@ -10,7 +11,7 @@
+   searchLanguages,
+   type LanguageGroup,
+ } from '@/lib/languages';
+-import { getSelectedLanguage, loadTranslator, setSelectedLanguage } from '@/lib/translate';
++import { getSelectedLanguage, loadTranslator, reloadPage, setSelectedLanguage } from '@/lib/translate';
+ 
+ const subscribeNever = () => () => {};
+ const getServerLanguage = (): string | null => null;
+@@ -33,6 +34,8 @@
+   useEffect(() => {
+     if (!open) return;
+     inputRef.current?.focus();
++    const previousOverflow = document.body.style.overflow;
++    document.body.style.overflow = 'hidden';
+     const onKey = (e: KeyboardEvent) => {
+       if (e.key === 'Escape') {
+         setOpen(false);
+@@ -40,7 +43,10 @@
+       }
+     };
+     window.addEventListener('keydown', onKey);
+-    return () => window.removeEventListener('keydown', onKey);
++    return () => {
++      window.removeEventListener('keydown', onKey);
++      document.body.style.overflow = previousOverflow;
++    };
+   }, [open]);
+ 
+   const results = useMemo(() => searchLanguages(query), [query]);
+@@ -48,8 +54,7 @@
+ 
+   const choose = (code: string) => {
+     setSelectedLanguage(code === SOURCE_LANGUAGE ? null : code);
+-    // A reload lets the translator start cleanly (or restores the original English page).
+-    window.location.reload();
++    reloadPage();
+   };
+ 
+   return (
+@@ -72,9 +77,11 @@
+       {/* Target element Google's translator attaches to. Hidden; our own picker is the visible UI. */}
+       <div id="google_translate_element" className="notranslate hidden" aria-hidden="true" translate="no" />
+ 
+-      {open && (
++      {/* Rendered in document.body: the navbar's backdrop-blur would otherwise become the containing block for
++          this fixed overlay and clip it to the header bar. */}
++      {open && createPortal(
+         <div
+-          className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/70 p-4 sm:items-center"
++          className="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto bg-black/70 p-4 sm:items-center"
+           onMouseDown={(e) => {
+             if (e.target === e.currentTarget) setOpen(false);
+           }}
+@@ -188,7 +195,8 @@
+               </ul>
+             </details>
+           </div>
+-        </div>
++        </div>,
++        document.body
+       )}
+     </>
+   );
+diff -ruN a/lib/translate.ts b/lib/translate.ts
+--- a/lib/translate.ts	2026-10-27 00:25:55.373849881 +0000
++++ b/lib/translate.ts	2026-10-27 00:25:55.375655256 +0000
+@@ -78,6 +78,11 @@
+   }
+ }
+ 
++/** Reloads the page so the translator starts cleanly (or the original English page is restored). Separate so tests can replace it. */
++export function reloadPage(): void {
++  window.location.reload();
++}
++
+ /** Loads Google's translator once. Safe to call repeatedly. */
+ export function loadTranslator(): void {
+   if (typeof document === 'undefined' || document.getElementById(SCRIPT_ID)) return;
