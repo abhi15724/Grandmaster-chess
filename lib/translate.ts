@@ -78,6 +78,11 @@ declare global {
   }
 }
 
+/** Reloads the page so the translator starts cleanly (or the original English page is restored). Separate so tests can replace it. */
+export function reloadPage(): void {
+  window.location.reload();
+}
+
 /** Loads Google's translator once. Safe to call repeatedly. */
 export function loadTranslator(): void {
   if (typeof document === 'undefined' || document.getElementById(SCRIPT_ID)) return;
