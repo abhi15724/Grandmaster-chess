@@ -1,0 +1,700 @@
+diff -ruN --strip-trailing-cr a/app/agents/page.tsx b/app/agents/page.tsx
+--- a/app/agents/page.tsx	1970-01-01 00:00:00.000000000 +0000
++++ b/app/agents/page.tsx	2026-11-01 01:27:54.000000000 +0000
+@@ -0,0 +1,140 @@
++import type { Metadata } from 'next';
++import Link from 'next/link';
++import { Bot } from 'lucide-react';
++import { pageMetadata } from '@/lib/seo';
++import { jsonLdGraph, breadcrumbSchema, personSchema } from '@/lib/json-ld';
++import { SITE_URL } from '@/lib/site-config';
++import { toolLink } from '@/lib/deeplinks';
++import { calculateEmi, formatMoney } from '@/lib/emi';
++
++export const metadata: Metadata = pageMetadata({
++  title: 'For AI Assistants and Developers: MCP and Tool Links',
++  description:
++    'How AI assistants and developers can use Grandmasterchess: the MCP server and its tools, prefilled tool links, the sitemap, and how to cite our articles.',
++  path: '/agents',
++  absoluteTitle: true,
++  ogLabel: 'Developers',
++});
++
++const H2 = 'mb-2 text-lg font-bold text-zinc-100';
++const A = 'text-[#81b64c] hover:underline';
++const CODE = 'rounded bg-[#262421] px-1.5 py-0.5 text-[#81b64c] break-all';
++
++const STATELESS_TOOLS: [string, string][] = [
++  ['search_chess_content', 'Search the published articles; returns matching pages with URLs, updated dates and checked-on dates.'],
++  ['get_chess_article', 'Get one article by slug, with its sources, dates and a ready-made citation line.'],
++  ['find_opening', 'A short reference for a chess opening, with related articles.'],
++  ['get_chess_rules', 'A concise rules reference (moves, castling, en passant, promotion, draws).'],
++  ['get_chess_puzzle', 'A practice position (FEN) for a chosen tactical theme.'],
++  ['list_legal_moves', 'Every legal move from a FEN, in SAN and UCI, optionally for one square.'],
++  ['apply_chess_move', 'Apply one move (SAN or UCI) to a FEN and get the new FEN and game status.'],
++  ['analyze_chess_position', 'Stockfish analysis of a FEN: best move, evaluation and main line.'],
++  ['coach_chess_move', 'Stockfish comparison of the position before and after a move, with a classification.'],
++];
++const STATEFUL_TOOLS: [string, string][] = [
++  ['new_chess_game / start_ai_chess_game / play_chess_vs_ai', 'Start or continue a game kept in server memory (the AI opponent is Stockfish).'],
++  ['make_chess_move / get_chess_game / get_legal_chess_moves / analyze_chess_game', 'Work with a game created above, using its game id.'],
++];
++
++export default function AgentsPage() {
++  const emi = calculateEmi({ principal: 500000, annualRatePct: 9, months: 60 })!;
++  const links: [string, string, string][] = [
++    ['EMI calculator', toolLink('/tools/emi-calculator', { amount: 500000, rate: 9, years: 5 }), `amount, rate (% a year), years or months, currency (INR, USD, GBP, EUR). This example shows an EMI of ${formatMoney(emi.emi, 'INR')}.`],
++    ['Currency converter', toolLink('/tools/currency-converter', { amount: 100, from: 'USD', to: 'INR' }), 'amount, from and to (three-letter currency codes). The result and the date of the rates are in the page itself.'],
++    ['PGN and FEN viewer', toolLink('/tools/pgn-viewer', { pgn: '1. e4 e5 2. Nf3 Nc6 3. Bb5' }), 'pgn (a game) or fen (a position), up to 8,000 characters. Steps through the moves on a board.'],
++  ];
++  const graph = jsonLdGraph(
++    personSchema(),
++    breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'For AI Assistants', path: '/agents' }])
++  );
++  return (
++    <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
++      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }} />
++      <div className="mb-2 flex items-center gap-3">
++        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#81b64c] text-zinc-950"><Bot className="h-5 w-5" /></div>
++        <h1 className="text-2xl font-extrabold text-zinc-100 sm:text-3xl">For AI Assistants and Developers</h1>
++      </div>
++      <p className="mb-8 text-sm text-zinc-400">
++        Grandmasterchess is designed to be read and used by AI assistants as well as people. This page lists what is available, how to connect, and how to
++        cite us.
++      </p>
++
++      <div className="space-y-8 text-sm leading-relaxed text-zinc-300">
++        <section>
++          <h2 className={H2}>Reading the site</h2>
++          <ul className="list-disc space-y-1 pl-5">
++            <li>Pages are served as complete HTML and do not need JavaScript to be read.</li>
++            <li>Crawling is allowed, except for <code className={CODE}>/api/</code> and <code className={CODE}>/dashboard</code>. See <a className={A} href="/robots.txt">robots.txt</a>.</li>
++            <li>Find pages through the <a className={A} href="/sitemap.xml">sitemap</a>, the <a className={A} href="/feed.xml">RSS feed</a> and <a className={A} href="/llms.txt">llms.txt</a>.</li>
++            <li>Articles start with a short answer, list their sources at the bottom and show a &quot;checked on&quot; date. Ratings, rankings and schedules change, so treat a figure as correct only as of that date.</li>
++            <li>When you use our content, please cite and link the page, for example &quot;Grandmasterchess (https://www.grandmasterchess.in/blog/what-elo-is-a-grandmaster)&quot;.</li>
++          </ul>
++        </section>
++
++        <section>
++          <h2 className={H2}>MCP server</h2>
++          <p className="mb-2">
++            Any assistant that supports remote MCP servers can connect to <code className={CODE}>{SITE_URL}/api/mcp</code> (Streamable HTTP). No sign-in is needed. A
++            health check is at <code className={CODE}>/api/mcp/health</code>.
++          </p>
++          <h3 className="mb-1 mt-4 font-bold text-zinc-100">Tools that need no saved game (preferred)</h3>
++          <div className="overflow-x-auto">
++            <table className="w-full border border-[#3c3934] text-left text-xs">
++              <tbody>
++                {STATELESS_TOOLS.map(([n, d]) => (
++                  <tr key={n} className="border-t border-[#3c3934] align-top first:border-t-0"><td className="p-2 font-mono text-[#81b64c]">{n}</td><td className="p-2">{d}</td></tr>
++                ))}
++              </tbody>
++            </table>
++          </div>
++          <h3 className="mb-1 mt-4 font-bold text-zinc-100">Tools that keep a game in server memory</h3>
++          <div className="overflow-x-auto">
++            <table className="w-full border border-[#3c3934] text-left text-xs">
++              <tbody>
++                {STATEFUL_TOOLS.map(([n, d]) => (
++                  <tr key={n} className="border-t border-[#3c3934] align-top first:border-t-0"><td className="p-2 font-mono text-[#81b64c]">{n}</td><td className="p-2">{d}</td></tr>
++                ))}
++              </tbody>
++            </table>
++          </div>
++          <p className="mt-3">
++            Saved games live in the server&apos;s memory and can be lost between requests, so for reliable play pass the position as a FEN to{' '}
++            <code className={CODE}>apply_chess_move</code> and keep the FEN yourself. The engine behind these tools is Stockfish. The games on the website use a
++            different, home-built engine that is much weaker (see <Link href="/about" className={A}>About</Link>).
++          </p>
++        </section>
++
++        <section>
++          <h2 className={H2}>Prefilled tool links</h2>
++          <p className="mb-2">These links open a tool with values already filled in, so an assistant can give a person a link that shows the answer.</p>
++          <div className="space-y-3">
++            {links.map(([name, href, note]) => (
++              <div key={name} className="rounded-lg border border-[#3c3934] bg-[#1e1c19] p-3">
++                <p className="font-bold text-zinc-100">{name}</p>
++                <p className="mt-1"><a className={A} href={href}><code className={CODE}>{href}</code></a></p>
++                <p className="mt-1 text-xs text-zinc-400">{note}</p>
++              </div>
++            ))}
++          </div>
++          <p className="mt-2 text-xs text-zinc-500">Values are validated; anything that is not a plain number, a short code or a game is ignored.</p>
++        </section>
++
++        <section>
++          <h2 className={H2}>Browser-based agents</h2>
++          <p>
++            The chessboard can be used without a mouse. Each square has a spoken name such as &quot;e4, white pawn&quot;, the arrow keys move between squares,
++            Enter or Space selects and moves, Escape cancels, and the last move and whose turn it is are announced. Tools use labelled form fields.
++          </p>
++        </section>
++
++        <section>
++          <h2 className={H2}>Fair use</h2>
++          <p>
++            Please keep request rates reasonable. Engine analysis is the most expensive call. We may slow or block traffic that harms the site. Questions or
++            corrections: <Link href="/contact" className={A}>contact us</Link> or see the <Link href="/editorial-policy" className={A}>editorial policy</Link>.
++          </p>
++        </section>
++      </div>
++    </div>
++  );
++}
+diff -ruN --strip-trailing-cr a/app/sitemap.ts b/app/sitemap.ts
+--- a/app/sitemap.ts	2026-10-25 18:39:05.000000000 +0000
++++ b/app/sitemap.ts	2026-11-01 01:27:54.000000000 +0000
+@@ -17,6 +17,7 @@
+     '/learn/chess-openings',
+     '/learn/chess-strategies',
+     '/tools',
++    '/agents',
+     '/tools/elo-calculator',
+     '/tools/pgn-viewer',
+     '/tools/chess-coordinates-trainer',
+diff -ruN --strip-trailing-cr a/app/tools/currency-converter/page.tsx b/app/tools/currency-converter/page.tsx
+--- a/app/tools/currency-converter/page.tsx	2026-10-30 04:09:13.000000000 +0000
++++ b/app/tools/currency-converter/page.tsx	2026-10-31 10:25:34.000000000 +0000
+@@ -3,6 +3,7 @@
+ import { pageMetadata } from '@/lib/seo';
+ import { CurrencyConverter } from '@/components/tools/CurrencyConverter';
+ import { currencyName, fetchRatesServer, popularRows } from '@/lib/currency';
++import { parseCurrencyParams, type SearchParams } from '@/lib/deeplinks';
+ import { ToolShell, H2, type Faq } from '@/components/tools/ToolShell';
+ 
+ export const metadata: Metadata = pageMetadata({
+@@ -22,14 +23,13 @@
+   { question: 'How is a conversion between two non-euro currencies calculated?', answer: 'Both currencies are expressed per euro, so the amount is divided by the first currency\'s rate and multiplied by the second one\'s. This is called a cross rate.' },
+ ];
+ 
+-// Rebuilt at most once an hour so the rates printed below stay current.
+-export const revalidate = 3600;
+-
+ const BASES = ['USD', 'EUR', 'GBP'];
+ const QUOTES = ['INR', 'USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'SGD', 'CNY'];
+ 
+-export default async function CurrencyConverterPage() {
++// Rendered per request; the rates themselves are cached for an hour by fetchRatesServer.
++export default async function CurrencyConverterPage({ searchParams }: { searchParams: Promise<SearchParams> }) {
+   const rates = await fetchRatesServer();
++  const initial = parseCurrencyParams(await searchParams);
+   return (
+     <ToolShell
+       name="Currency Converter"
+@@ -38,7 +38,7 @@
+       icon={<ArrowLeftRight className="h-5 w-5" />}
+       applicationCategory="FinanceApplication"
+       intro="Convert an amount between about 30 major currencies using the European Central Bank's daily reference rates. The date of the rates is shown with every result."
+-      tool={<CurrencyConverter />}
++      tool={<CurrencyConverter initial={initial} initialData={rates} />}
+       faq={FAQ}
+       related={[
+         { href: '/tools/emi-calculator', label: 'EMI calculator', note: 'work out the monthly payment on a loan.' },
+diff -ruN --strip-trailing-cr a/app/tools/emi-calculator/page.tsx b/app/tools/emi-calculator/page.tsx
+--- a/app/tools/emi-calculator/page.tsx	2026-10-30 04:09:13.000000000 +0000
++++ b/app/tools/emi-calculator/page.tsx	2026-10-31 10:25:34.000000000 +0000
+@@ -3,6 +3,7 @@
+ import { pageMetadata } from '@/lib/seo';
+ import { calculateEmi, formatMoney } from '@/lib/emi';
+ import { EmiCalculator } from '@/components/tools/EmiCalculator';
++import { parseEmiParams, type SearchParams } from '@/lib/deeplinks';
+ import { ToolShell, H2, type Faq } from '@/components/tools/ToolShell';
+ 
+ export const metadata: Metadata = pageMetadata({
+@@ -22,7 +23,8 @@
+   { question: 'Will my lender\'s EMI be exactly the same?', answer: 'It can differ slightly. Lenders may round differently, count days instead of months, change the rate on floating-rate loans, or add processing fees and insurance, which this calculator does not include.' },
+ ];
+ 
+-export default function EmiCalculatorPage() {
++export default async function EmiCalculatorPage({ searchParams }: { searchParams: Promise<SearchParams> }) {
++  const initial = parseEmiParams(await searchParams);
+   const P = 1_000_000;
+   const rows = [5, 10, 15, 20].map((y) => ({ y, r: calculateEmi({ principal: P, annualRatePct: 9, months: y * 12 })! }));
+   const ten = rows[1].r;
+@@ -35,7 +37,7 @@
+       icon={<Landmark className="h-5 w-5" />}
+       applicationCategory="FinanceApplication"
+       intro="Enter a loan amount, interest rate and tenure to see your monthly EMI, the total interest you will pay, and the full repayment schedule. Everything is calculated in your browser."
+-      tool={<EmiCalculator />}
++      tool={<EmiCalculator initial={initial} />}
+       faq={FAQ}
+       related={[
+         { href: '/tools/currency-converter', label: 'Currency converter', note: 'convert a loan or price between currencies.' },
+diff -ruN --strip-trailing-cr a/app/tools/pgn-viewer/page.tsx b/app/tools/pgn-viewer/page.tsx
+--- a/app/tools/pgn-viewer/page.tsx	2026-10-25 07:58:02.000000000 +0000
++++ b/app/tools/pgn-viewer/page.tsx	2026-10-31 10:25:34.000000000 +0000
+@@ -5,6 +5,7 @@
+ import { jsonLdGraph, breadcrumbSchema, faqSchema, personSchema } from '@/lib/json-ld';
+ import { SITE_URL, absoluteUrl } from '@/lib/site-config';
+ import { PgnViewer } from '@/components/tools/PgnViewer';
++import { parsePgnParam, type SearchParams } from '@/lib/deeplinks';
+ 
+ export const metadata: Metadata = pageMetadata({
+   title: 'Free PGN Viewer: Replay Chess Games Online',
+@@ -51,7 +52,8 @@
+   ['6. Fullmove number', 'Starts at 1 and increases after Black moves.', '1'],
+ ];
+ 
+-export default function PgnViewerPage() {
++export default async function PgnViewerPage({ searchParams }: { searchParams: Promise<SearchParams> }) {
++  const initialText = parsePgnParam(await searchParams);
+   const graph = jsonLdGraph(
+     {
+       '@type': 'WebApplication',
+@@ -89,7 +91,7 @@
+         Everything runs in your browser, so nothing you paste is uploaded.
+       </p>
+ 
+-      <PgnViewer />
++      <PgnViewer initialText={initialText} />
+ 
+       <div className="mt-10 space-y-8 text-sm leading-relaxed text-zinc-300">
+         <section>
+diff -ruN --strip-trailing-cr a/components/ChessBoard.tsx b/components/ChessBoard.tsx
+--- a/components/ChessBoard.tsx	2026-10-25 03:00:36.000000000 +0000
++++ b/components/ChessBoard.tsx	2026-10-31 15:43:15.000000000 +0000
+@@ -17,6 +17,8 @@
+   isAiThinking?: boolean;
+ }
+ 
++const PIECE_NAMES: Record<string, string> = { p: 'pawn', n: 'knight', b: 'bishop', r: 'rook', q: 'queen', k: 'king' };
++
+ export const ChessBoard: React.FC<ChessBoardProps> = ({
+   chess,
+   boardTheme,
+@@ -30,6 +32,8 @@
+   const [selectedSquare, setSelectedSquare] = useState<Square | null>(null);
+   const [legalMoves, setLegalMoves] = useState<Move[]>([]);
+   const [draggedSquare, setDraggedSquare] = useState<Square | null>(null);
++  // Roving tab stop: one square is reachable with Tab, the arrow keys move between squares.
++  const [focusSquare, setFocusSquare] = useState<Square | null>(null);
+ 
+   const boardRef = useRef<HTMLDivElement>(null);
+ 
+@@ -164,9 +168,18 @@
+     setLegalMoves([]);
+   };
+ 
++  const moveHistory = chess.history();
++  const lastSan = moveHistory[moveHistory.length - 1];
++  const announcement = `${lastSan ? `Last move ${lastSan}. ` : ''}${chess.turn() === 'w' ? 'White' : 'Black'} to move.${
++    chess.isCheckmate() ? ' Checkmate.' : chess.isStalemate() ? ' Stalemate.' : chess.isDraw() ? ' Draw.' : inCheck ? ' Check.' : ''
++  }`;
++  const tabStop: Square = focusSquare ?? (orientation === 'w' ? 'e2' : 'e7');
++
+   return (
+     <div translate="no"
+       ref={boardRef}
++      role="group"
++      aria-label="Chessboard"
+       className={`relative w-full aspect-square max-w-[560px] mx-auto rounded-xl border-4 overflow-hidden shadow-2xl chess-board-container ${boardTheme.borderClass}`}
+       style={{ touchAction: 'none' }}
+     >
+@@ -191,10 +204,39 @@
+               <div
+                 key={square}
+                 id={`square-${square}`}
++                role="button"
++                aria-label={`${square}, ${piece ? `${piece.color === 'w' ? 'white' : 'black'} ${PIECE_NAMES[piece.type]}` : 'empty'}${
++                  isSelected ? ', selected' : ''
++                }${isLegalTarget ? ', legal move' : ''}`}
++                aria-pressed={isSelected}
++                aria-disabled={!isInteractive || undefined}
++                tabIndex={tabStop === square ? 0 : -1}
++                onFocus={() => setFocusSquare(square)}
++                onKeyDown={(e) => {
++                  if (e.key === 'Enter' || e.key === ' ') {
++                    e.preventDefault();
++                    handleSquareClick(square);
++                    return;
++                  }
++                  if (e.key === 'Escape') {
++                    setSelectedSquare(null);
++                    setLegalMoves([]);
++                    return;
++                  }
++                  const step: Record<string, [number, number]> = { ArrowUp: [-1, 0], ArrowDown: [1, 0], ArrowLeft: [0, -1], ArrowRight: [0, 1] };
++                  const d = step[e.key];
++                  if (!d) return;
++                  e.preventDefault();
++                  const nextRank = Math.max(0, Math.min(7, rankIdx + d[0]));
++                  const nextFile = Math.max(0, Math.min(7, fileIdx + d[1]));
++                  const next = `${files[nextFile]}${ranks[nextRank]}` as Square;
++                  setFocusSquare(next);
++                  e.currentTarget.parentElement?.querySelector<HTMLElement>(`#square-${next}`)?.focus();
++                }}
+                 onClick={() => handleSquareClick(square)}
+                 onDragOver={handleDragOver}
+                 onDrop={(e) => handleDrop(e, square)}
+-                className="relative flex items-center justify-center cursor-pointer transition-colors duration-150"
++                className="relative flex items-center justify-center cursor-pointer transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-amber-400"
+                 style={{ backgroundColor: bg }}
+               >
+                 {/* Last move highlight */}
+@@ -281,6 +323,11 @@
+         </div>
+       )}
+ 
++      {/* Spoken status for screen readers and assistive agents */}
++      <div className="sr-only" role="status" aria-live="polite">
++        {announcement}
++      </div>
++
+       {/* Check Alert Banner */}
+       {inCheck && (
+         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5 rounded-full bg-rose-950/90 border border-rose-500/60 px-3 py-1 text-[11px] font-extrabold text-rose-200 shadow-2xl backdrop-blur-md animate-bounce">
+diff -ruN --strip-trailing-cr a/components/Footer.tsx b/components/Footer.tsx
+--- a/components/Footer.tsx	2026-10-26 01:43:25.000000000 +0000
++++ b/components/Footer.tsx	2026-11-01 01:27:54.000000000 +0000
+@@ -133,6 +133,9 @@
+               <li>
+                 <Link href="/about#author" className="hover:text-[#81b64c] transition-colors">Who runs this site</Link>
+               </li>
++              <li>
++                <Link href="/agents" className="hover:text-[#81b64c] transition-colors">For AI assistants</Link>
++              </li>
+             </ul>
+             <div className="flex flex-wrap gap-2 text-[11px]">
+               <a href="/sitemap.xml" target="_blank" rel="noreferrer" className="rounded bg-[#211f1c] px-2 py-1 text-zinc-400 hover:text-zinc-200 border border-[#3c3934]">
+diff -ruN --strip-trailing-cr a/components/tools/CurrencyConverter.tsx b/components/tools/CurrencyConverter.tsx
+--- a/components/tools/CurrencyConverter.tsx	2026-10-25 18:36:15.000000000 +0000
++++ b/components/tools/CurrencyConverter.tsx	2026-10-31 10:25:34.000000000 +0000
+@@ -3,6 +3,7 @@
+ import React, { useEffect, useMemo, useState } from 'react';
+ import { ArrowLeftRight, RefreshCw } from 'lucide-react';
+ import { convert, currencyName, formatCurrency, type RatesPayload } from '@/lib/currency';
++import type { CurrencyInitial } from '@/lib/deeplinks';
+ 
+ const POPULAR = ['USD', 'EUR', 'INR', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'CNY', 'SGD'];
+ const AMOUNTS = [1, 10, 100, 1000, 10000];
+@@ -17,14 +18,15 @@
+   'w-full rounded-lg border border-[#3c3934] bg-[#262421] px-3 py-2.5 text-sm text-zinc-100 focus:border-[#81b64c] focus:outline-none';
+ const label = 'mb-1 block text-xs font-bold uppercase tracking-wider text-zinc-400';
+ 
+-export const CurrencyConverter: React.FC = () => {
+-  const [data, setData] = useState<RatesPayload | null>(null);
+-  const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+-  const [amount, setAmount] = useState('100');
+-  const [from, setFrom] = useState('USD');
+-  const [to, setTo] = useState('INR');
++export const CurrencyConverter: React.FC<{ initial?: CurrencyInitial; initialData?: RatesPayload | null }> = ({ initial, initialData = null }) => {
++  const [data, setData] = useState<RatesPayload | null>(initialData);
++  const [status, setStatus] = useState<'loading' | 'ready' | 'error'>(initialData ? 'ready' : 'loading');
++  const [amount, setAmount] = useState(initial?.amount ?? '100');
++  const [from, setFrom] = useState(initial?.from ?? (initialData?.rates.USD ? 'USD' : 'USD'));
++  const [to, setTo] = useState(initial?.to ?? (initialData?.rates.INR ? 'INR' : initialData ? 'EUR' : 'INR'));
+ 
+   useEffect(() => {
++    if (initialData) return; // rates already supplied by the server
+     let cancelled = false;
+     fetchRates()
+       .then((d) => {
+@@ -39,7 +41,7 @@
+     return () => {
+       cancelled = true;
+     };
+-  }, []);
++  }, [initialData]);
+ 
+   const retry = () => {
+     setStatus('loading');
+diff -ruN --strip-trailing-cr a/components/tools/EmiCalculator.tsx b/components/tools/EmiCalculator.tsx
+--- a/components/tools/EmiCalculator.tsx	2026-10-25 18:37:14.000000000 +0000
++++ b/components/tools/EmiCalculator.tsx	2026-10-31 10:25:34.000000000 +0000
+@@ -2,6 +2,7 @@
+ 
+ import React, { useState } from 'react';
+ import { calculateEmi, formatMoney, validateEmi } from '@/lib/emi';
++import type { EmiInitial } from '@/lib/deeplinks';
+ 
+ const field =
+   'w-full rounded-lg border border-[#3c3934] bg-[#262421] px-3 py-2.5 text-sm text-zinc-100 focus:border-[#81b64c] focus:outline-none';
+@@ -9,12 +10,12 @@
+ 
+ const num = (s: string) => Number(s.replace(/,/g, ''));
+ 
+-export const EmiCalculator: React.FC = () => {
+-  const [currency, setCurrency] = useState('INR');
+-  const [amount, setAmount] = useState('1000000');
+-  const [rate, setRate] = useState('9');
+-  const [tenure, setTenure] = useState('10');
+-  const [unit, setUnit] = useState<'years' | 'months'>('years');
++export const EmiCalculator: React.FC<{ initial?: EmiInitial }> = ({ initial }) => {
++  const [currency, setCurrency] = useState(initial?.currency ?? 'INR');
++  const [amount, setAmount] = useState(initial?.amount ?? '1000000');
++  const [rate, setRate] = useState(initial?.rate ?? '9');
++  const [tenure, setTenure] = useState(initial?.tenure ?? '10');
++  const [unit, setUnit] = useState<'years' | 'months'>(initial?.unit ?? 'years');
+   const [monthly, setMonthly] = useState(false);
+ 
+   const months = Math.round(num(tenure) * (unit === 'years' ? 12 : 1));
+diff -ruN --strip-trailing-cr a/components/tools/PgnViewer.tsx b/components/tools/PgnViewer.tsx
+--- a/components/tools/PgnViewer.tsx	2026-10-25 07:56:09.000000000 +0000
++++ b/components/tools/PgnViewer.tsx	2026-10-31 10:25:34.000000000 +0000
+@@ -10,8 +10,8 @@
+ const btn =
+   'inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#3c3934] bg-[#262421] text-zinc-200 hover:border-[#81b64c]/60 disabled:opacity-35 disabled:hover:border-[#3c3934]';
+ 
+-export const PgnViewer: React.FC = () => {
+-  const [text, setText] = useState(SAMPLE_PGN);
++export const PgnViewer: React.FC<{ initialText?: string }> = ({ initialText }) => {
++  const [text, setText] = useState(initialText ?? SAMPLE_PGN);
+   const [index, setIndex] = useState(0); // 0 = start position, n = after n-th ply
+   const [flip, setFlip] = useState(false);
+   const [playing, setPlaying] = useState(false);
+diff -ruN --strip-trailing-cr a/lib/deeplinks.ts b/lib/deeplinks.ts
+--- a/lib/deeplinks.ts	1970-01-01 00:00:00.000000000 +0000
++++ b/lib/deeplinks.ts	2026-10-31 10:25:34.000000000 +0000
+@@ -0,0 +1,64 @@
++/**
++ * Prefilled tool links, e.g. /tools/emi-calculator?amount=500000&rate=9&years=5.
++ * Every value is validated here, so a crafted link can only ever set plain numbers, short codes or a size-limited text.
++ */
++export type SearchParams = Record<string, string | string[] | undefined>;
++
++const first = (v: string | string[] | undefined): string | undefined => (Array.isArray(v) ? v[0] : v);
++const NUMBER = /^[0-9][0-9,]{0,14}(\.[0-9]{1,6})?$/;
++const SMALL_NUMBER = /^[0-9]{1,3}(\.[0-9]{1,4})?$/;
++
++export interface EmiInitial {
++  amount?: string;
++  rate?: string;
++  tenure?: string;
++  unit?: 'years' | 'months';
++  currency?: string;
++}
++
++export function parseEmiParams(sp: SearchParams): EmiInitial {
++  const out: EmiInitial = {};
++  const amount = first(sp.amount);
++  const rate = first(sp.rate);
++  const years = first(sp.years);
++  const months = first(sp.months);
++  const currency = first(sp.currency)?.toUpperCase();
++  if (amount && NUMBER.test(amount)) out.amount = amount.replace(/,/g, '');
++  if (rate && SMALL_NUMBER.test(rate)) out.rate = rate;
++  if (years && SMALL_NUMBER.test(years)) { out.tenure = years; out.unit = 'years'; }
++  else if (months && /^[0-9]{1,3}$/.test(months)) { out.tenure = months; out.unit = 'months'; }
++  if (currency && ['INR', 'USD', 'GBP', 'EUR', 'NONE'].includes(currency)) out.currency = currency;
++  return out;
++}
++
++export interface CurrencyInitial {
++  amount?: string;
++  from?: string;
++  to?: string;
++}
++
++export function parseCurrencyParams(sp: SearchParams): CurrencyInitial {
++  const out: CurrencyInitial = {};
++  const amount = first(sp.amount);
++  const from = first(sp.from)?.toUpperCase();
++  const to = first(sp.to)?.toUpperCase();
++  if (amount && NUMBER.test(amount)) out.amount = amount.replace(/,/g, '');
++  if (from && /^[A-Z]{3}$/.test(from)) out.from = from;
++  if (to && /^[A-Z]{3}$/.test(to)) out.to = to;
++  return out;
++}
++
++/** `?pgn=` (a game) or `?fen=` (a position), limited to 8,000 characters. Parsing and legality are checked by the viewer. */
++export function parsePgnParam(sp: SearchParams): string | undefined {
++  const text = first(sp.pgn) ?? first(sp.fen);
++  if (!text) return undefined;
++  const trimmed = text.trim();
++  return trimmed.length > 0 && trimmed.length <= 8000 ? trimmed : undefined;
++}
++
++/** Builds a link to a tool with prefilled values (used by the agents page and by tests). */
++export function toolLink(path: string, params: Record<string, string | number>): string {
++  const q = new URLSearchParams();
++  for (const [k, v] of Object.entries(params)) q.set(k, String(v));
++  return `${path}?${q.toString()}`;
++}
+diff -ruN --strip-trailing-cr a/mcp-server/package.json b/mcp-server/package.json
+--- a/mcp-server/package.json	2026-10-23 06:06:49.000000000 +0000
++++ b/mcp-server/package.json	2026-10-31 10:20:14.000000000 +0000
+@@ -11,7 +11,8 @@
+     "@modelcontextprotocol/ext-apps": "^1.0.0",
+     "chess.js": "^1.4.0",
+     "zod": "^4.2.0",
+-    "@se-oss/stockfish": "^1.0.1"
++    "@se-oss/stockfish": "^1.0.1",
++    "gray-matter": "^4.0.3"
+   },
+   "description": "Shared Grandmaster Chess MCP tool definitions used by the Vercel Next.js route at /api/mcp."
+ }
+diff -ruN --strip-trailing-cr a/mcp-server/server.js b/mcp-server/server.js
+--- a/mcp-server/server.js	2026-10-23 06:06:49.000000000 +0000
++++ b/mcp-server/server.js	2026-10-31 10:23:45.000000000 +0000
+@@ -1,7 +1,10 @@
+ import { readFile, readdir } from "node:fs/promises";
++import { existsSync } from "node:fs";
+ import { join, resolve } from "node:path";
+ import { McpServer } from "@modelcontextprotocol/server";
+ import { z } from "zod";
++import matter from "gray-matter";
++import { Chess } from "chess.js";
+ import { registerAppResource, registerAppTool, RESOURCE_MIME_TYPE } from "@modelcontextprotocol/ext-apps/server";
+ import { createGame, getGame, getMode, snapshot, playMove, legalMoves, recordedMoves } from "./game.js";
+ import { bestMove, analyzePosition, coachingFromAnalysis } from "./engine.js";
+@@ -9,37 +12,50 @@
+ 
+ 
+ const SITE_URL = (process.env.SITE_URL || "https://www.grandmasterchess.in").replace(/\/$/, "");
+-const BLOG_DIR = resolve(process.env.BLOG_DIR || (process.env.VERCEL ? join(process.cwd(), "content", "blog") : join(process.cwd(), "..", "content", "blog")));
++const BLOG_DIR = resolve(process.env.BLOG_DIR || [join(process.cwd(), "content", "blog"), join(process.cwd(), "..", "content", "blog")].find((d) => existsSync(d)) || join(process.cwd(), "content", "blog"));
++
++const asText = (v) => (v instanceof Date ? v.toISOString().slice(0, 10) : v === undefined || v === null ? "" : String(v));
+ 
+ function parseMarkdown(filename, markdown) {
+-  const match = markdown.match(/^---\s*([\s\S]*?)\s*---\s*([\s\S]*)$/);
+-  const frontmatter = {};
+-  let body = markdown;
+-  if (match) {
+-    body = match[2];
+-    for (const line of match[1].split("\n")) {
+-      const m = line.match(/^([A-Za-z][A-Za-z0-9_-]*):\s*(.*)$/);
+-      if (m) frontmatter[m[1]] = m[2].replace(/^["']|["']$/g, "");
+-    }
+-  }
++  const { data, content } = matter(markdown);
+   const slug = filename.replace(/^\d+-/, "").replace(/\.md$/, "");
+-  return {slug,title:frontmatter.title || slug.replace(/-/g," "),description:frontmatter.description || "",category:frontmatter.category || "",date:frontmatter.date || "",url:SITE_URL+"/blog/"+slug,body:body.trim()};
++  return {
++    slug,
++    title: asText(data.title) || slug.replace(/-/g, " "),
++    description: asText(data.description),
++    category: asText(data.category),
++    date: asText(data.date),
++    updated: asText(data.updated),
++    factChecked: asText(data.factChecked),
++    sources: Array.isArray(data.sources) ? data.sources.filter((x) => x && x.url).map((x) => ({ title: asText(x.title), url: asText(x.url) })) : [],
++    // Pages held back from search engines (not yet verified) must not be served to agents either.
++    unpublished: data.noindex === true || data.noindex === "true",
++    url: SITE_URL + "/blog/" + slug,
++    body: content.trim()
++  };
+ }
+ 
+ async function loadArticles() {
+   const files = (await readdir(BLOG_DIR)).filter(f => f.endsWith(".md"));
+   const result = [];
+   for (const filename of files) {
+-    try { result.push(parseMarkdown(filename,await readFile(join(BLOG_DIR,filename),"utf8"))); } catch {}
++    try { result.push(parseMarkdown(filename, await readFile(join(BLOG_DIR, filename), "utf8"))); } catch {}
+   }
+-  return result;
++  return result.filter((a) => !a.unpublished);
+ }
+ 
++// ---- stateless chess helpers (no saved game needed, so they work on any server instance)
++function chessFromFen(fen) { try { return new Chess(fen); } catch { return null; } }
++function statusOfPosition(c) {
++  return c.isCheckmate() ? "checkmate" : c.isStalemate() ? "stalemate" : c.isInsufficientMaterial() ? "draw (insufficient material)" : c.isThreefoldRepetition() ? "draw (threefold repetition)" : c.isDraw() ? "draw" : c.isCheck() ? "check" : "playing";
++}
++function uciOf(m) { return m.from + m.to + (m.promotion || ""); }
++
+ export function makeServer(existingServer) {
+   const server = existingServer || new McpServer({
+     name:"grandmaster-chess",
+     version:"0.1.0",
+-    instructions:"Grandmaster Chess is a chess learning and playing website. Prefer its published articles when answering questions about its content. Current player, tournament and rating facts may require external verification."
++    instructions:"Grandmaster Chess is a free chess website with guides, tools and games. Prefer its published articles when answering questions about its content, and cite the article url. Each article lists its sources and, where facts were checked, a factChecked date; ratings, rankings and schedules change, so treat them as correct only as of that date. For playing or analysing chess, prefer the stateless FEN tools (list_legal_moves, apply_chess_move, analyze_chess_position): they need no saved game. Games created with new_chess_game are kept in server memory and can be lost between requests."
+   });
+ 
+   registerAppResource(server, "grandmaster-chess-board", "ui://widget/chess-board.html", {}, async () => ({
+@@ -56,10 +72,11 @@
+   },async ({query,limit})=>{
+     const terms=query.toLowerCase().split(/\s+/).filter(Boolean);
+     const results=(await loadArticles()).map(a=>{
+-      const hay=(a.title+" "+a.description+" "+a.category+" "+a.body).toLowerCase();
+-      return {a,score:terms.reduce((n,t)=>n+(hay.includes(t)?1:0),0)};
++      // Title matches count most, then description/category, then the body, so the most relevant page ranks first.
++      const title=a.title.toLowerCase(), desc=(a.description+" "+a.category).toLowerCase(), body=a.body.toLowerCase();
++      return {a,score:terms.reduce((n,t)=>n+(title.includes(t)?5:0)+(desc.includes(t)?3:0)+(body.includes(t)?1:0),0)};
+     }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,limit).map(x=>({
+-      title:x.a.title,description:x.a.description,category:x.a.category,date:x.a.date,url:x.a.url,
++      title:x.a.title,description:x.a.description,category:x.a.category,date:x.a.date,updated:x.a.updated||x.a.date,factChecked:x.a.factChecked||null,url:x.a.url,
+       snippet:x.a.body.replace(/[\n#*_>\[\]]/g," ").replace(/\s+/g," ").trim().slice(0,500)
+     }));
+     return {content:[{type:"text",text:JSON.stringify({query,results},null,2)}],structuredContent:{query,results}};
+@@ -73,7 +90,7 @@
+   },async ({slug})=>{
+     const article=(await loadArticles()).find(a=>a.slug===slug);
+     if(!article) return {content:[{type:"text",text:"Article not found: "+slug}],isError:true};
+-    const result={title:article.title,description:article.description,category:article.category,date:article.date,url:article.url,content:article.body};
++    const result={title:article.title,description:article.description,category:article.category,date:article.date,updated:article.updated||article.date,factChecked:article.factChecked||null,sources:article.sources,url:article.url,content:article.body,citeAs:"Grandmasterchess ("+article.url+")"};
+     return {content:[{type:"text",text:JSON.stringify(result,null,2)}],structuredContent:result};
+   });
+ 
+@@ -147,6 +164,41 @@
+   registerAppTool(server,"new_chess_game",{title:"Start a Chess Game",description:"Start a new in-memory standard chess game and return its board state.",inputSchema:z.object({}),annotations:{readOnlyHint:false,openWorldHint:false},_meta:{ui:{resourceUri:"ui://widget/chess-board.html"},"openai/toolInvocation/invoking":"Starting chess…","openai/toolInvocation/invoked":"Chess board ready"}},async()=>{const result=createGame();return {content:[{type:"text",text:JSON.stringify(result,null,2)}],structuredContent:result};});
+   registerAppTool(server,"play_chess_vs_ai",{title:"Play Against Grandmaster AI",description:"Start or continue a chess game where the human plays White and Stockfish plays Black. The server validates the human move, calculates the engine move, and returns the resulting board.",inputSchema:z.object({gameId:z.string().optional(),from:z.string().regex(/^[a-h][1-8]$/),to:z.string().regex(/^[a-h][1-8]$/),promotion:z.enum(["q","r","b","n"]).optional().default("q"),difficulty:z.enum(["beginner","intermediate","advanced","master"]).optional().default("intermediate")}),annotations:{readOnlyHint:false,openWorldHint:false},_meta:{ui:{resourceUri:"ui://widget/chess-board.html"},"openai/toolInvocation/invoking":"Grandmaster AI is thinking…","openai/toolInvocation/invoked":"Grandmaster AI moved"}} ,async({gameId,from,to,promotion,difficulty})=>{try{let id=gameId;if(!id){const started=createGame("ai");id=started.gameId;}const chess=getGame(id);if(!chess)throw new Error("Game not found: "+id);if(getMode(id).mode!=="ai")throw new Error("This game is not an AI match.");if(chess.isGameOver())throw new Error("Game is over.");if(chess.turn()!=="w")throw new Error("It is not the human player's turn.");const human=playMove(id,from,to,promotion);if(chess.isGameOver())return {content:[{type:"text",text:JSON.stringify(human,null,2)}],structuredContent:human};const engine=await bestMove(chess.fen(),difficulty);if(!engine.bestmove||engine.bestmove.length<4)throw new Error("Engine did not return a legal move.");const ai=playMove(id,engine.bestmove.slice(0,2),engine.bestmove.slice(2,4),engine.bestmove[4]||"q");const result={...ai,gameId:id,humanMove:human.move,aiMove:ai.move,engine:{difficulty,depth:engine.depth,score:engine.score}};return {content:[{type:"text",text:JSON.stringify(result,null,2)}],structuredContent:result};}catch(e){return {content:[{type:"text",text:e.message}],isError:true};}});
+ 
++  server.registerTool("list_legal_moves",{
++    title:"List Legal Moves From a Position",
++    description:"Stateless: given a FEN, return every legal move (SAN and UCI), optionally only for the piece on one square. Does not use or change any saved game.",
++    inputSchema:z.object({fen:z.string().min(10).max(120),square:z.string().regex(/^[a-h][1-8]$/).optional()}),
++    annotations:{readOnlyHint:true,openWorldHint:false}
++  },async ({fen,square})=>{
++    const chess=chessFromFen(fen);
++    if(!chess)return {content:[{type:"text",text:"That is not a valid FEN: "+fen}],isError:true};
++    const moves=chess.moves({verbose:true,...(square?{square}:{})}).map(m=>({san:m.san,uci:uciOf(m),piece:m.piece,captured:m.captured||null,promotion:m.promotion||null}));
++    const result={fen:chess.fen(),turn:chess.turn()==="w"?"white":"black",status:statusOfPosition(chess),count:moves.length,moves};
++    return {content:[{type:"text",text:JSON.stringify(result,null,2)}],structuredContent:result};
++  });
++
++  server.registerTool("apply_chess_move",{
++    title:"Apply a Chess Move to a Position",
++    description:"Stateless: given a FEN and one move (SAN such as Nf3, or UCI such as e2e4 / e7e8q), return the new FEN, the move in SAN and UCI, and the status. Illegal moves are rejected with the list of legal moves. Does not use or change any saved game.",
++    inputSchema:z.object({fen:z.string().min(10).max(120),move:z.string().min(2).max(12)}),
++    annotations:{readOnlyHint:true,openWorldHint:false}
++  },async ({fen,move})=>{
++    const chess=chessFromFen(fen);
++    if(!chess)return {content:[{type:"text",text:"That is not a valid FEN: "+fen}],isError:true};
++    let made=null;
++    try{
++      made=/^[a-h][1-8][a-h][1-8][qrbn]?$/i.test(move)
++        ?chess.move({from:move.slice(0,2).toLowerCase(),to:move.slice(2,4).toLowerCase(),promotion:move[4]?move[4].toLowerCase():undefined})
++        :chess.move(move);
++    }catch{made=null;}
++    if(!made){
++      const legal=new Chess(fen).moves();
++      return {content:[{type:"text",text:"Illegal or unreadable move: "+move+". Legal moves here: "+legal.slice(0,80).join(", ")}],isError:true};
++    }
++    const result={fen:chess.fen(),san:made.san,uci:uciOf(made),turn:chess.turn()==="w"?"white":"black",status:statusOfPosition(chess),isGameOver:chess.isGameOver(),legalMoveCount:chess.moves().length};
++    return {content:[{type:"text",text:JSON.stringify(result,null,2)}],structuredContent:result};
++  });
++
+   server.registerTool("get_chess_game",{title:"Get Chess Game",description:"Get the current state of an in-memory chess game.",inputSchema:z.object({gameId:z.string().min(3)}),annotations:{readOnlyHint:true,openWorldHint:false}},async({gameId})=>{const chess=getGame(gameId);if(!chess)return {content:[{type:"text",text:"Game not found: "+gameId}],isError:true};const result=snapshot(gameId,chess);return {content:[{type:"text",text:JSON.stringify(result,null,2)}],structuredContent:result};});
+   server.registerTool("get_legal_chess_moves",{title:"Get Legal Chess Moves",description:"Get legal moves from a square in an active game.",inputSchema:z.object({gameId:z.string().min(3),square:z.string().regex(/^[a-h][1-8]$/)}),annotations:{readOnlyHint:true,openWorldHint:false}},async({gameId,square})=>{try{const moves=legalMoves(gameId,square);const result={gameId,square,moves};return {content:[{type:"text",text:JSON.stringify(result,null,2)}],structuredContent:result};}catch(e){return {content:[{type:"text",text:e.message}],isError:true};}});
+   server.registerTool("make_chess_move",{title:"Make a Chess Move",description:"Make one legal chess move in an active in-memory game. Invalid moves are rejected by chess.js.",inputSchema:z.object({gameId:z.string().min(3),from:z.string().regex(/^[a-h][1-8]$/),to:z.string().regex(/^[a-h][1-8]$/),promotion:z.enum(["q","r","b","n"]).optional().default("q")}),annotations:{readOnlyHint:false,openWorldHint:false}},async({gameId,from,to,promotion})=>{try{const result=playMove(gameId,from,to,promotion);return {content:[{type:"text",text:JSON.stringify(result,null,2)}],structuredContent:result};}catch(e){return {content:[{type:"text",text:e.message}],isError:true};}});
+diff -ruN --strip-trailing-cr a/next.config.ts b/next.config.ts
+--- a/next.config.ts	2026-10-25 07:53:28.000000000 +0000
++++ b/next.config.ts	2026-10-31 10:20:14.000000000 +0000
+@@ -2,6 +2,8 @@
+ 
+ const nextConfig: NextConfig = {
+   poweredByHeader: false,
++  // The MCP route reads the article markdown at runtime; make sure the host bundles those files.
++  outputFileTracingIncludes: { '/api/mcp': ['./content/blog/**/*'] },
+   serverExternalPackages: ["@se-oss/stockfish", "@modelcontextprotocol/server", "@modelcontextprotocol/ext-apps", "mcp-handler"],
+   async headers() {
+     return [
+diff -ruN --strip-trailing-cr a/public/llms.txt b/public/llms.txt
+--- a/public/llms.txt	2026-10-25 18:39:05.000000000 +0000
++++ b/public/llms.txt	2026-11-01 01:27:54.000000000 +0000
+@@ -12,6 +12,12 @@
+ - Chess tools: Elo rating calculator, PGN and FEN viewer, board coordinates trainer (https://www.grandmasterchess.in/tools).
+ - Everyday tools: currency converter (ECB daily reference rates), EMI calculator, image to PDF and PDF to Word converters.
+ 
++## For AI assistants and developers
++- MCP server (Streamable HTTP, no sign-in): https://www.grandmasterchess.in/api/mcp . Preferred tools need no saved game: search_chess_content, get_chess_article, list_legal_moves, apply_chess_move, analyze_chess_position.
++- Guide, tool list and prefilled tool links: https://www.grandmasterchess.in/agents
++- Prefilled links: /tools/emi-calculator?amount=500000&rate=9&years=5 , /tools/currency-converter?amount=100&from=USD&to=INR , /tools/pgn-viewer?pgn=... (or ?fen=...)
++- Articles carry sources and a "checked on" date; please cite the page URL.
++
+ ## Key pages
+ - Play: https://www.grandmasterchess.in/play/ai , https://www.grandmasterchess.in/play/local
+ - Rules guide: https://www.grandmasterchess.in/learn/chess-rules
